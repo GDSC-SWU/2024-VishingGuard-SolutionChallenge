@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RequiredArgsConstructor
 @Service
 public class MessageService {
     public static final String COLLECTION_NAME = "Message";
-    public List<Message> getMessage(){
+    public List<Message> getMessage()throws ExecutionException, InterruptedException {
         List<Message> list = new ArrayList<>();
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> future = db.collection(COLLECTION_NAME).get();
