@@ -19,7 +19,7 @@ public class FirebaseConfig {
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    //.setDatabaseUrl("https://{{데이터베이스명}}.firebaseio.com")
+                    //.setDatabaseUrl("https://Message.firebaseio.com")
                     .build();
 
             FirebaseApp.initializeApp(options);
