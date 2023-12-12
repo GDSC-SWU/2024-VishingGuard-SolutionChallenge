@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import java.io.FileInputStream;
 
 @Configuration
-
 public class FirebaseConfig {
     @PostConstruct
     public void initialize(){
@@ -19,10 +18,12 @@ public class FirebaseConfig {
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    //.setDatabaseUrl("https://Message.firebaseio.com")
+                    .setDatabaseUrl("https://Message.firebaseio.com")
                     .build();
 
-            FirebaseApp.initializeApp(options);
+            if (FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
         } catch (Exception e){
             e.printStackTrace();
         }
