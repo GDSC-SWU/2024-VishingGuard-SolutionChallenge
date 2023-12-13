@@ -34,10 +34,6 @@ public class MessageRepository {
 
         return result;
     }
-/*
-    public Long getMessageId() throws Exception{
-        CollectionReference messages = firestore.collection("Message");
 
-    }*/
 
 }

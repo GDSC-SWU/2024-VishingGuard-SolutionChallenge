@@ -44,24 +44,6 @@ class MessageControllerTest {
     private MessageRepository messageRepository;
     @Autowired
     private MockMvc mockMvc;
-    @BeforeAll
-    public static void setup() {
-        // Firebase 초기화 코드
-        try {
-            FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://Message.firebaseio.com")
-                    .build();
-
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     @DisplayName("문자 피싱 검사 테스트")

@@ -23,17 +23,6 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class MessageService {
     public final MessageRepository messageRepository;
-    public static final String COLLECTION_NAME = "Message";
-    public List<Message> getMessage() throws Exception{
-        List<Message> list = new ArrayList<>();
-        Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<QuerySnapshot> future = db.collection(COLLECTION_NAME).get();
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-            list.add(document.toObject(Message.class));
-        }
-        return list;
-    }
 
     public ResponseEntity<Object> isPhishingMessage(MessageRequestDto messageRequestDto){
         try{
@@ -52,7 +41,6 @@ public class MessageService {
             // 예외 발생 시, 클라이언트에게 400 Bad Request 와 함께 예외 메시지를 반환
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     private String removeSpacesAndLowercase(String input) {
