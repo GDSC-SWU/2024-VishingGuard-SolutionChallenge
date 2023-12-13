@@ -17,10 +17,10 @@ public class MessageRepository {
         this.firestore = firestore;
     }
     // Message Keyword 저장하는 메서드
-    public String saveMessage(Message message) throws Exception{
+    public Message saveMessage(Message message) throws Exception {
         CollectionReference messages = firestore.collection("Message");
-        DocumentReference documentReference = messages.add(message).get();
-        return documentReference.getId();
+        messages.add(message);
+        return message;
     }
 
     public List<Message> getAllMessages() throws Exception{

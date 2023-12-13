@@ -1,6 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
@@ -9,6 +10,9 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -17,6 +21,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MessageControllerTest {
+    @LocalServerPort
+    private int port;
+    @Autowired
+    private MessageRepository messageRepository;
+    @Autowired
+    private MockMvc mockMvc;
     @BeforeAll
     public static void setup() {
         // Firebase 초기화 코드
@@ -38,19 +48,14 @@ class MessageControllerTest {
 
     @Test
     public void saveMessageTest() throws Exception {
-        Message message = Message.builder()
-                .messageKeyword("Test content")
-                .build();
+        Message message1 = messageRepository.saveMessage(Message.builder()
+                .messageKeyword("엄마")
+                .build());
 
-        // Firestore 인스턴스 가져오기
-        Firestore firestore = FirestoreClient.getFirestore();
+        Message message2 = messageRepository.saveMessage(Message.builder()
+                .messageKeyword("기프트 카드")
+                .build());
 
-        // Firestore에 데이터 추가
-        Map<String, Object> messageData = new HashMap<>();
-        messageData.put("messageKeyword", message.getMessageKeyword());
 
-        DocumentReference documentReference = firestore.collection("Message").add(messageData).get();
-        String generatedId = documentReference.getId();
-        System.out.println(generatedId);
     }
 }
