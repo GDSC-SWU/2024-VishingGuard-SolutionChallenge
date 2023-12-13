@@ -40,7 +40,8 @@ public class MessageService {
             List<Message> messageList=messageRepository.getAllMessages();
 
             for (Message message: messageList){
-                if (message != null && removeSpacesAndLowercase(messageRequestDto.getMessage()).contains(removeSpacesAndLowercase(message.getMessageContent())))
+                if (message != null && removeSpacesAndLowercase(messageRequestDto.getMessage())
+                        .contains(removeSpacesAndLowercase(message.getMessageKeyword())))
                 {
                     return ResponseEntity.ok(true);
                 }
