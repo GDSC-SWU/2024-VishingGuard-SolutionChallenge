@@ -1,6 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.result.service;
 
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
@@ -19,8 +21,9 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 @Service
 public class MessageService {
+    public final MessageRepository messageRepository;
     public static final String COLLECTION_NAME = "Message";
-    public List<Message> getMessage()throws ExecutionException, InterruptedException {
+    public List<Message> getMessage() throws Exception{
         List<Message> list = new ArrayList<>();
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> future = db.collection(COLLECTION_NAME).get();
@@ -32,6 +35,16 @@ public class MessageService {
     }
 
     public ResponseEntity<Object> isPhishingMessage(MessageRequestDto messageRequestDto){
+        try{
+            List<Message> messageList=messageRepository.getAllMessages();
+            for (Message message: messageList){
+
+            }
+            return ResponseEntity.ok(false);
+        }catch (Exception e){
+            // 예외 발생 시, 클라이언트에게 400 Bad Request 와 함께 예외 메시지를 반환
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
 
     }
 }
