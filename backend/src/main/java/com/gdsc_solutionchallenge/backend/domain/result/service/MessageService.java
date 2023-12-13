@@ -8,10 +8,12 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 @RequiredArgsConstructor
@@ -27,5 +29,9 @@ public class MessageService {
             list.add(document.toObject(Message.class));
         }
         return list;
+    }
+
+    public ResponseEntity<Object> isPhishingMessage(MessageRequestDto messageRequestDto){
+
     }
 }
