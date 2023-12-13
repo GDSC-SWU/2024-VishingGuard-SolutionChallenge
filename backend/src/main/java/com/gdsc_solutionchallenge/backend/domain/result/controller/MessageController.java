@@ -16,10 +16,8 @@ public class MessageController {
     private final MessageService messageService;
 
     // Json객체 -> Dto로 전환 후, service 단으로 이동
-    @GetMapping("/message")
-    public ResponseEntity<Object> phishingMessage(/*@RequestBody MessageRequestDto messageRequestDto*/)throws ExecutionException, InterruptedException {
-        //return messageService.isPhishingMessage(messageRequestDto);
-        List<Message> message=messageService.getMessage();
-        return ResponseEntity.ok().body(message);
+    @PostMapping("/message")
+    public ResponseEntity<Object> phishingMessage(@RequestBody MessageRequestDto messageRequestDto)throws ExecutionException, InterruptedException {
+        return messageService.isPhishingMessage(messageRequestDto);
     }
 }
