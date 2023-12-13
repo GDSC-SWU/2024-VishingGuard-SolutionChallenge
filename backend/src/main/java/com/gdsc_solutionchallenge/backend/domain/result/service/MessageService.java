@@ -4,6 +4,7 @@ import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -37,7 +38,12 @@ public class MessageService {
     public ResponseEntity<Object> isPhishingMessage(MessageRequestDto messageRequestDto){
         try{
             List<Message> messageList=messageRepository.getAllMessages();
+
             for (Message message: messageList){
+                if (message != null && removeSpacesAndLowercase(messageRequestDto.getMessage()).contains(removeSpacesAndLowercase(message.getMessageContent())))
+                {
+                    return ResponseEntity.ok(true);
+                }
 
             }
             return ResponseEntity.ok(false);
@@ -46,5 +52,9 @@ public class MessageService {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    private String removeSpacesAndLowercase(String input) {
+        return input.replaceAll("\\s", "").toLowerCase();
     }
 }
