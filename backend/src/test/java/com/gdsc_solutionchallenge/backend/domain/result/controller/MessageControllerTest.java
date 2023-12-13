@@ -9,7 +9,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc(addFilters = false)
-@Transactional
+//@Transactional
 class MessageControllerTest {
     @LocalServerPort
     private int port;
@@ -65,16 +67,16 @@ class MessageControllerTest {
     @DisplayName("문자 피싱 검사 테스트")
     public void saveMessageTest() throws Exception {
         // Given
-        Message message1 = messageRepository.saveMessage(Message.builder()
+        /*Message message1 = messageRepository.saveMessage(Message.builder()
                 .messageKeyword("엄마")
                 .build());
 
         Message message2 = messageRepository.saveMessage(Message.builder()
                 .messageKeyword("기프트 카드")
-                .build());
+                .build());*/
 
         MessageRequestDto messageRequestDto=MessageRequestDto.builder()
-                .message("국민은행")
+                .message("대포통장에 기프트 카드")
                 .build();
 
         // When

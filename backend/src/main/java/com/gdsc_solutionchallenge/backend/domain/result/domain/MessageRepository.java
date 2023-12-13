@@ -3,6 +3,7 @@ package com.gdsc_solutionchallenge.backend.domain.result.domain;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import java.util.concurrent.ExecutionException;
 @Repository
 public class MessageRepository {
     private final Firestore firestore;
-
 
     public MessageRepository(Firestore firestore) {
         this.firestore = firestore;
