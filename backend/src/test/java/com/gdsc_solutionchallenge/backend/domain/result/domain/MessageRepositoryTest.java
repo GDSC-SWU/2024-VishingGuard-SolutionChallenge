@@ -21,18 +21,15 @@ class MessageRepositoryTest {
     @Test
     @DisplayName("피싱 문구 저장 & 불러오기")
     public void saveText_Load() throws Exception{
-        final String text="피싱 문구";
-
+        final String text="HI";
         //Given
         Message savedMessage = messageRepository.saveMessage(Message.builder()
                 .messageKeyword(text)
                 .build());
-
         // When
-        Message message=messageRepository.findById(savedMessage.getId())
+        Message message=messageRepository.findById(savedMessage.getId());
 
         // Then
-
         assertThat(message.getMessageKeyword()).isEqualTo(savedMessage.getMessageKeyword());
     }
 

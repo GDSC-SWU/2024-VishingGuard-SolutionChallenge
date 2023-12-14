@@ -47,7 +47,7 @@ class MessageControllerTest {
 
     @Test
     @DisplayName("문자 피싱 검사 테스트")
-    public void saveMessageTest() throws Exception {
+    public void testMessagePhishing() throws Exception {
         // Given
         /*Message message1 = messageRepository.saveMessage(Message.builder()
                 .messageKeyword("엄마")

@@ -19,13 +19,24 @@ public class MessageRepository {
     // Message Keyword 저장하는 메서드
     public Message saveMessage(Message message) throws Exception {
         CollectionReference messages = firestore.collection("Message");
-        messages.add(message);
+        ApiFuture<DocumentReference> apiFuture = messages.add(message);
+        DocumentReference documentReference = apiFuture.get();
+        message.setId(documentReference.getId());
         return message;
     }
 
     public Message findById(String id) throws Exception{
-        Message message=
-        return message;
+        CollectionReference messages = firestore.collection("Message");
+        DocumentReference documentReference = messages.document(id); // 특정 ID에 해당하는 문서를 참조
+        ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
+        DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
+
+        if (documentSnapshot.exists()) {
+            return documentSnapshot.toObject(Message.class);
+        } else {
+            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
+            return null;
+        }
     }
 
     public List<Message> getAllMessages() throws Exception{
