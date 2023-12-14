@@ -35,5 +35,10 @@ public class MessageRepository {
         return result;
     }
 
+    public String getMessageID(Message message) throws Exception{
+        String MessageId=
+        return MessageId;
+    }
+
 
 }

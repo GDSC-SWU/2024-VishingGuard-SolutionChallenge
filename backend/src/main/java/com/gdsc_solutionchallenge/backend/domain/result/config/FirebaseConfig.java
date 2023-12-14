@@ -32,8 +32,6 @@ public class FirebaseConfig {
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
