@@ -29,7 +29,7 @@ class MessageRepositoryTest {
                 .build());
 
         // When
-        Message message=messageRepository.getMessageID(savedMessage);
+        Message message=messageRepository.findById(savedMessage.getId())
 
         // Then
 

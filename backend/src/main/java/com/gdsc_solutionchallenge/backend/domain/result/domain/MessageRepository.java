@@ -23,9 +23,9 @@ public class MessageRepository {
         return message;
     }
 
-    public String getMessageID(Message message) throws Exception{
-        String MessageId=
-        return MessageId;
+    public Message findById(String id) throws Exception{
+        Message message=
+        return message;
     }
 
     public List<Message> getAllMessages() throws Exception{
