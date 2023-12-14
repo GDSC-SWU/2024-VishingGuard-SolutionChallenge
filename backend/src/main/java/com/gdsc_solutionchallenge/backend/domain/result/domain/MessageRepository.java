@@ -23,6 +23,11 @@ public class MessageRepository {
         return message;
     }
 
+    public String getMessageID(Message message) throws Exception{
+        String MessageId=
+        return MessageId;
+    }
+
     public List<Message> getAllMessages() throws Exception{
         CollectionReference messages = firestore.collection("Message");
         ApiFuture<QuerySnapshot> querySnapshot = messages.get();
@@ -35,10 +40,7 @@ public class MessageRepository {
         return result;
     }
 
-    public String getMessageID(Message message) throws Exception{
-        String MessageId=
-        return MessageId;
-    }
+
 
 
 }

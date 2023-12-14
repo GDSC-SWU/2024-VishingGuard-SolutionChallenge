@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Message {
     /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)*/
-    //private Long id;
+    private String id;
     @NotNull
     //@JoinColumn(name = "message_content")
     private String messageKeyword;
