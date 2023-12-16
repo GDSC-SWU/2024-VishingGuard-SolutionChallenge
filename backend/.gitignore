@@ -38,3 +38,5 @@ out/
 
 
 serviceAccountKey.json
+*.yml
+application.properties
