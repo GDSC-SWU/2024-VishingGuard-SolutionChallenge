@@ -3,21 +3,12 @@ package com.gdsc_solutionchallenge.backend.domain.result.service;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.cloud.FirestoreClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ExecutionException;
+
 
 @RequiredArgsConstructor
 @Service

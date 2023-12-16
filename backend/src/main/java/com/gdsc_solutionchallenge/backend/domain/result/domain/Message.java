@@ -13,12 +13,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Message {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
     @DocumentId
     private String id;
     @NotNull
-    //@JoinColumn(name = "message_content")
+
     private String messageKeyword;
 
     @Builder
