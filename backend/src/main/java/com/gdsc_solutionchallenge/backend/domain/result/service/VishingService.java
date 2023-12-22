@@ -2,8 +2,10 @@ package com.gdsc_solutionchallenge.backend.domain.result.service;
 
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.Vishing;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.VishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,13 @@ import java.util.List;
 public class VishingService {
     public final VishingRepository vishingRepository;
 
-    public ResponseEntity<Object> isVishing(SmishingRequestDto smishingRequestDto){
+    public ResponseEntity<Object> isVishing(VishingRequestDto vishingRequestDto){
         try{
-            List<Message> messageList=vishingRepository.getAllMessages();
+            List<Vishing> vishingList=vishingRepository.getAllVishings();
 
-            for (Message message: messageList){
-                if (message != null && removeSpacesAndLowercase(smishingRequestDto.getMessage())
-                        .contains(removeSpacesAndLowercase(message.getMessageKeyword())))
+            for (Vishing vishing: vishingList){
+                if (vishing != null && removeSpacesAndLowercase(vishingRequestDto.getVishingScript())
+                        .contains(removeSpacesAndLowercase(vishing.getVishingKeyword())))
                 {
                     return ResponseEntity.ok(true);
                 }

@@ -14,7 +14,7 @@ public class VishingRepository {
         this.firestore = firestore;
     }
     // Vishing Keyword 저장하는 메서드
-    public Vishing saveMessage(Vishing vishing) throws Exception {
+    public Vishing saveVishing(Vishing vishing) throws Exception {
         CollectionReference vishings = firestore.collection("Vishing");
         ApiFuture<DocumentReference> apiFuture = vishings.add(vishing);
         DocumentReference documentReference = apiFuture.get();
