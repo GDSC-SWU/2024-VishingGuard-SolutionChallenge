@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.plugin.serialization") version embeddedKotlinVersion
 }
 
 android {
@@ -51,4 +52,6 @@ dependencies {
 
     // retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 }
