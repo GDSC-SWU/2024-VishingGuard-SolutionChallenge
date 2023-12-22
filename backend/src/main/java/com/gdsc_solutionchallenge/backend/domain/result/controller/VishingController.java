@@ -1,5 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
+import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.MessageService;
@@ -25,9 +26,14 @@ public class VishingController {
     @PostMapping("/vishing")
     @Operation(summary = "전화 피싱", description = "파라미터로 받은 전화 대본 피싱 여부를 반환")
     @Parameter(name = "전화", description = "피싱 검사할 전화 내용 DTO")
-    public ResponseEntity<Object> vishing(@RequestBody VishingRequestDto vishingRequestDto){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(vishingService.isVishing(vishingRequestDto));
+    public ResponseEntity<Object> vishing(@RequestBody VishingRequestDto vishingRequestDto) throws Exception {
+        try{
+            boolean result=vishingService.isVishing(vishingRequestDto);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다",result));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

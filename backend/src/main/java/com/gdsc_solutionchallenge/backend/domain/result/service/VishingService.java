@@ -17,23 +17,17 @@ import java.util.List;
 public class VishingService {
     public final VishingRepository vishingRepository;
 
-    public ResponseEntity<Object> isVishing(VishingRequestDto vishingRequestDto){
-        try{
-            List<Vishing> vishingList=vishingRepository.getAllVishings();
+    public boolean isVishing(VishingRequestDto vishingRequestDto) throws Exception {
 
-            for (Vishing vishing: vishingList){
-                if (vishing != null && removeSpacesAndLowercase(vishingRequestDto.getVishingScript())
-                        .contains(removeSpacesAndLowercase(vishing.getVishingKeyword())))
-                {
-                    return ResponseEntity.ok(true);
-                }
+        List<Vishing> vishingList=vishingRepository.getAllVishings();
 
+        for (Vishing vishing: vishingList) {
+            if (vishing != null && removeSpacesAndLowercase(vishingRequestDto.getVishingScript())
+                    .contains(removeSpacesAndLowercase(vishing.getVishingKeyword()))) {
+                return true;
             }
-            return ResponseEntity.ok(false);
-        }catch (Exception e){
-            // 예외 발생 시, 클라이언트에게 400 Bad Request 와 함께 예외 메시지를 반환
-            return ResponseEntity.badRequest().body(e.getMessage());
         }
+        return false;
     }
 
     private String removeSpacesAndLowercase(String input) {
