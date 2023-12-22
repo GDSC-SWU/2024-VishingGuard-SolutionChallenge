@@ -18,7 +18,9 @@ class SMSReceiver : BroadcastReceiver() {
             if(messages?.size!! > 0){
                 val content = messages[0]?.messageBody.toString()
                 if (content != null) {
-                    Log.d("문자 내용 추출", content)
+                    // 문자 내용 전달
+                    Log.d("message contents", content)
+                    context?.let { sendToActivity(it, content) }
                 }
             }
         }
@@ -32,5 +34,17 @@ class SMSReceiver : BroadcastReceiver() {
             messages[i] = SmsMessage.createFromPdu(objs[i] as ByteArray)
         }
         return messages
+    }
+
+    // 메시지 내용 전달
+    private fun sendToActivity(context: Context, content: String) {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(
+            Intent.FLAG_ACTIVITY_NEW_TASK
+                    or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        )
+        intent.putExtra("content", content)
+        context.startActivity(intent)
     }
 }
