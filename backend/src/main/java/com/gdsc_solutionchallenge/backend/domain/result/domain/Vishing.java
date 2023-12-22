@@ -10,15 +10,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Message {
+public class Vishing {
     @DocumentId
     private String id;
     @NotNull
 
-    private String messageKeyword;
+    private String vishingKeyword;
 
     @Builder
-    public Message(String messageKeyword){
-        this.messageKeyword=messageKeyword;
+    public Vishing(String vishingKeyword){
+        this.vishingKeyword=vishingKeyword;
     }
 }
