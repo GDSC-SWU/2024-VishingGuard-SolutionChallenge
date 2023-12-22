@@ -2,7 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.result.service;
 
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.List;
 public class MessageService {
     public final MessageRepository messageRepository;
 
-    public ResponseEntity<Object> isPhishingMessage(MessageRequestDto messageRequestDto){
+    public ResponseEntity<Object> isPhishingMessage(SmishingRequestDto smishingRequestDto){
         try{
             List<Message> messageList=messageRepository.getAllMessages();
 
             for (Message message: messageList){
-                if (message != null && removeSpacesAndLowercase(messageRequestDto.getMessage())
+                if (message != null && removeSpacesAndLowercase(smishingRequestDto.getMessage())
                         .contains(removeSpacesAndLowercase(message.getMessageKeyword())))
                 {
                     return ResponseEntity.ok(true);

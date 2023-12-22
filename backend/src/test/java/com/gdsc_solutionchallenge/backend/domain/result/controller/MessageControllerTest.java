@@ -1,16 +1,9 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,12 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -57,7 +44,7 @@ class MessageControllerTest {
                 .messageKeyword("기프트 카드")
                 .build());*/
 
-        MessageRequestDto messageRequestDto=MessageRequestDto.builder()
+        SmishingRequestDto smishingRequestDto = SmishingRequestDto.builder()
                 .message("대포통장에 기프트 카드")
                 .build();
 
@@ -67,7 +54,7 @@ class MessageControllerTest {
         // Then
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(messageRequestDto)))
+                        .content(new ObjectMapper().writeValueAsString(smishingRequestDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isBoolean())
                 .andDo(print());

@@ -9,11 +9,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MessageRequestDto {
+public class SmishingRequestDto {
     @Schema(description = "피싱 검사할 메시지")
     private String message;
     @Builder
-    public MessageRequestDto(String message){
+    public SmishingRequestDto(String message){
         this.message=message;
     }
 }
