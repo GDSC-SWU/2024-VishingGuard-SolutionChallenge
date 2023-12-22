@@ -11,9 +11,9 @@ import lombok.Setter;
 @Setter
 public class SmishingRequestDto {
     @Schema(description = "피싱 검사할 메시지")
-    private String message;
+    private String smishingScript;
     @Builder
-    public SmishingRequestDto(String message){
-        this.message=message;
+    public SmishingRequestDto(String smishingScript){
+        this.smishingScript=smishingScript;
     }
 }

@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,8 @@ public class VishingController {
     @Operation(summary = "전화 피싱", description = "파라미터로 받은 전화 대본 피싱 여부를 반환")
     @Parameter(name = "전화", description = "피싱 검사할 전화 내용 DTO")
     public ResponseEntity<Object> vishing(@RequestBody VishingRequestDto vishingRequestDto){
-        return vishingService.isVishing(vishingRequestDto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(vishingService.isVishing(vishingRequestDto));
     }
 }

@@ -20,7 +20,7 @@ public class MessageService {
             List<Message> messageList=messageRepository.getAllMessages();
 
             for (Message message: messageList){
-                if (message != null && removeSpacesAndLowercase(smishingRequestDto.getMessage())
+                if (message != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
                         .contains(removeSpacesAndLowercase(message.getMessageKeyword())))
                 {
                     return ResponseEntity.ok(true);

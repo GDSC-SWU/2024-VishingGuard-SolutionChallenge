@@ -45,7 +45,7 @@ class MessageControllerTest {
                 .build());*/
 
         SmishingRequestDto smishingRequestDto = SmishingRequestDto.builder()
-                .message("대포통장에 기프트 카드")
+                .smishingScript("대포통장에 기프트 카드")
                 .build();
 
         // When
