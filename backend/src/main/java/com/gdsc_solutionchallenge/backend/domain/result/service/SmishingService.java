@@ -16,16 +16,15 @@ public class SmishingService {
     public final SmishingRepository smishingRepository;
 
     public boolean isSmishing(SmishingRequestDto smishingRequestDto) throws Exception {
+        List<Smishing> smishingList = smishingRepository.getAllSmishings();
 
-            List<Smishing> smishingList = smishingRepository.getAllSmishings();
-
-            for (Smishing smishing : smishingList){
-                if (smishing != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
-                        .contains(removeSpacesAndLowercase(smishing.getSmishingKeyword()))) {
-                    return true;
-                }
+        for (Smishing smishing : smishingList){
+            if (smishing != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
+                    .contains(removeSpacesAndLowercase(smishing.getSmishingKeyword()))) {
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
     private String removeSpacesAndLowercase(String input) {

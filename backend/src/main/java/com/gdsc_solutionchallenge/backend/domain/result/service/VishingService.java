@@ -14,7 +14,6 @@ public class VishingService {
     public final VishingRepository vishingRepository;
 
     public boolean isVishing(VishingRequestDto vishingRequestDto) throws Exception {
-
         List<Vishing> vishingList=vishingRepository.getAllVishings();
 
         for (Vishing vishing: vishingList) {

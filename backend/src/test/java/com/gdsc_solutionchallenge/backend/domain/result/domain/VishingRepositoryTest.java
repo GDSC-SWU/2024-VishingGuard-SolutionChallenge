@@ -8,26 +8,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class SmishingRepositoryTest {
+class VishingRepositoryTest {
     @Autowired
-    private SmishingRepository smishingRepository;
+    private VishingRepository vishingRepository;
 
     @Test
-    @DisplayName("스미싱 문구 저장 & 불러오기")
+    @DisplayName("보이스 피싱 문구 저장 & 불러오기")
     public void saveText_Load() throws Exception{
-        final String text="smishing";
+        final String text="vishing";
         //Given
-        Smishing savedSmishing = smishingRepository.saveMessage(Smishing.builder()
-                .smishingKeyword(text)
+        Vishing savedVishing = vishingRepository.saveVishing(Vishing.builder()
+                .vishingKeyword(text)
                 .build());
         // When
-        Smishing smishing = smishingRepository.findById(savedSmishing.getId());
+        Vishing vishing = vishingRepository.findById(savedVishing.getId());
 
         // Then
-        assertThat(smishing.getSmishingKeyword()).isEqualTo(savedSmishing.getSmishingKeyword());
+        assertThat(vishing.getVishingKeyword()).isEqualTo(savedVishing.getVishingKeyword());
     }
-
 }
