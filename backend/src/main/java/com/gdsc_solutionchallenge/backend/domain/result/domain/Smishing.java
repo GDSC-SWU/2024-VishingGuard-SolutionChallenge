@@ -10,15 +10,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Message {
+public class Smishing {
     @DocumentId
     private String id;
     @NotNull
-
-    private String messageKeyword;
+    private String smishingKeyword;
 
     @Builder
-    public Message(String messageKeyword){
-        this.messageKeyword=messageKeyword;
+    public Smishing(String smishingKeyword){
+        this.smishingKeyword=smishingKeyword;
     }
 }

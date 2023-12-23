@@ -7,30 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class MessageRepositoryTest {
+class SmishingRepositoryTest {
     @Autowired
-    private MessageRepository messageRepository;
+    private SmishingRepository smishingRepository;
 
     @Test
     @DisplayName("피싱 문구 저장 & 불러오기")
     public void saveText_Load() throws Exception{
         final String text="HI";
         //Given
-        Message savedMessage = messageRepository.saveMessage(Message.builder()
-                .messageKeyword(text)
+        Smishing savedSmishing = smishingRepository.saveMessage(Smishing.builder()
+                .smishingKeyword(text)
                 .build());
         // When
-        Message message=messageRepository.findById(savedMessage.getId());
+        Smishing smishing = smishingRepository.findById(savedSmishing.getId());
 
         // Then
-        assertThat(message.getMessageKeyword()).isEqualTo(savedMessage.getMessageKeyword());
+        assertThat(smishing.getMessageKeyword()).isEqualTo(savedSmishing.getMessageKeyword());
     }
 
 }

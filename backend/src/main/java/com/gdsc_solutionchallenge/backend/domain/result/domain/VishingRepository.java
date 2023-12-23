@@ -15,7 +15,7 @@ public class VishingRepository {
     }
     // Vishing Keyword 저장하는 메서드
     public Vishing saveVishing(Vishing vishing) throws Exception {
-        CollectionReference vishings = firestore.collection("Vishing");
+        CollectionReference vishings = firestore.collection("vishing");
         ApiFuture<DocumentReference> apiFuture = vishings.add(vishing);
         DocumentReference documentReference = apiFuture.get();
         vishing.setId(documentReference.getId());
@@ -23,7 +23,7 @@ public class VishingRepository {
     }
     // Vishing id로 해당 문서 찾는 메서드
     public Vishing findById(String id) throws Exception{
-        CollectionReference vishings = firestore.collection("Vishing");
+        CollectionReference vishings = firestore.collection("vishing");
         DocumentReference documentReference = vishings.document(id); // 특정 ID에 해당하는 문서를 참조
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
@@ -37,7 +37,7 @@ public class VishingRepository {
     }
     // Vishing 의 모든 문서 가져오는 메서드
     public List<Vishing> getAllVishings() throws Exception{
-        CollectionReference vishings = firestore.collection("Vishing");
+        CollectionReference vishings = firestore.collection("vishing");
         ApiFuture<QuerySnapshot> querySnapshot = vishings.get();
 
         List<Vishing> result = new ArrayList<>();

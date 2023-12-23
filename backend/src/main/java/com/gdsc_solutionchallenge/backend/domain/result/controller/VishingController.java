@@ -1,16 +1,13 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
-import com.gdsc_solutionchallenge.backend.domain.result.service.MessageService;
 import com.gdsc_solutionchallenge.backend.domain.result.service.VishingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

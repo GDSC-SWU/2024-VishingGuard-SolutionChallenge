@@ -1,7 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.result.service;
 
-import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.Smishing;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +12,16 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class MessageService {
-    public final MessageRepository messageRepository;
+public class SmishingService {
+    public final SmishingRepository smishingRepository;
 
-    public ResponseEntity<Object> isPhishingMessage(SmishingRequestDto smishingRequestDto){
+    public ResponseEntity<Object> isSmishing(SmishingRequestDto smishingRequestDto){
         try{
-            List<Message> messageList=messageRepository.getAllMessages();
+            List<Smishing> smishingList = smishingRepository.getAllSmishings();
 
-            for (Message message: messageList){
-                if (message != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
-                        .contains(removeSpacesAndLowercase(message.getMessageKeyword())))
+            for (Smishing smishing : smishingList){
+                if (smishing != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
+                        .contains(removeSpacesAndLowercase(smishing.getSmishingKeyword())))
                 {
                     return ResponseEntity.ok(true);
                 }

@@ -1,7 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 
 import org.junit.jupiter.api.DisplayName;
@@ -24,11 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc(addFilters = false)
 //@Transactional
-class MessageControllerTest {
+class SmishingControllerTest {
     @LocalServerPort
     private int port;
     @Autowired
-    private MessageRepository messageRepository;
+    private SmishingRepository smishingRepository;
     @Autowired
     private MockMvc mockMvc;
 
