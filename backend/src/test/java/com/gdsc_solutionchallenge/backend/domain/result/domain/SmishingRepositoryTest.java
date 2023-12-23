@@ -27,7 +27,7 @@ class SmishingRepositoryTest {
         Smishing smishing = smishingRepository.findById(savedSmishing.getId());
 
         // Then
-        assertThat(smishing.getMessageKeyword()).isEqualTo(savedSmishing.getMessageKeyword());
+        assertThat(smishing.getSmishingKeyword()).isEqualTo(savedSmishing.getSmishingKeyword());
     }
 
 }

@@ -15,23 +15,17 @@ import java.util.List;
 public class SmishingService {
     public final SmishingRepository smishingRepository;
 
-    public ResponseEntity<Object> isSmishing(SmishingRequestDto smishingRequestDto){
-        try{
+    public boolean isSmishing(SmishingRequestDto smishingRequestDto) throws Exception {
+
             List<Smishing> smishingList = smishingRepository.getAllSmishings();
 
             for (Smishing smishing : smishingList){
                 if (smishing != null && removeSpacesAndLowercase(smishingRequestDto.getSmishingScript())
-                        .contains(removeSpacesAndLowercase(smishing.getSmishingKeyword())))
-                {
-                    return ResponseEntity.ok(true);
+                        .contains(removeSpacesAndLowercase(smishing.getSmishingKeyword()))) {
+                    return true;
                 }
-
             }
-            return ResponseEntity.ok(false);
-        }catch (Exception e){
-            // 예외 발생 시, 클라이언트에게 400 Bad Request 와 함께 예외 메시지를 반환
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            return false;
     }
 
     private String removeSpacesAndLowercase(String input) {
