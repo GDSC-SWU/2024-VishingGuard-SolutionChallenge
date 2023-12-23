@@ -7,20 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/*@Entity
-@Table(name = "Message")*/
 @Getter
 @Setter
 @NoArgsConstructor
-public class Message {
+public class Smishing {
     @DocumentId
     private String id;
     @NotNull
-
-    private String messageKeyword;
+    private String smishingKeyword;
 
     @Builder
-    public Message(String messageKeyword){
-        this.messageKeyword=messageKeyword;
+    public Smishing(String smishingKeyword){
+        this.smishingKeyword=smishingKeyword;
     }
 }

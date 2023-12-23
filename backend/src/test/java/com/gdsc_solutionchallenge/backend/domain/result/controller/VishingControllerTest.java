@@ -1,16 +1,11 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.Message;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.MessageRepository;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.MessageRequestDto;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-
-import org.junit.jupiter.api.BeforeAll;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.Vishing;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.VishingRepository;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,55 +16,49 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc(addFilters = false)
-//@Transactional
-class MessageControllerTest {
+class VishingControllerTest {
     @LocalServerPort
     private int port;
     @Autowired
-    private MessageRepository messageRepository;
+    private VishingRepository vishingRepository;
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("문자 피싱 검사 테스트")
-    public void testMessagePhishing() throws Exception {
+    @DisplayName("보이스 피싱 검사 테스트")
+    public void vishingTest() throws Exception {
         // Given
-        /*Message message1 = messageRepository.saveMessage(Message.builder()
-                .messageKeyword("엄마")
+        Vishing vishing1 = vishingRepository.saveVishing(Vishing.builder()
+                .vishingKeyword("도용")
                 .build());
 
-        Message message2 = messageRepository.saveMessage(Message.builder()
-                .messageKeyword("기프트 카드")
-                .build());*/
+        Vishing vishing2 = vishingRepository.saveVishing(Vishing.builder()
+                .vishingKeyword("개인정보유출")
+                .build());
 
-        MessageRequestDto messageRequestDto=MessageRequestDto.builder()
-                .message("대포통장에 기프트 카드")
+        VishingRequestDto vishingRequestDto = VishingRequestDto.builder()
+                .vishingScript("고객님의 명의가 도용되었습니다")
                 .build();
 
         // When
-        String url = "http://localhost:" + port + "/api/v1/result/message";
+        String url = "http://localhost:" + port + "/api/v1/result/vishing";
 
         // Then
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(messageRequestDto)))
+                        .content(new ObjectMapper().writeValueAsString(vishingRequestDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isBoolean())
+                .andExpect(jsonPath("$.data").isBoolean())
                 .andDo(print());
 
     }
