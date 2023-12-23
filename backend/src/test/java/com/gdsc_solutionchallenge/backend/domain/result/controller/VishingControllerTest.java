@@ -36,7 +36,7 @@ class VishingControllerTest {
 
     @Test
     @DisplayName("보이스 피싱 검사 테스트")
-    public void testMessagePhishing() throws Exception {
+    public void vishingTest() throws Exception {
         // Given
         Vishing vishing1 = vishingRepository.saveVishing(Vishing.builder()
                 .vishingKeyword("도용")
@@ -51,14 +51,14 @@ class VishingControllerTest {
                 .build();
 
         // When
-        String url = "http://localhost:" + port + "/api/v1/result/message";
+        String url = "http://localhost:" + port + "/api/v1/result/vishing";
 
         // Then
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(vishingRequestDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isBoolean())
+                .andExpect(jsonPath("$.data").isBoolean())
                 .andDo(print());
 
     }

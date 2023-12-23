@@ -34,7 +34,7 @@ class SmishingControllerTest {
 
     @Test
     @DisplayName("스미싱 검사 테스트")
-    public void testMessagePhishing() throws Exception {
+    public void smishingTest() throws Exception {
         // Given
         /*Message message1 = messageRepository.saveMessage(Message.builder()
                 .messageKeyword("엄마")
@@ -49,14 +49,14 @@ class SmishingControllerTest {
                 .build();
 
         // When
-        String url = "http://localhost:" + port + "/api/v1/result/message";
+        String url = "http://localhost:" + port + "/api/v1/result/smishing";
 
         // Then
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(smishingRequestDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isBoolean())
+                .andExpect(jsonPath("$.data").isBoolean())
                 .andDo(print());
 
     }
