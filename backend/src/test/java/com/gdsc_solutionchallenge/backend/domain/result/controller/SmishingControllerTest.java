@@ -45,7 +45,7 @@ class SmishingControllerTest {
                 .build());*/
 
         SmishingRequestDto smishingRequestDto = SmishingRequestDto.builder()
-                .smishingScript("대포통장에 기프트 카드")
+                .smishingScript("기프트 카드")
                 .build();
 
         // When
