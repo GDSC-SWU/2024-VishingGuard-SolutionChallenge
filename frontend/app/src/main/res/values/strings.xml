@@ -4,4 +4,10 @@
     <!--sms text-->
     <string name="tv_sms_title">Message</string>
     <string name="tv_message">수신된 문자가 없습니다.</string>
+ui
+    <!--audio text-->
+    <string name="tv_audio_title">음성 인식</string>
+    <string name="btn_speech">시작</string>
+    <string name="tv_speech">인식된 음성이 없습니다.</string>
+    <string name="tv_state">상태 체크</string>
 </resources>
