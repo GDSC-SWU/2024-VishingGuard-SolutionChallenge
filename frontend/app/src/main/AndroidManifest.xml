@@ -18,9 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VishingGuard"
         tools:targetApi="31">
+        <activity
+            android:name=".smishing.SmishingActivity"
+            android:exported="false" />
 
         <receiver
-            android:name=".SMSReceiver"
+            android:name=".smishing.SMSReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -38,5 +41,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

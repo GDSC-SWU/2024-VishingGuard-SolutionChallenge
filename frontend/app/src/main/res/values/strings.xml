@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">VishingGuard</string>
+
+    <!--sms text-->
+    <string name="tv_sms_title">Message</string>
+    <string name="tv_message">수신된 문자가 없습니다.</string>
 </resources>

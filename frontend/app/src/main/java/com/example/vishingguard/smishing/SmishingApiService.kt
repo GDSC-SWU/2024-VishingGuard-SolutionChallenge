@@ -1,4 +1,4 @@
-package com.example.vishingguard
+package com.example.vishingguard.smishing
 
 import retrofit2.Call
 import retrofit2.http.POST
