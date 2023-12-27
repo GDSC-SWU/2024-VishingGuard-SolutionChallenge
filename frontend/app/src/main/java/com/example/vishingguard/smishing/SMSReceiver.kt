@@ -1,4 +1,4 @@
-package com.example.vishingguard
+package com.example.vishingguard.smishing
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -38,7 +38,7 @@ class SMSReceiver : BroadcastReceiver() {
 
     // 메시지 내용 전달
     private fun sendToActivity(context: Context, content: String) {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, SmishingActivity::class.java)
         intent.addFlags(
             Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_SINGLE_TOP
