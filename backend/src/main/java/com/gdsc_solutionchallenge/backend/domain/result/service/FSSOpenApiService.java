@@ -44,7 +44,7 @@ public class FSSOpenApiService {
         JsonNode jsonResult = jsonResponse.get("result");
 
         // "result" 배열에서 마지막 요소 가져오기
-        JsonNode lastResult = jsonResult.get(jsonResult.size() - 1);
+        JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
 
         // 마지막 요소에서 "atchfileUrl" 가져오기
         JsonNode lastAtchfileUrlNode = lastResult.get("atchfileUrl");
