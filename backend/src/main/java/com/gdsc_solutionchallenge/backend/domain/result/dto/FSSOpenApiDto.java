@@ -8,11 +8,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OpenApiDto {
+public class FSSOpenApiDto {
     private String atchfileUrl;
+    private String atchfileNm;
     @Builder
-    public OpenApiDto(String atchfileUrl){
+    public FSSOpenApiDto(String atchfileUrl, String atchfileNm){
         this.atchfileUrl=atchfileUrl;
+        this.atchfileNm = atchfileNm;
     }
 
 }

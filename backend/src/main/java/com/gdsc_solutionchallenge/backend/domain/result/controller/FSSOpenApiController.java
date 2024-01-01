@@ -1,27 +1,16 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.OpenApiDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.FSSOpenApiDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.FSSOpenApiService;
-import com.gdsc_solutionchallenge.backend.domain.result.service.SmishingService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -40,22 +29,29 @@ public class FSSOpenApiController {
             RestTemplate restTemplate = new RestTemplate();
             String responseData = restTemplate.getForObject(apiUrl, String.class);
             // 응답받은 data parsing 진행
-            String parsedData = fssOpenApiService.dataParsing(responseData);
+            List<FSSOpenApiDto> OpenApiDto = fssOpenApiService.dataParsing(responseData);
+            return ResponseEntity.ok(OpenApiDto);
             // | 기준으로 분리
-            String[] urls=parsedData.split("\\|");
+            //String[] urls=OpenApiDto.split("\\|");
 
             // 파일 다운로드
-            if (urls != null && number >= 0 && number < urls.length) {
-                String fileUrl = urls[number];
-
-                // 파일의 URL을 반환
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(new BaseResponse<>(HttpStatus.OK.value(), "다운로드 URL입니다", fileUrl));
-
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(urls[0]);
-            }
+//            if (urls != null && number >= 0 && number < urls.length) {
+//                String fileUrl = urls[number];
+//
+//                // 파일의 내용을 바이트 배열로 읽어옴
+//                byte[] fileContent = restTemplate.getForObject(fileUrl, byte[].class);
+//
+//                // 바이트 배열을 이용하여 ByteArrayResource 생성
+//                ByteArrayResource resource = new ByteArrayResource(fileContent);
+//
+//                // 파일의 Content-Type을 지정하여 응답
+//                return ResponseEntity
+//                        .ok()
+//                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                        .body(resource);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(urls[0]);
+//            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

@@ -3,14 +3,10 @@ package com.gdsc_solutionchallenge.backend.domain.result.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.OpenApiDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.FSSOpenApiDto;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FSSOpenApiService {
-    public String  dataParsing(String responseData) throws ParseException, JsonProcessingException {
+    public List<FSSOpenApiDto> dataParsing(String responseData) throws ParseException, JsonProcessingException {
         /*JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(responseData);
         // 가장 큰 JSON 객체 response 가져오기
@@ -43,21 +39,21 @@ public class FSSOpenApiService {
         // "result" 배열 가져오기
         JsonNode jsonResult = jsonResponse.get("result");
 
-        // "result" 배열에서 마지막 요소 가져오기
-        JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
+        List<FSSOpenApiDto> result = new ArrayList<>();
 
-        // 마지막 요소에서 "atchfileUrl" 가져오기
-        JsonNode lastAtchfileUrlNode = lastResult.get("atchfileUrl");
+        // "result" 배열에서 각 요소를 FSSOpenApiDto로 만들어 리스트에 추가
+        for (JsonNode atchfileNode : jsonResult) {
+            result.add(makeFFSDto(atchfileNode));
+        }
 
-        return lastAtchfileUrlNode.asText();
+        return result;
 
     }
 
     // 콘텐츠 정보 JSON을 DTO로 변환
-    private OpenApiDto makeFFSDto(JSONObject atchfileUrl) {
-        OpenApiDto dto = OpenApiDto.builder().
-                atchfileUrl((String) atchfileUrl.get("atchfileUrl")).
-                build();
-        return dto;
+    private FSSOpenApiDto makeFFSDto(JsonNode atchfileNode) {
+        String atchfileUrl = atchfileNode.get("atchfileUrl").asText();
+        String atchfileNm = atchfileNode.get("atchfileNm").asText();
+        return new FSSOpenApiDto(atchfileUrl, atchfileNm);
     }
 }
