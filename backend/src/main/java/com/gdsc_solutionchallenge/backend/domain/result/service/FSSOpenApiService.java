@@ -1,5 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.result.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.OpenApiDto;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -15,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FSSOpenApiService {
-    public List<OpenApiDto> dataParsing(String responseData) throws ParseException {
-        JSONParser jsonParser = new JSONParser();
+    public String  dataParsing(String responseData) throws ParseException, JsonProcessingException {
+        /*JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(responseData);
         // 가장 큰 JSON 객체 response 가져오기
         JSONObject jsonResponse = (JSONObject) jsonObject.get("reponse");
@@ -29,7 +32,24 @@ public class FSSOpenApiService {
             result.add(makeFFSDto(atchfileUrl));
         }
 
-        return result;
+        return result;*/
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(responseData);
+
+        // "reponse" 객체 가져오기
+        JsonNode jsonResponse = jsonNode.get("reponse");
+
+        // "result" 배열 가져오기
+        JsonNode jsonResult = jsonResponse.get("result");
+
+        // "result" 배열에서 마지막 요소 가져오기
+        JsonNode lastResult = jsonResult.get(jsonResult.size() - 1);
+
+        // 마지막 요소에서 "atchfileUrl" 가져오기
+        JsonNode lastAtchfileUrlNode = lastResult.get("atchfileUrl");
+
+        return lastAtchfileUrlNode.asText();
 
     }
 

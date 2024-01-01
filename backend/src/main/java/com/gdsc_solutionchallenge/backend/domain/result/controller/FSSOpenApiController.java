@@ -32,7 +32,7 @@ public class FSSOpenApiController {
             RestTemplate restTemplate = new RestTemplate();
             String responseData = restTemplate.getForObject(apiUrl, String.class);
 
-            List<OpenApiDto> parsedData = fssOpenApiService.dataParsing(responseData);
+            String parsedData = fssOpenApiService.dataParsing(responseData);
 
             // 성공적인 응답을 클라이언트에 반환
             return ResponseEntity.ok(parsedData);
