@@ -1,17 +1,17 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.dto.FSSOpenApiDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.FSSOpenApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.util.List;
+import java.net.URL;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,55 +29,30 @@ public class FSSOpenApiController {
             RestTemplate restTemplate = new RestTemplate();
             String responseData = restTemplate.getForObject(apiUrl, String.class);
             // 응답받은 data parsing 진행
-            List<FSSOpenApiDto> OpenApiDto = fssOpenApiService.dataParsing(responseData);
-            return ResponseEntity.ok(OpenApiDto);
+            String parsedFile = fssOpenApiService.fileParsing(responseData);
+            String parsedFileName = fssOpenApiService.fileNameParsing(responseData);
             // | 기준으로 분리
-            //String[] urls=OpenApiDto.split("\\|");
+            String[] fileUrls=parsedFile.split("\\|");
+            String[] fileUrlsName=parsedFileName.split("\\|");
 
             // 파일 다운로드
-//            if (urls != null && number >= 0 && number < urls.length) {
-//                String fileUrl = urls[number];
-//
-//                // 파일의 내용을 바이트 배열로 읽어옴
-//                byte[] fileContent = restTemplate.getForObject(fileUrl, byte[].class);
-//
-//                // 바이트 배열을 이용하여 ByteArrayResource 생성
-//                ByteArrayResource resource = new ByteArrayResource(fileContent);
-//
-//                // 파일의 Content-Type을 지정하여 응답
-//                return ResponseEntity
-//                        .ok()
-//                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-//                        .body(resource);
-//            } else {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(urls[0]);
-//            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
+            if (fileUrls != null && number >= 0 && number < fileUrls.length) {
+                String fileUrl = fileUrls[number];
+                String fileUrlName = fileUrlsName[number];
 
-    /*@GetMapping("/financial/download/{number}")
-    @Operation(summary = "금감원 파일 다운로드", description = "금감원 파일 다운로드")
-    @Parameter(name = "파일 번호", description = "다운로드 할 파일 번호")
-    public ResponseEntity<Object> downloadFile(@PathVariable("number") int number){
-        try {
-            Object result = fssOpenApiService.downloadFile(urls[number]);
-            if (urls != null && number >= 0 && number < urls.length) {
-                String fileUrl = urls[number];
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileUrlName);
 
-                Path filePath = Paths.get(fileUrl);
-                Resource resource = new InputStreamResource(Files.newInputStream(filePath)); // 파일 resource 얻기
+                byte[] fileContent = new RestTemplate().getForObject(fileUrl, byte[].class);
 
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", resource));
+                return new ResponseEntity<>(fileContent, headers, HttpStatus.OK);
+
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(urls[0]);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ByteArrayResource("File not found".getBytes()));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-
-    }*/
+    }
 }

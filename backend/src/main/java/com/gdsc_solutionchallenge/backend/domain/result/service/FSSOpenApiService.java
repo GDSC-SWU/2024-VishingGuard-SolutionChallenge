@@ -14,22 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FSSOpenApiService {
-    public List<FSSOpenApiDto> dataParsing(String responseData) throws ParseException, JsonProcessingException {
-        /*JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(responseData);
-        // 가장 큰 JSON 객체 response 가져오기
-        JSONObject jsonResponse = (JSONObject) jsonObject.get("reponse");
-        // 다음 result 가져오기
-        JSONArray jsonResult = (JSONArray) jsonResponse.get("result");
-        List<OpenApiDto> result = new ArrayList<>();
-        // atchfileUrl 만 포함해서 리스트 만들기
-        for (Object o : jsonResult) {
-            JSONObject atchfileUrl = (JSONObject) o;
-            result.add(makeFFSDto(atchfileUrl));
-        }
-
-        return result;*/
-
+    public String fileParsing(String responseData) throws ParseException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseData);
 
@@ -39,14 +24,32 @@ public class FSSOpenApiService {
         // "result" 배열 가져오기
         JsonNode jsonResult = jsonResponse.get("result");
 
-        List<FSSOpenApiDto> result = new ArrayList<>();
+        // "result" 배열에서 마지막 요소 가져오기
+        JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
 
-        // "result" 배열에서 각 요소를 FSSOpenApiDto로 만들어 리스트에 추가
-        for (JsonNode atchfileNode : jsonResult) {
-            result.add(makeFFSDto(atchfileNode));
-        }
+        // 마지막 요소에서 "atchfileUrl" 가져오기
+        JsonNode atchfileUrl = lastResult.get("atchfileUrl");
 
-        return result;
+        return atchfileUrl.asText();
+
+    }
+    public String fileNameParsing(String responseData) throws ParseException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(responseData);
+
+        // "reponse" 객체 가져오기
+        JsonNode jsonResponse = jsonNode.get("reponse");
+
+        // "result" 배열 가져오기
+        JsonNode jsonResult = jsonResponse.get("result");
+
+        // "result" 배열에서 마지막 요소 가져오기
+        JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
+
+        // 마지막 요소에서 "atchfileNm" 가져오기
+        JsonNode atchfileNm = lastResult.get("atchfileNm");
+
+        return atchfileNm.asText();
 
     }
 
