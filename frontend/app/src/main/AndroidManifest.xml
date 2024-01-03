@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!-- 인터넷 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.telephony"
-        android:required="false"/>
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -32,13 +32,17 @@
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".vishing.VishingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
         </activity>
     </application>
 </manifest>
