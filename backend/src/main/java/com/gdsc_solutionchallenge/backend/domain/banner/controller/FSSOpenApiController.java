@@ -1,17 +1,15 @@
-package com.gdsc_solutionchallenge.backend.domain.result.controller;
+package com.gdsc_solutionchallenge.backend.domain.banner.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.service.FSSOpenApiService;
+import com.gdsc_solutionchallenge.backend.domain.banner.service.FSSOpenApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 

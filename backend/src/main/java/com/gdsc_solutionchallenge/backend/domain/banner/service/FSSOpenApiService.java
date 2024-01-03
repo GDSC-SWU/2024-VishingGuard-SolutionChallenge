@@ -1,15 +1,11 @@
-package com.gdsc_solutionchallenge.backend.domain.result.service;
+package com.gdsc_solutionchallenge.backend.domain.banner.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.FSSOpenApiDto;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -53,10 +49,4 @@ public class FSSOpenApiService {
 
     }
 
-    // 콘텐츠 정보 JSON을 DTO로 변환
-    private FSSOpenApiDto makeFFSDto(JsonNode atchfileNode) {
-        String atchfileUrl = atchfileNode.get("atchfileUrl").asText();
-        String atchfileNm = atchfileNode.get("atchfileNm").asText();
-        return new FSSOpenApiDto(atchfileUrl, atchfileNm);
-    }
 }
