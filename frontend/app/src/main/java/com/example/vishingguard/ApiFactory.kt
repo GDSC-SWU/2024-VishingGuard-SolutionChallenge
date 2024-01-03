@@ -1,5 +1,7 @@
 package com.example.vishingguard
 
+import com.example.vishingguard.smishing.SmishingApiService
+import com.example.vishingguard.vishing.VishingApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,4 +21,5 @@ object ApiFactory {
 
 object ServicePool {
     val postSmishing = ApiFactory.retrofit.create(SmishingApiService::class.java)
+    val postVishing = ApiFactory.retrofit.create(VishingApiService::class.java)
 }
