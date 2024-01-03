@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,7 +44,8 @@ public class FSSOpenApiController {
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileUrlName);
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(fileUrlName, StandardCharsets.UTF_8.toString()));
+                System.out.println("Content-Disposition: " + headers.getFirst(HttpHeaders.CONTENT_DISPOSITION));
 
                 byte[] fileContent = new RestTemplate().getForObject(fileUrl, byte[].class);
 
