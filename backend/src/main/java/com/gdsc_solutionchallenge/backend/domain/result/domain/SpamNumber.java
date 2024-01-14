@@ -15,8 +15,11 @@ public class SpamNumber {
     private String id;
     @NotNull
     private String number;
+
+    private String name;
     @Builder
-    public SpamNumber(String number){
+    public SpamNumber(String number,String name){
         this.number=number;
+        this.name=name;
     }
 }

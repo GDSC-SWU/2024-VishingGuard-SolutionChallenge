@@ -6,6 +6,7 @@ import com.gdsc_solutionchallenge.backend.domain.result.domain.SpamNumber;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.SpamNumberRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumRequsetDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,10 @@ public class SpamNumService {
         for (SpamNumber spamNumber : spamNumberList){
             if (spamNumber != null && removeHyphens(spamNumRequsetDto.getSpamNumber())
                     .contains(removeHyphens(spamNumber.getNumber()))) {
-                return true;
+                return new SpamNumResponseDto(true, spamNumber.getName());
             }
         }
-        return false;
+        return new SpamNumResponseDto(false, null);
     }
 
     // 하이픈 삭제
