@@ -38,7 +38,7 @@ public class PhishingUrlRepository {
         }
     }
 
-    public List<PhishingUrl> getAllSmishings() throws Exception{
+    public List<PhishingUrl> getAllURLS() throws Exception{
         CollectionReference phishingUrls = firestore.collection("phishing_url");
         ApiFuture<QuerySnapshot> querySnapshot = phishingUrls.get();
 

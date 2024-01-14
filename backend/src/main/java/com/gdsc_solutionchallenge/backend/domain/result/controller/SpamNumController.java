@@ -26,7 +26,7 @@ public class SpamNumController {
 
     @PostMapping("/spamNumber")
     @Operation(summary = "스팸 전화번호 판단", description = "스팸 전화번호 여부를 판단")
-    public ResponseEntity<Object> spamJudging(@RequestBody SpamNumRequsetDto spamNumRequsetDto) {
+    public ResponseEntity<Object> postSpam(@RequestBody SpamNumRequsetDto spamNumRequsetDto) {
         try {
             SpamNumResponseDto responseDto= spamNumService.isSpamNum(spamNumRequsetDto);
             return ResponseEntity

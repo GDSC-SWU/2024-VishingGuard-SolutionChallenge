@@ -24,10 +24,10 @@ public class SmishingController {
     @Operation(summary = "메시지 피싱", description = "파라미터로 받은 메시지 피싱 여부를 반환")
     public ResponseEntity<Object> postSmishing(@RequestBody SmishingRequestDto smishingRequestDto) {
         try {
-            SmishingResponseDto result = smishingService.isSmishing(smishingRequestDto);
+            SmishingResponseDto smishingResponseDto = smishingService.isSmishing(smishingRequestDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", result));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", smishingResponseDto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
