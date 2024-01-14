@@ -17,7 +17,7 @@ import java.util.List;
 public class SpamNumService {
     public final SpamNumberRepository spamNumberRepository;
 
-    public boolean isSpamNum(SpamNumRequsetDto spamNumRequsetDto) throws Exception {
+    public SpamNumResponseDto isSpamNum(SpamNumRequsetDto spamNumRequsetDto) throws Exception {
         List<SpamNumber> spamNumberList = spamNumberRepository.getAllNumbers();
 
         for (SpamNumber spamNumber : spamNumberList){
