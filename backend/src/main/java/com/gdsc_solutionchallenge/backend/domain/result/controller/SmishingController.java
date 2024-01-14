@@ -2,6 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.SmishingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,7 +24,7 @@ public class SmishingController {
     @Operation(summary = "메시지 피싱", description = "파라미터로 받은 메시지 피싱 여부를 반환")
     public ResponseEntity<Object> postSmishing(@RequestBody SmishingRequestDto smishingRequestDto) {
         try {
-            boolean result = smishingService.isSmishing(smishingRequestDto);
+            SmishingResponseDto result = smishingService.isSmishing(smishingRequestDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", result));
