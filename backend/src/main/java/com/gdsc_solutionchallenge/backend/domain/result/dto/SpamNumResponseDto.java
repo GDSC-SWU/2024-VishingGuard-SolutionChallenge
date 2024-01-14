@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class SpamNumResponseDto {
-    private final boolean result;
-    private final String name;
+    private boolean result;
+    private String name;
 
     public SpamNumResponseDto(boolean result, String name) {
         this.result = result;
