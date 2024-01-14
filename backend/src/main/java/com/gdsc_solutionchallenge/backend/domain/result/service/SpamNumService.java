@@ -22,7 +22,7 @@ public class SpamNumService {
 
         for (SpamNumber spamNumber : spamNumberList){
             if (spamNumber != null && removeHyphens(spamNumRequsetDto.getSpamNumber())
-                    .contains(removeHyphens(spamNumber.getNumber()))) {
+                    .equals(removeHyphens(spamNumber.getNumber()))) {
                 return new SpamNumResponseDto(true, spamNumber.getName());
             }
         }
