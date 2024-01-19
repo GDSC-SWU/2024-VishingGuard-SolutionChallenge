@@ -28,9 +28,7 @@ public class Board {
     //@CreationTimestamp
     private LocalDateTime created_at;
 
-   //@UpdateTimestamp
-
-
+    //@UpdateTimestamp
     private LocalDateTime updated_at;
 
     @Builder
