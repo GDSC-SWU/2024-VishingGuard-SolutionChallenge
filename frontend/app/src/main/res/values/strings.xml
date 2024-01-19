@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">VishingGuard</string>
 
+
+    <!--bottom navigation text-->
+    <string name="tv_home_bot">홈</string>
+    <string name="tv_map_bot">이동 경로</string>
+    <string name="tv_pishing_bot">피싱 위험</string>
+    <string name="tv_mypage_bot">마이 페이지</string>
+
     <!--sms text-->
     <string name="tv_sms_title">Message</string>
     <string name="tv_message">수신된 문자가 없습니다.</string>
-ui
+
     <!--audio text-->
     <string name="tv_audio_title">음성 인식</string>
     <string name="btn_speech">시작</string>
