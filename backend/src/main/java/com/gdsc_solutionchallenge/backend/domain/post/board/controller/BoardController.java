@@ -34,7 +34,6 @@ public class BoardController {
             return ResponseEntity
                     .status(e.getCode())
                     .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
-
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)

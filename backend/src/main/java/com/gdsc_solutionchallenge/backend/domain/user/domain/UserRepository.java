@@ -37,27 +37,33 @@ public class UserRepository {
         }
     }
 
-    public User findByNickname(String Nickname) throws Exception{
+    public User findByNickname(String nickname) throws Exception{
         CollectionReference users = firestore.collection("user");
-        DocumentReference documentReference = users.document(Nickname);
-        ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
-        DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
-        if (documentSnapshot.exists()) {
+        // whereEqualTo를 사용하여 쿼리 생성
+        Query query = users.whereEqualTo("nickname", nickname);
+
+        // 쿼리를 실행하여 결과 가져오기
+        ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
+        QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
+
+        // 결과에서 문서 가져오기
+        if (!querySnapshot.isEmpty()) {
+            DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
             return documentSnapshot.toObject(User.class);
         } else {
-            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
+            // 해당 조건에 맞는 문서가 없을 경우에 대한 처리
             return null;
         }
     }
 
-    public List<PhishingUrl> getAllURLS() throws Exception{
-        CollectionReference phishingUrls = firestore.collection("phishing_url");
-        ApiFuture<QuerySnapshot> querySnapshot = phishingUrls.get();
+    public List<User> getAllUsers() throws Exception{
+        CollectionReference users = firestore.collection("user");
+        ApiFuture<QuerySnapshot> querySnapshot = users.get();
 
-        List<PhishingUrl> result = new ArrayList<>();
+        List<User> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            result.add(document.toObject(PhishingUrl.class));
+            result.add(document.toObject(User.class));
         }
 
         return result;
