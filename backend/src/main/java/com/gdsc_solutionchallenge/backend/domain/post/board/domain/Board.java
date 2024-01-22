@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.post.domain;
+package com.gdsc_solutionchallenge.backend.domain.post.board.domain;
 
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.cloud.firestore.annotation.DocumentId;

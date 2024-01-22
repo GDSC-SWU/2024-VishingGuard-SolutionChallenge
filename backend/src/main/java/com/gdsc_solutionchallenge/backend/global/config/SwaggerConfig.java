@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.config;
+package com.gdsc_solutionchallenge.backend.global.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

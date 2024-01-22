@@ -1,5 +1,6 @@
-package com.gdsc_solutionchallenge.backend.domain.post.domain;
+package com.gdsc_solutionchallenge.backend.domain.post.heart.domain;
 
+import com.gdsc_solutionchallenge.backend.domain.post.board.domain.Board;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.cloud.firestore.annotation.DocumentId;
 import jakarta.validation.constraints.NotNull;

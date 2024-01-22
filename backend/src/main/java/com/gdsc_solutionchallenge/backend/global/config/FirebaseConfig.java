@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.config;
+package com.gdsc_solutionchallenge.backend.global.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
