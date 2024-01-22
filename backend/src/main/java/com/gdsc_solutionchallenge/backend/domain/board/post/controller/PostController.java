@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "게시글 수정", description = "게시글 수정 API")
+    @Operation(summary = "특정 게시글 수정", description = "특정 게시글 수정 API")
     public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
         try {
             String postId = postService.updatePost(id, postUpdateReqDto);

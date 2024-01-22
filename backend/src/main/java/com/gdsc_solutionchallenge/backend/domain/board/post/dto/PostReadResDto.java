@@ -11,6 +11,8 @@ public class PostReadResDto {
     private String content; // 게시글 내용
     private String nickname; // 작성자 정보
     private Timestamp updated_at;
+//    private int comment_count;
+//    private int heart_count;
 
     // BoardReadDto 의 생성자
     public PostReadResDto(Post post){
