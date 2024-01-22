@@ -9,11 +9,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
+@Setter
 public class Heart {
     @DocumentId
     private String id;

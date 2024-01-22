@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class HeartController {
     private final HeartService heartService;
     @Operation(summary = "좋아요 설정", description = "좋아요 설정 API")
-    @PostMapping("/{id}")
-    public ResponseEntity<Object> setHeart(@PathVariable("id") String userId,@PathVariable("id") String postId){
+    @PostMapping("/")
+    public ResponseEntity<Object> setHeart(@RequestBody HeartReqDto heartReqDto){
         try {
-            Boolean isHeart = heartService.isHeart(userId,postId);
+            Boolean isHeart = heartService.isHeart(heartReqDto.getUser_Id(),heartReqDto.getPost_Id());
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", isHeart ));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", isHeart));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
