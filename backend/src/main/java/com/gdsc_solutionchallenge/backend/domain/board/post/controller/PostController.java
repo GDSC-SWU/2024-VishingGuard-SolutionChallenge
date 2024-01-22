@@ -1,6 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostListResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReadResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -60,7 +63,6 @@ public class PostController {
         }
     }
 
-    // 특정 id 게시글 조회
     @GetMapping("/{id}")
     @Operation(summary = "특정 게시글 조회", description = "특정 게시글 조회 API")
     public ResponseEntity<Object> findById (@PathVariable("id") String id){
@@ -80,21 +82,46 @@ public class PostController {
                     .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
         }
     }
-//
-//    // 게시글 목록 조회
-//    @GetMapping("/")
-//    @Operation(summary = "특정 게시글 조회", description = "조회할 게시글 id")
-//
-//    public List<BoardListDto> findAllDesc() {
-//        return boardService.findAllByOrderByIdDesc();
-//    }
-//
-//    // 특정 게시글 삭제
-//    @DeleteMapping("/{id}")
-//    @Operation(summary = "게시글 생성", description = "생성할 게시글 Dto")
-//
-//    public Long delete(@PathVariable Long id){
-//        boardService.deletePost(id);
-//        return id;
-//    }
+
+    @GetMapping("/")
+    @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API")
+    public ResponseEntity<Object> findAllPosts() {
+        try {
+            List<PostListResDto> posts = postService.getAllPosts();
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 목록 조회 완료", posts));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+        }
+    }
+
+    // 특정 게시글 삭제
+    @DeleteMapping("/{id}")
+    @Operation(summary = "특정 게시글 삭제", description = "특정 게시글 삭제 API")
+
+    public ResponseEntity<Object> delete(@PathVariable("id") String id){
+        try {
+            String postId = postService.deletePost(id);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "특정 게시글 삭제 완료", postId));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+        }
+    }
 }

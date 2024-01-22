@@ -2,6 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.board.post.domain;
 
 import com.gdsc_solutionchallenge.backend.domain.result.domain.PhishingUrl;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Repository;
 
@@ -18,21 +19,29 @@ public class PostRepository {
         this.firestore = firestore;
     }
     public Post save(Post post) throws Exception {
-        CollectionReference boards = firestore.collection("post");
-        ApiFuture<DocumentReference> apiFuture = boards.add(post);
+        CollectionReference posts = firestore.collection("post");
+        ApiFuture<DocumentReference> apiFuture = posts.add(post);
         DocumentReference documentReference = apiFuture.get();
         post.setId(documentReference.getId());
         return post;
     }
 
+    public String delete(String id) throws Exception {
+        CollectionReference posts = firestore.collection("post");
+        DocumentReference documentReference = posts.document(id);
+        documentReference.delete();
+        return id;
+    }
+
     public Post update(Post post) throws Exception{
-        CollectionReference boards = firestore.collection("post");
+        CollectionReference posts = firestore.collection("post");
         DocumentReference documentReference = firestore.collection("post").document(post.getId());
 
         // 업데이트할 데이터를 Map으로 생성
         Map<String, Object> updates = new HashMap<>();
         updates.put("title", post.getTitle());
         updates.put("content", post.getContent());
+        updates.put("updated_at", Timestamp.now());
 
         // 해당 문서에 업데이트 적용
         ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
@@ -42,8 +51,8 @@ public class PostRepository {
     }
 
     public Post findById(String id) throws Exception{
-        CollectionReference boards = firestore.collection("post");
-        DocumentReference documentReference = boards.document(id); // 특정 ID에 해당하는 문서를 참조
+        CollectionReference posts = firestore.collection("post");
+        DocumentReference documentReference = posts.document(id); // 특정 ID에 해당하는 문서를 참조
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
@@ -55,11 +64,9 @@ public class PostRepository {
         }
     }
 
-
-
-    public List<Post> getAllBoards() throws Exception{
-        CollectionReference boards = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = boards.get();
+    public List<Post> getAll() throws Exception{
+        CollectionReference posts = firestore.collection("post");
+        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
 
         List<Post> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {

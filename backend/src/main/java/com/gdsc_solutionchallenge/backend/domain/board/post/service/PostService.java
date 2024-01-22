@@ -2,6 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.board.post.service;
 
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostListResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReadResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
@@ -12,7 +13,11 @@ import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,12 +54,29 @@ public class PostService {
     }
 
     public Post findPostById (String id) throws Exception {
-            // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
-            Post post = postRepository.findById(id);
-            if (post == null) {
-                throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
-            }
+        // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
+        Post post = postRepository.findById(id);
+        if (post == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+        }
 
-            return post;
+        return post;
+    }
+
+    public List<PostListResDto> getAllPosts() throws Exception {
+        return postRepository.getAll().stream()
+                // BoardRepository 의 findAllDesc 메서드를 호출하여 게시글을 내림차순으로 조회 (쿼리 기능)
+                .map(PostListResDto::new)// 각 게시글을 BoardListDto 로 변환
+                .collect(Collectors.toList()); // 이후 리스트로 수집하여 반환
+    }
+
+    public String deletePost(String id) throws Exception {
+        // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
+        Post post = postRepository.findById(id);
+        if (post == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+        }
+
+        return postRepository.delete(id);
     }
 }
