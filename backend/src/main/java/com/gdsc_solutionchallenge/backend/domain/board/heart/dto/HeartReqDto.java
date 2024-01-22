@@ -1,5 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.board.heart.dto;
 
+import com.gdsc_solutionchallenge.backend.domain.board.heart.domain.Heart;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import lombok.Builder;
@@ -19,5 +20,12 @@ public class HeartReqDto {
     public HeartReqDto(User user, Post post){
         this.user_Id=user.getId();
         this.post_Id=post.getId();
+    }
+    public Heart toEntity(String userId, String postId){
+        Heart build = Heart.builder()
+                .user_id(userId)
+                .post_id(postId)
+                .build();
+        return build;
     }
 }

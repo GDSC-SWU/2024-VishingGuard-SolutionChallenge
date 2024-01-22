@@ -21,17 +21,18 @@ public class Heart {
     private String id;
 
     @NotNull
-    private User user;
+    private String user_id;
 
     @NotNull
-    private Post post;
+    private String post_id;
 
     @ServerTimestamp
     private Timestamp created_at;
 
     @Builder
-    public Heart(User user, Post post) {
-        this.user = user;
-        this.post = post;
+    public Heart(String user_id, String post_id) {
+        this.user_id = user_id;
+        this.post_id = post_id;
     }
 }
+

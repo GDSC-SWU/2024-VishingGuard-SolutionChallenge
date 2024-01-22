@@ -22,7 +22,7 @@ public class HeartController {
     @PostMapping("/")
     public ResponseEntity<Object> setHeart(@RequestBody HeartReqDto heartReqDto){
         try {
-            Boolean isHeart = heartService.isHeart(heartReqDto.getUser_Id(),heartReqDto.getPost_Id());
+            Boolean isHeart = heartService.isHeart(heartReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", isHeart));
