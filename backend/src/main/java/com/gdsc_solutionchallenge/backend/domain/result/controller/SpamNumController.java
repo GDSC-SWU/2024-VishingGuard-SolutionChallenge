@@ -1,6 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.global.config.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumRequsetDto;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.SpamNumService;

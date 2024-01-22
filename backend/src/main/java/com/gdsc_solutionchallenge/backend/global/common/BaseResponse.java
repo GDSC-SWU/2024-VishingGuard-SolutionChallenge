@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.global.config.common;
+package com.gdsc_solutionchallenge.backend.global.common;
 
 import lombok.Getter;
 

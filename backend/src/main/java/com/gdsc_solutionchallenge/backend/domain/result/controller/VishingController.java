@@ -1,6 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.global.config.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.VishingService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,10 +1,12 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.global.config.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.SmishingService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
