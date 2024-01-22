@@ -9,11 +9,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SpamNumRequsetDto {
+public class SpamNumReqDto {
     @Schema(description = "스팸 검사할 전화번호")
     private String spamNumber;
     @Builder
-    public SpamNumRequsetDto(String spamNumber){
+    public SpamNumReqDto(String spamNumber){
         this.spamNumber=spamNumber;
     }
 }

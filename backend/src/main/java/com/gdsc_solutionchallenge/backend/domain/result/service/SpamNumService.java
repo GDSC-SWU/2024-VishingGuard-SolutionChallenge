@@ -1,12 +1,9 @@
 package com.gdsc_solutionchallenge.backend.domain.result.service;
 
-import com.gdsc_solutionchallenge.backend.domain.result.domain.Smishing;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.SpamNumber;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.SpamNumberRepository;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumRequsetDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResponseDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumReqDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +14,16 @@ import java.util.List;
 public class SpamNumService {
     public final SpamNumberRepository spamNumberRepository;
 
-    public SpamNumResponseDto isSpamNum(SpamNumRequsetDto spamNumRequsetDto) throws Exception {
+    public SpamNumResDto isSpamNum(SpamNumReqDto spamNumReqDto) throws Exception {
         List<SpamNumber> spamNumberList = spamNumberRepository.getAllNumbers();
 
         for (SpamNumber spamNumber : spamNumberList){
-            if (spamNumber != null && removeHyphens(spamNumRequsetDto.getSpamNumber())
+            if (spamNumber != null && removeHyphens(spamNumReqDto.getSpamNumber())
                     .equals(removeHyphens(spamNumber.getNumber()))) {
-                return new SpamNumResponseDto(true, spamNumber.getName());
+                return new SpamNumResDto(true, spamNumber.getName());
             }
         }
-        return new SpamNumResponseDto(false, null);
+        return new SpamNumResDto(false, null);
     }
 
     // 하이픈 삭제

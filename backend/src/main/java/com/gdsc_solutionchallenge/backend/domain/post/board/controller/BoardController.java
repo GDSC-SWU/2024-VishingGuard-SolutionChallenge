@@ -1,5 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.post.board.controller;
 
+import com.gdsc_solutionchallenge.backend.domain.post.board.dto.BoardReqDto;
 import com.gdsc_solutionchallenge.backend.domain.post.board.service.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,9 +18,9 @@ public class BoardController {
 
     // 게시글 생성
     @PostMapping("/")
-    @Operation(summary = "게시글 생성", description = "생성할 게시글 Dto")
-    public ResponseEntity<Object> save(@RequestBody BoardDto boardDto){
-        return boardService.savePost(boardDto);
+    @Operation(summary = "게시글 생성", description = "게시글을 생성합니다")
+    public ResponseEntity<Object> save(@RequestBody BoardReqDto boardReqDto){
+        return boardService.savePost(boardReqDto);
     }
 
     // 게시글 수정

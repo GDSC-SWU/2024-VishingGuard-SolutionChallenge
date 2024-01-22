@@ -9,11 +9,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class VishingRequestDto {
+public class VishingReqDto {
     @Schema(description = "피싱 검사할 통화 대본")
     private String vishingScript;
     @Builder
-    public VishingRequestDto(String vishingScript){
+    public VishingReqDto(String vishingScript){
         this.vishingScript=vishingScript;
     }
 }

@@ -2,7 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingReqDto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ class SmishingControllerTest {
                 .messageKeyword("기프트 카드")
                 .build());*/
 
-        SmishingRequestDto smishingRequestDto = SmishingRequestDto.builder()
+        SmishingReqDto smishingReqDto = SmishingReqDto.builder()
                 .smishingScript("문자나라")
                 .build();
 
@@ -54,7 +54,7 @@ class SmishingControllerTest {
         // Then
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(smishingRequestDto)))
+                        .content(new ObjectMapper().writeValueAsString(smishingReqDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isBoolean())
                 .andDo(print());
