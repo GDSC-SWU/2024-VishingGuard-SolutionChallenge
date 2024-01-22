@@ -2,8 +2,10 @@ package com.gdsc_solutionchallenge.backend.domain.post.board.dto;
 
 import com.gdsc_solutionchallenge.backend.domain.post.board.domain.Board;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
+import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
@@ -40,10 +42,10 @@ public class BoardReqDto {
     // 제목이 공백이거나 50자 이상을 초과할 경우 IllegalArgumentException 발생됨
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
-            throw new IllegalArgumentException("게시판 제목은 공백일 수 없습니다.");
+            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "게시판 제목은 공백일 수 없습니다.");
         }
         if (title.length() > 50) {
-            throw new IllegalArgumentException("게시판 제목은 " + 50 + "자 이하로 입력해야 합니다.");
+            throw new BaseException(HttpStatus.BAD_REQUEST.value(),"게시판 제목은 " + 50 + "자 이하로 입력해야 합니다.");
         }
         this.title = title;
     }
@@ -52,7 +54,7 @@ public class BoardReqDto {
     // 내용이 공백일 경우 IllegalArgumentException 발생됨
     public void setContent(String content) {
         if (content == null || content.trim().isEmpty()) {
-            throw new IllegalArgumentException("게시판 내용은 공백일 수 없습니다.");
+            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "게시판 내용은 공백일 수 없습니다.");
         }
         this.content = content;
     }

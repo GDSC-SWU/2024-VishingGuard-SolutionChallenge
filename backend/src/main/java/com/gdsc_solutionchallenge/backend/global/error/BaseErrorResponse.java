@@ -1,5 +1,6 @@
-package com.gdsc_solutionchallenge.backend.global.common;
+package com.gdsc_solutionchallenge.backend.global.error;
 
+import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import lombok.Getter;
 
 @Getter

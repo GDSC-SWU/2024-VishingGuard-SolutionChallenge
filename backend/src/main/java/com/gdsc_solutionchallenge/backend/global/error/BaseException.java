@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.global.common;
+package com.gdsc_solutionchallenge.backend.global.error;
 
 import lombok.Getter;
 import lombok.Setter;
