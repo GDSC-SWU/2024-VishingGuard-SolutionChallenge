@@ -1,8 +1,8 @@
-package com.gdsc_solutionchallenge.backend.domain.post.board.controller;
+package com.gdsc_solutionchallenge.backend.domain.board.post.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.post.board.dto.BoardReqDto;
-import com.gdsc_solutionchallenge.backend.domain.post.board.service.BoardService;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingResDto;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
+import com.gdsc_solutionchallenge.backend.domain.board.post.service.PostService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
@@ -13,23 +13,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/boards")
+@RequestMapping("/api/v1/posts")
 @Tag(name = "게시판 API", description = "게시판 API 모음")
-public class BoardController {
-    private final BoardService boardService;
+public class PostController {
+    private final PostService postService;
 
-    // 게시글 생성
     @PostMapping("/")
-    @Operation(summary = "게시글 생성", description = "게시글을 생성합니다")
-    public ResponseEntity<Object> save(@RequestBody BoardReqDto boardReqDto){
+    @Operation(summary = "게시글 생성", description = "게시글을 API")
+    public ResponseEntity<Object> save(@RequestBody PostReqDto postReqDto){
         try {
-            String id = boardService.saveBoard(boardReqDto);
+            String postId = postService.savePost(postReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글이 작성 완료", id));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 작성 완료", postId));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -41,13 +39,24 @@ public class BoardController {
         }
     }
 
-//    // 게시글 수정
-//    @PutMapping("/{id}")
-//    @Operation(summary = "게시글 수정", description = "수정할 게시글 id + 수정할 게시글 Dto")
-//
-//    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody BoardUpdateDto requestDto){
-//        return boardService.updatePost(id, requestDto);
-//    }
+    @PutMapping("/{id}")
+    @Operation(summary = "게시글 수정", description = "게시글을 수정 API")
+    public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
+        try {
+            String postId = postService.updatePost(id, postUpdateReqDto);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 수정 완료", postId ));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+        }
+    }
 //
 //    // 특정 id 게시글 조회
 //    @GetMapping("/{id}")

@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.post.board.domain;
+package com.gdsc_solutionchallenge.backend.domain.board.post.domain;
 
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.cloud.Timestamp;
@@ -11,11 +11,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Board {
+public class Post {
     @DocumentId
     private String id;
 
@@ -36,7 +35,7 @@ public class Board {
     private Timestamp updated_at;
 
     @Builder
-    public Board(User user, String title, String content) {
+    public Post(User user, String title, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
@@ -45,5 +44,6 @@ public class Board {
     public void update(String title, String content){
         this.title=title;
         this.content=content;
+        this.updated_at = Timestamp.now();
     }
 }

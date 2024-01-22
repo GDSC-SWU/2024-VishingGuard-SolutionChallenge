@@ -1,9 +1,10 @@
-package com.gdsc_solutionchallenge.backend.domain.post.board.controller;
+package com.gdsc_solutionchallenge.backend.domain.board.post.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdsc_solutionchallenge.backend.domain.post.board.domain.BoardRepository;
-import com.gdsc_solutionchallenge.backend.domain.post.board.dto.BoardReqDto;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepository;
+import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
+import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -28,11 +29,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc(addFilters = false)
-class BoardControllerTest {
+class PostControllerTest {
     @LocalServerPort
     private int port;
     @Autowired
-    private BoardRepository boardRepository;
+    private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -45,18 +46,42 @@ class BoardControllerTest {
         User user= userRepository.findByNickname("kim");
 
         // Arrange
-        BoardReqDto boardReqDto = BoardReqDto.builder()
+        PostReqDto postReqDto = PostReqDto.builder()
                 .title("Valid Title")
                 .content("Valid Content")
                 .user(user)
                 .build();
 
-        String url="http://localhost:" + port + "/api/boards";
+        String url="http://localhost:" + port + "/api/v1/posts";
 
         // when
         mockMvc.perform(post(url)
                         .contentType(APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(boardReqDto)))
+                        .content(new ObjectMapper().writeValueAsString(postReqDto)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void updateBoardTest() throws Exception {
+        User user= userRepository.findByNickname("kim");
+        Post post= postRepository.findById("BCMH1HxUgxGFpqXxZZaQ");
+
+        String updateId = post.getId();
+        String expectedTitle = "title2";
+        String expectedContent = "content2";
+
+        PostUpdateReqDto postUpdateReqDto= PostUpdateReqDto.builder()
+                .title(expectedTitle)
+                .content(expectedContent)
+                .build();
+
+        String url="http://localhost:" + port + "/api/v1/posts/"+updateId;
+
+        // when
+        mockMvc.perform(put(url)
+                        .contentType(APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(postUpdateReqDto)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

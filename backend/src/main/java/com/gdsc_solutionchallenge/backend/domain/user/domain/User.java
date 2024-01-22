@@ -32,9 +32,6 @@ public class User {
     @NotNull
     private String phone;
 
-    @ServerTimestamp
-    private Timestamp created_at;
-
     @Builder
     public User(String email, String password, String nickname, String phone) {
         this.email = email;

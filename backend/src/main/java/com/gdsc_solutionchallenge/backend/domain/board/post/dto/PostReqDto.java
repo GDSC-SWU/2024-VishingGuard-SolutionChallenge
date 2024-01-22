@@ -1,6 +1,6 @@
-package com.gdsc_solutionchallenge.backend.domain.post.board.dto;
+package com.gdsc_solutionchallenge.backend.domain.board.post.dto;
 
-import com.gdsc_solutionchallenge.backend.domain.post.board.domain.Board;
+import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 @Setter
 @ToString
 @NoArgsConstructor
-public class BoardReqDto {
+public class PostReqDto {
     @Schema(description = "게시글 제목")
     private String title;
     @Schema(description = "게시글 내용")
@@ -21,7 +21,7 @@ public class BoardReqDto {
 
     // BoardReqDto 생성자
     @Builder
-    public BoardReqDto(String title, String content, User user){
+    public PostReqDto(String title, String content, User user){
         this.title=title;
         this.content=content;
         this.nickname=user.getNickname();
@@ -29,8 +29,8 @@ public class BoardReqDto {
 
     // BoardReqDto 를 Board 로 변환하는 메서드
     // 변환된 Board 가 return
-    public Board toEntity(User user){
-        Board build = Board.builder()
+    public Post toEntity(User user){
+        Post build = Post.builder()
                 .user(user)
                 .title(title)
                 .content(content)
