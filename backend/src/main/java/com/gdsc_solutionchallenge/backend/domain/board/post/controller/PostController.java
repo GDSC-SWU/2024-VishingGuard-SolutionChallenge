@@ -1,5 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.controller;
 
+import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReadResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.service.PostService;
@@ -21,7 +23,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/")
-    @Operation(summary = "게시글 생성", description = "게시글을 API")
+    @Operation(summary = "게시글 생성", description = "게시글 등록 API")
     public ResponseEntity<Object> save(@RequestBody PostReqDto postReqDto){
         try {
             String postId = postService.savePost(postReqDto);
@@ -40,7 +42,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "게시글 수정", description = "게시글을 수정 API")
+    @Operation(summary = "게시글 수정", description = "게시글 수정 API")
     public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
         try {
             String postId = postService.updatePost(id, postUpdateReqDto);
@@ -57,14 +59,27 @@ public class PostController {
                     .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
         }
     }
-//
-//    // 특정 id 게시글 조회
-//    @GetMapping("/{id}")
-//    @Operation(summary = "특정 게시글 조회", description = "조회할 게시글 id")
-//
-//    public ResponseEntity<Object> findById (@PathVariable Long id){
-//        return boardService.findById(id);
-//    }
+
+    // 특정 id 게시글 조회
+    @GetMapping("/{id}")
+    @Operation(summary = "특정 게시글 조회", description = "특정 게시글 조회 API")
+    public ResponseEntity<Object> findById (@PathVariable("id") String id){
+        try {
+            Post post = postService.findPostById(id);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "특정 게시글 조회 완료", new PostReadResDto(post) ));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+        }
+    }
 //
 //    // 게시글 목록 조회
 //    @GetMapping("/")

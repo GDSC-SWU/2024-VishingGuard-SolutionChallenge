@@ -2,6 +2,7 @@ package com.gdsc_solutionchallenge.backend.domain.board.post.service;
 
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReadResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
@@ -45,5 +46,15 @@ public class PostService {
 
         return updatedPost.getId();
 
+    }
+
+    public Post findPostById (String id) throws Exception {
+            // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
+            Post post = postRepository.findById(id);
+            if (post == null) {
+                throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            }
+
+            return post;
     }
 }

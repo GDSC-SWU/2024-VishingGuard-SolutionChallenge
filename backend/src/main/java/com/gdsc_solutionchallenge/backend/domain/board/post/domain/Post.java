@@ -28,8 +28,8 @@ public class Post {
     @NotNull
     private String content;
 
-    @ServerTimestamp
-    private Timestamp created_at;
+//    @ServerTimestamp
+//    private Timestamp created_at;
 
     @ServerTimestamp
     private Timestamp updated_at;
