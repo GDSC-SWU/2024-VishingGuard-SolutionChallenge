@@ -15,4 +15,15 @@ public class BaseResponse<T> {
         this.message = message;
         this.data = data;
     }
+    // status, message 만 넘겨주는 Response
+    public BaseResponse(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    // status, data 만 넘겨주는 Response
+    public BaseResponse(int status, T data) {
+        this.status = status;
+        this.data = data;
+    }
 }

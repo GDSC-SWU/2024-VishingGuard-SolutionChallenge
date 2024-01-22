@@ -1,6 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.user.domain;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 public class User {
     @DocumentId
-    private Long id;
+    private String id;
 
     @NotNull
     private String email;
@@ -30,8 +32,8 @@ public class User {
     @NotNull
     private String phone;
 
-    //@CreationTimestamp
-    private LocalDateTime created_at;
+    @ServerTimestamp
+    private Timestamp created_at;
 
     @Builder
     public User(String email, String password, String nickname, String phone) {
