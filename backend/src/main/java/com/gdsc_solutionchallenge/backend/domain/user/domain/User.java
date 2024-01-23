@@ -34,6 +34,8 @@ public class User {
     @NotNull
     private String phone;
 
+    //private String profileImageUrl; 로그인 이후 구현 예정
+
     @Builder
     public User(String email, String password, String nickname, String phone) {
         this.email = email;
@@ -52,8 +54,8 @@ public class User {
         this.nickname = nickname;
     }
 
-//    //비밀번호 변경, 회원 탈퇴 시, 비밀번호를 확인하며, 이때 비밀번호의 일치여부를 판단하는 메서드
-//    public boolean matchPassword(PasswordEncoder passwordEncoder, String checkPassword){
-//        return passwordEncoder.matches(checkPassword, getPassword());
-//    }
+    //비밀번호 변경, 회원 탈퇴 시, 비밀번호를 확인하며, 이때 비밀번호의 일치여부를 판단하는 메서드
+    public boolean matchPassword(PasswordEncoder passwordEncoder, String checkPassword){
+        return passwordEncoder.matches(checkPassword, getPassword());
+    }
 }

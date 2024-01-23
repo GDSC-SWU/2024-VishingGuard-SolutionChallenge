@@ -48,10 +48,11 @@ public class PostController {
     @Operation(summary = "특정 게시글 수정", description = "특정 게시글 수정 API")
     public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
         try {
-            String postId = postService.updatePost(id, postUpdateReqDto);
+            PostReadResDto updatedPost = postService.updatePost(id, postUpdateReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 수정 완료", postId ));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 수정 완료", updatedPost
+                    gi));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())

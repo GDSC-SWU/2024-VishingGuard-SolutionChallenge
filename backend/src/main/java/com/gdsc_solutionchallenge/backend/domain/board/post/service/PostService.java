@@ -39,7 +39,7 @@ public class PostService {
         return savedPost.getId();
     }
 
-    public String updatePost(String id, PostUpdateReqDto postUpdateReqDto) throws Exception {
+    public PostReadResDto updatePost(String id, PostUpdateReqDto postUpdateReqDto) throws Exception {
         Post post = postRepository.findById(id);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
@@ -47,9 +47,9 @@ public class PostService {
 
         post.update(postUpdateReqDto.getTitle(), postUpdateReqDto.getContent());
 
-        Post updatedPost = postRepository.update(post);
+        postRepository.save(post);
 
-        return updatedPost.getId();
+        return new PostReadResDto(post);
 
     }
 
