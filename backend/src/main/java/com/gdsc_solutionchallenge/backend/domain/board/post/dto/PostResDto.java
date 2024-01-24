@@ -1,39 +1,33 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.dto;
 
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
-import com.google.cloud.Timestamp;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
-public class PostListResDto {
+public class PostResDto {
     private String id; // 게시글 ID
     private String title; // 게시글 제목
-    private String nickname; // 작성자 닉네임
+    private String content; // 게시글 내용
+    private String nickname; // 작성자 정보
     private String updated_at;
-    private String contentSnippet;
     private int comment_count;
     private int heart_count;
+    private Boolean isMyPost;
 
-    // BoardListDto 의 생성자
-    public PostListResDto(Post post){
+
+    @Builder
+    public PostResDto(Post post, Boolean isMyPost){
         this.id=post.getId();
+        this.content=post.getContent();
         this.title=post.getTitle();
-        this.nickname=post.getUser().getNickname(); // UserEntity 에서 nickname 가져오기
+        this.nickname=post.getUser().getNickname();
         this.updated_at = formatTimestamp(post.getUpdated_at().toDate().toInstant());
-        this.contentSnippet=getContentSnippet(post.getContent(), 82);
-    }
-
-    private String getContentSnippet(String content, int maxChars) {
-        if (content.length() <= maxChars) {
-            return content;
-        } else {
-            return content.substring(0, maxChars);
-        }
+        this.isMyPost=isMyPost;
     }
 
     private String formatTimestamp(Instant instant) {
@@ -41,4 +35,5 @@ public class PostListResDto {
         Date date = Date.from(instant);
         return sdf.format(date);
     }
+
 }

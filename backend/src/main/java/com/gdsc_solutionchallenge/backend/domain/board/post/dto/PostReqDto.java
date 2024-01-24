@@ -16,19 +16,16 @@ public class PostReqDto {
     private String title;
     @Schema(description = "게시글 내용")
     private String content;
-    @Schema(description = "작성자 이름")
-    private String nickname;
+//    @Schema(description = "작성자 이름")
+//    private String nickname;
 
-    // BoardReqDto 생성자
     @Builder
-    public PostReqDto(String title, String content, User user){
+    public PostReqDto(String title, String content/*, User user*/){
         this.title=title;
         this.content=content;
-        this.nickname=user.getNickname();
+        //this.nickname=user.getNickname();
     }
 
-    // BoardReqDto 를 Board 로 변환하는 메서드
-    // 변환된 Board 가 return
     public Post toEntity(User user){
         Post build = Post.builder()
                 .user(user)

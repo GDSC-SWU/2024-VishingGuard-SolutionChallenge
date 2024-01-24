@@ -49,7 +49,7 @@ class PostControllerTest {
         PostReqDto postReqDto = PostReqDto.builder()
                 .title("Valid Title")
                 .content("Valid Content")
-                .user(user)
+//                .user(user)
                 .build();
 
         String url="http://localhost:" + port + "/api/v1/posts";
@@ -65,16 +65,17 @@ class PostControllerTest {
     @Test
     public void updateBoardTest() throws Exception {
         User user= userRepository.findByNickname("kim");
-        Post post= postRepository.findById("BCMH1HxUgxGFpqXxZZaQ");
+        Post post= postRepository.findById("CT9uwP2PmV93h2BnneIV");
 
         String updateId = post.getId();
         String expectedTitle = "title2";
         String expectedContent = "content2";
 
-        PostUpdateReqDto postUpdateReqDto= PostUpdateReqDto.builder()
-                .title(expectedTitle)
-                .content(expectedContent)
-                .build();
+//        PostUpdateReqDto postUpdateReqDto= PostUpdateReqDto.builder()
+//                .title(expectedTitle)
+//                .content(expectedContent)
+//                .build();
+        PostUpdateReqDto postUpdateReqDto = new PostUpdateReqDto(expectedTitle,expectedContent);
 
         String url="http://localhost:" + port + "/api/v1/posts/"+updateId;
 
