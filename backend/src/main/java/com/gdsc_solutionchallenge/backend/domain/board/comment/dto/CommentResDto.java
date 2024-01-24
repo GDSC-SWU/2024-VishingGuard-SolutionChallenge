@@ -2,14 +2,18 @@ package com.gdsc_solutionchallenge.backend.domain.board.comment.dto;
 
 import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentResDto {
     private String commentId;
     private String postId;
@@ -20,13 +24,13 @@ public class CommentResDto {
     private Boolean isAuthorComment;
 
     @Builder
-    public CommentResDto(Comment comment, Post post, Boolean isAuthorComment){
+    public CommentResDto(Comment comment, String nickName){
         this.commentId=comment.getId();
-        this.postId=post.getId();
+        this.postId=comment.getPost_id();
         this.content=comment.getContent();
         this.nickname=comment.getUser().getNickname();
         this.updated_at = formatTimestamp(comment.getUpdated_at());
-        this.isAuthorComment=isAuthorComment;
+        this.isAuthorComment=comment.getUser().getNickname().equals(nickName);
     }
 
     private String formatTimestamp(Date date) {
@@ -36,4 +40,5 @@ public class CommentResDto {
         }
         return null;
     }
+
 }

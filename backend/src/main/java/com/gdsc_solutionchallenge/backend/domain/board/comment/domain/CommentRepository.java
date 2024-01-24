@@ -1,6 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.board.comment.domain;
 
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
+import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
@@ -27,8 +28,8 @@ public class CommentRepository {
     }
 
     public String delete(String id) throws Exception {
-        CollectionReference posts = firestore.collection("post");
-        DocumentReference documentReference = posts.document(id);
+        CollectionReference comments = firestore.collection("comment");
+        DocumentReference documentReference = comments.document(id);
         documentReference.delete();
         return id;
     }
@@ -50,27 +51,44 @@ public class CommentRepository {
         return post;
     }
 
-    public Post findById(String id) throws Exception{
-        CollectionReference posts = firestore.collection("post");
-        DocumentReference documentReference = posts.document(id); // 특정 ID에 해당하는 문서를 참조
+    public Comment findById(String commentId) throws Exception{
+        CollectionReference comments = firestore.collection("comment");
+        DocumentReference documentReference = comments.document(commentId); // 특정 ID에 해당하는 문서를 참조
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
         if (documentSnapshot.exists()) {
-            return documentSnapshot.toObject(Post.class);
+            return documentSnapshot.toObject(Comment.class);
         } else {
             // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
             return null;
         }
     }
 
-    public List<Post> getAll() throws Exception{
-        CollectionReference posts = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
+    public List<Comment> getAllCommentByPostId(String postid) throws Exception{
+        CollectionReference comments = firestore.collection("comment");
 
-        List<Post> result = new ArrayList<>();
+        // whereEqualTo를 사용하여 쿼리 생성
+        Query query = comments.whereEqualTo("post_id", postid);
+
+        // 쿼리를 실행하여 결과 가져오기
+        ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
+        QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
+
+        List<Comment> result = new ArrayList<>();
+        for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
+            result.add(document.toObject(Comment.class));
+        }
+        return result;
+    }
+
+    public List<Comment> getAll() throws Exception{
+        CollectionReference comments = firestore.collection("comment");
+        ApiFuture<QuerySnapshot> querySnapshot = comments.get();
+
+        List<Comment> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            result.add(document.toObject(Post.class));
+            result.add(document.toObject(Comment.class));
         }
 
         return result;

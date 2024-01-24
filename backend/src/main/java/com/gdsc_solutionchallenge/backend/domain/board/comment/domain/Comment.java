@@ -26,7 +26,10 @@ public class Comment {
     private User user;
 
     @NotNull
-    private Post post;
+    private String post_id;
+
+    @NotNull
+    private String user_id;
 
     @NotNull
     private String content;
@@ -38,9 +41,10 @@ public class Comment {
     private Timestamp updated_at;
 
     @Builder
-    public Comment(User user, Post post, String content) {
+    public Comment(User user, String post_id, String user_id, String content) {
         this.user = user;
-        this.post = post;
+        this.post_id = post_id;
+        this.user_id=user_id;
         this.content = content;
     }
 

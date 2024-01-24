@@ -39,17 +39,13 @@ public class CommentService {
         // Comment Entity 생성
         Comment comment = Comment.builder()
                 .user(user)
-                .post(post)
+                .post_id(post.getId())
+                .user_id(user.getId())
                 .content(commentReqDto.getContent())
                 .build();
 
         commentRepository.save(comment);
-
-        if (user.getNickname().equals(post.getUser().getNickname())){
-            return new CommentResDto(comment, post,true);
-        }else{
-            return new CommentResDto(comment, post,false);
-        }
+        return new CommentResDto(comment, user.getNickname());
     }
 
 //    public PostResDto updatePost(String id, PostUpdateReqDto postUpdateReqDto) throws Exception {
@@ -74,20 +70,44 @@ public class CommentService {
 //        return post;
 //    }
 //
-//    public List<PostListResDto> getAllPosts() throws Exception {
-//        return postRepository.getAll().stream()
-//                // BoardRepository 의 findAllDesc 메서드를 호출하여 게시글을 내림차순으로 조회 (쿼리 기능)
-//                .map(PostListResDto::new)// 각 게시글을 BoardListDto 로 변환
-//                .collect(Collectors.toList()); // 이후 리스트로 수집하여 반환
-//    }
-//
-//    public String deletePost(String id) throws Exception {
-//        // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
-//        Post post = postRepository.findById(id);
-//        if (post == null) {
-//            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
-//        }
-//
-//        return postRepository.delete(id);
-//    }
+    public List<CommentResDto> getAllComments(String userId, String postId) throws Exception {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
+        }
+        Post post = postRepository.findById(postId);
+        if (post == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+        }
+        List<Comment> comments = commentRepository.getAllCommentByPostId(postId);
+
+        List<CommentResDto> commentResDtos = comments.stream()
+                .map(comment -> new CommentResDto(comment, user.getNickname()))
+                .collect(Collectors.toList());
+
+        return commentResDtos;
+    }
+
+    public String deleteComment(String userId, String postId, String commentId) throws Exception {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
+        }
+        Post post = postRepository.findById(postId);
+        if (post == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+        }
+        Comment comment = commentRepository.findById(commentId);
+        if (comment == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "comment not found");
+        }
+
+        if (!comment.getPost_id().equals(postId)){
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "resource not found");
+        } else if (!comment.getUser_id().equals(userId)){
+            throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to delete");
+        }
+
+        return commentRepository.delete(commentId);
+    }
 }
