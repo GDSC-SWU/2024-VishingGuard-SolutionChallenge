@@ -34,21 +34,20 @@ public class CommentRepository {
         return id;
     }
 
-    public Post update(Post post) throws Exception{
-        CollectionReference posts = firestore.collection("post");
-        DocumentReference documentReference = firestore.collection("post").document(post.getId());
+    public Comment update(Comment comment) throws Exception{
+        CollectionReference comments = firestore.collection("comment");
+        DocumentReference documentReference = firestore.collection("comment").document(comment.getId());
 
         // 업데이트할 데이터를 Map으로 생성
         Map<String, Object> updates = new HashMap<>();
-        updates.put("title", post.getTitle());
-        updates.put("content", post.getContent());
+        updates.put("content", comment.getContent());
         updates.put("updated_at", Timestamp.now());
 
         // 해당 문서에 업데이트 적용
         ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
         writeResultApiFuture.get();  // 결과를 기다림
 
-        return post;
+        return comment;
     }
 
     public Comment findById(String commentId) throws Exception{

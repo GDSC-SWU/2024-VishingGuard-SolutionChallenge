@@ -23,6 +23,9 @@ public class Post {
     @NotNull
     private User user;
 
+    @NotNull
+    private String user_id;
+
     @Size(max = 50)
     @NotNull
     private String title;
@@ -37,8 +40,9 @@ public class Post {
     private Timestamp updated_at;
 
     @Builder
-    public Post(User user, String title, String content) {
+    public Post(User user, String user_id, String title, String content) {
         this.user = user;
+        this.user_id = user_id;
         this.title = title;
         this.content = content;
     }
@@ -50,6 +54,10 @@ public class Post {
     }
 
     public Date getUpdated_at() {
-        return updated_at != null ? updated_at.toDate() : null;
+        return updated_at != null ? updated_at.toDate() : Timestamp.now().toDate();
+    }
+
+    public Date getCreated_at() {
+       return created_at != null ? created_at.toDate() : Timestamp.now().toDate();
     }
 }

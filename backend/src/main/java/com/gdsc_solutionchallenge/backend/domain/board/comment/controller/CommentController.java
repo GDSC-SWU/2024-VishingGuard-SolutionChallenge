@@ -2,7 +2,9 @@ package com.gdsc_solutionchallenge.backend.domain.board.comment.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentResDto;
+import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.service.CommentService;
+import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
@@ -86,13 +88,27 @@ public class CommentController {
         }
     }
 
-    //    @PatchMapping("/{memberId}/{post-id}/comments/{comment-id}")
-//    @Operation(summary = "댓글 수정", description = "댓글 수정 API")
-//    public ResponseEntity<Object> update(/*@AuthenticationPrincipal UserEntity user, */@RequestParam("temp") Long userId, @PathVariable("comment-id") Long commentId, @RequestBody @Valid NewCommentReqDto newCommentReqDto) {
-//        UpdateCommentResDto updateCommentResDto = commentService.updateComment(null, userId, commentId, newCommentReqDto);
-//
-//        return ResponseEntity.status(201).body(DataResponseDto.of(updateCommentResDto, 201));
-//    }
-//
+    @PatchMapping("/{userId}/{postId}/{commentId}")
+    @Operation(summary = "댓글 수정", description = "댓글 수정 API")
+    public ResponseEntity<Object> update(@PathVariable("userId") String userId,
+                                         @PathVariable("postId") String postId,
+                                         @PathVariable("commentId") String commentId,
+                                         @RequestBody CommentUpdateReqDto commentUpdateReqDto) {
+        try {
+            CommentResDto comment = commentService.updateComment(userId, postId, commentId, commentUpdateReqDto);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "댓글 수정 완료", comment));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+        }
+    }
+
 
 }

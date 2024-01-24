@@ -4,6 +4,7 @@ import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.CommentRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentResDto;
+import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostListResDto;
@@ -45,31 +46,30 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
-        return new CommentResDto(comment, user.getNickname());
+        return new CommentResDto(comment, user.getId());
     }
 
-//    public PostResDto updatePost(String id, PostUpdateReqDto postUpdateReqDto) throws Exception {
-//        Post post = postRepository.findById(id);
-//        if (post == null) {
-//            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
-//        }
-//
-//        post.update(postUpdateReqDto.getTitle(), postUpdateReqDto.getContent());
-//
-//        postRepository.save(post);
-//        return new PostResDto(post);
-//    }
-//
-//    public Post findPostById (String id) throws Exception {
-//        // boardRepository 에서 주어진 id에 해당하는 게시글을 데이터베이스에서 조회
-//        Post post = postRepository.findById(id);
-//        if (post == null) {
-//            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
-//        }
-//
-//        return post;
-//    }
-//
+    public CommentResDto updateComment(String userId, String postId,
+                                    String commentId, CommentUpdateReqDto commentUpdateReqDto) throws Exception {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
+        }
+        Post post = postRepository.findById(postId);
+        if (post == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+        }
+        Comment comment = commentRepository.findById(commentId);
+        if (comment == null) {
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "comment not found");
+        }
+
+        comment.update(commentUpdateReqDto.getContent());
+        commentRepository.update(comment);
+
+        return new CommentResDto(comment, user.getId());
+    }
+
     public List<CommentResDto> getAllComments(String userId, String postId) throws Exception {
         User user = userRepository.findById(userId);
         if (user == null) {
@@ -82,7 +82,7 @@ public class CommentService {
         List<Comment> comments = commentRepository.getAllCommentByPostId(postId);
 
         List<CommentResDto> commentResDtos = comments.stream()
-                .map(comment -> new CommentResDto(comment, user.getNickname()))
+                .map(comment -> new CommentResDto(comment, user.getId()))
                 .collect(Collectors.toList());
 
         return commentResDtos;

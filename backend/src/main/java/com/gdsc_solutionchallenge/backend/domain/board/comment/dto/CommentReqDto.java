@@ -20,12 +20,4 @@ public class CommentReqDto {
         this.content=content;
     }
 
-//    public Comment toEntity(User user, Post post){
-//        Comment build = Comment.builder()
-//                .user(user)
-//                .post(post)
-//                .content(content)
-//                .build();
-//        return build;
-//    }
 }

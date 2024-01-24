@@ -29,6 +29,7 @@ public class PostReqDto {
     public Post toEntity(User user){
         Post build = Post.builder()
                 .user(user)
+                .user_id(user.getId())
                 .title(title)
                 .content(content)
                 .build();

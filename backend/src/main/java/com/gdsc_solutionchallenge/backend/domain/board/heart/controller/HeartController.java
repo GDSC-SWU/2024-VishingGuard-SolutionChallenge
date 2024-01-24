@@ -1,6 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.board.heart.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.board.heart.dto.HeartReqDto;
+import com.gdsc_solutionchallenge.backend.domain.board.heart.dto.HeartResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.heart.service.HeartService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.*;
 public class HeartController {
     private final HeartService heartService;
     @Operation(summary = "좋아요 설정", description = "좋아요 설정 API")
-    @PostMapping("/")
-    public ResponseEntity<Object> setHeart(@RequestBody HeartReqDto heartReqDto){
+    @PostMapping("/{userId}/{postId}")
+    public ResponseEntity<Object> setHeart(@PathVariable("userId") String userId,
+                                           @PathVariable("postId") String postId){
         try {
-            Boolean isHeart = heartService.isHeart(heartReqDto);
+            HeartResDto heart = heartService.isHeart(userId, postId);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", isHeart));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", heart));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())

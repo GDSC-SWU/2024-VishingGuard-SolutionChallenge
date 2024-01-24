@@ -20,17 +20,19 @@ public class CommentResDto {
     private String nickname;
     private String content;
     private String updated_at;
+    private String created_at;
     private String profile_image;
-    private Boolean isAuthorComment;
+    private boolean isAuthorComment;
 
     @Builder
-    public CommentResDto(Comment comment, String nickName){
+    public CommentResDto(Comment comment, String userId){
         this.commentId=comment.getId();
         this.postId=comment.getPost_id();
         this.content=comment.getContent();
         this.nickname=comment.getUser().getNickname();
         this.updated_at = formatTimestamp(comment.getUpdated_at());
-        this.isAuthorComment=comment.getUser().getNickname().equals(nickName);
+        this.created_at = formatTimestamp(comment.getCreated_at());
+        this.isAuthorComment=comment.getUser().getId().equals(userId);
     }
 
     private String formatTimestamp(Date date) {

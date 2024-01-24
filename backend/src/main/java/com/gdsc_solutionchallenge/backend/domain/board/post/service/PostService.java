@@ -1,5 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.service;
 
+import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
+import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.CommentRepository;
+import com.gdsc_solutionchallenge.backend.domain.board.heart.domain.HeartRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostListResDto;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final HeartRepository heartRepository;
+
 
     public PostResDto savePost(String userId, PostReqDto postReqDto) throws Exception {
         User user = userRepository.findById(userId);
@@ -29,8 +35,9 @@ public class PostService {
         }
         Post post = postReqDto.toEntity(user);
         postRepository.save(post);
-
-        return new PostResDto(post,true);
+        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
+        return new PostResDto(post, true, comment_count, heart_count);
     }
 
     public PostResDto updatePost(String userId, String postId, PostUpdateReqDto postUpdateReqDto) throws Exception {
@@ -42,14 +49,15 @@ public class PostService {
         User user= userRepository.findById(userId);
         if(user==null){
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "user not found");
-        } else if (!user.getNickname().equals(post.getUser().getNickname())){
+        } else if (!user.getId().equals(post.getUser_id())){
             throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to modify");
         }
 
         post.update(postUpdateReqDto.getTitle(), postUpdateReqDto.getContent());
         postRepository.update(post);
-
-        return new PostResDto(post, true);
+        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
+        return new PostResDto(post, true, comment_count, heart_count);
     }
 
     public PostResDto findPostById (String userId, String postId) throws Exception {
@@ -57,22 +65,21 @@ public class PostService {
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
         }
-
+        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
         User user= userRepository.findById(userId);
         if(user == null){
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "user not found");
-        } else if (!user.getNickname().equals(post.getUser().getNickname())){
-            return new PostResDto(post, false);
+        } else if (!user.getId().equals(post.getUser_id())){
+            return new PostResDto(post, false, comment_count, heart_count);
         }
 
-        return new PostResDto(post, true);
+        return new PostResDto(post, true, comment_count, heart_count);
     }
 
     public List<PostListResDto> getAllPosts() throws Exception {
-        return postRepository.getAll().stream()
-                // BoardRepository 의 findAllDesc 메서드를 호출하여 게시글을 내림차순으로 조회 (쿼리 기능)
-                .map(PostListResDto::new)// 각 게시글을 BoardListDto 로 변환
-                .collect(Collectors.toList()); // 이후 리스트로 수집하여 반환
+        List<Post> posts = postRepository.getAll();
+        return PostListResDto.convertToDtoList(posts, commentRepository, heartRepository);
     }
 
     public String deletePost(String userId, String postId) throws Exception {
@@ -84,7 +91,7 @@ public class PostService {
         User user= userRepository.findById(userId);
         if(user == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "user not found");
-        } else if (!user.getNickname().equals(post.getUser().getNickname())){
+        } else if (!user.getId().equals(post.getUser_id())){
             throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to delete");
         }
 

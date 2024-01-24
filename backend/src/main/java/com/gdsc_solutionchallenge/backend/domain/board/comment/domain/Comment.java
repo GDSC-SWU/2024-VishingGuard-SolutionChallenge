@@ -44,7 +44,7 @@ public class Comment {
     public Comment(User user, String post_id, String user_id, String content) {
         this.user = user;
         this.post_id = post_id;
-        this.user_id=user_id;
+        this.user_id = user_id;
         this.content = content;
     }
 
@@ -54,6 +54,10 @@ public class Comment {
     }
 
     public Date getUpdated_at() {
-        return updated_at != null ? updated_at.toDate() : null;
+        return updated_at != null ? updated_at.toDate() : Timestamp.now().toDate();
+    }
+
+    public Date getCreated_at() {
+        return created_at != null ? created_at.toDate() : Timestamp.now().toDate();
     }
 }

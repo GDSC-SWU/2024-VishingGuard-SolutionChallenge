@@ -1,5 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.board.heart.domain;
 
+import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.api.core.ApiFuture;
@@ -41,6 +42,7 @@ public class HeartRepository {
         if (!querySnapshot.isEmpty()) {
             DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
             documentSnapshot.getReference().delete();
+            System.out.println("삭제");
         }
 
     }
@@ -69,6 +71,23 @@ public class HeartRepository {
             // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
             return null;
         }
+    }
+
+    public List<Heart> getAllHeartByPostId(String postid) throws Exception{
+        CollectionReference hearts = firestore.collection("heart");
+
+        // whereEqualTo를 사용하여 쿼리 생성
+        Query query = hearts.whereEqualTo("post_id", postid);
+
+        // 쿼리를 실행하여 결과 가져오기
+        ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
+        QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
+
+        List<Heart> result = new ArrayList<>();
+        for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
+            result.add(document.toObject(Heart.class));
+        }
+        return result;
     }
 
     public List<Post> getAll() throws Exception{
