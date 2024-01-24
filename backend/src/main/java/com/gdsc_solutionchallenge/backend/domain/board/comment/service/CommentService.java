@@ -46,7 +46,7 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
-        return new CommentResDto(comment, user.getId());
+        return new CommentResDto(comment, post);
     }
 
     public CommentResDto updateComment(String userId, String postId,
@@ -67,7 +67,7 @@ public class CommentService {
         comment.update(commentUpdateReqDto.getContent());
         commentRepository.update(comment);
 
-        return new CommentResDto(comment, user.getId());
+        return new CommentResDto(comment, post);
     }
 
     public List<CommentResDto> getAllComments(String userId, String postId) throws Exception {
@@ -82,7 +82,7 @@ public class CommentService {
         List<Comment> comments = commentRepository.getAllCommentByPostId(postId);
 
         List<CommentResDto> commentResDtos = comments.stream()
-                .map(comment -> new CommentResDto(comment, user.getId()))
+                .map(comment -> new CommentResDto(comment, post))
                 .collect(Collectors.toList());
 
         return commentResDtos;

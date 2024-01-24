@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class HeartController {
     private final HeartService heartService;
     @Operation(summary = "좋아요 설정", description = "좋아요 설정 API")
-    @PostMapping("/{userId}/{postId}")
+    @PostMapping("/{userId}/{postId}/create")
     public ResponseEntity<Object> setHeart(@PathVariable("userId") String userId,
                                            @PathVariable("postId") String postId){
         try {

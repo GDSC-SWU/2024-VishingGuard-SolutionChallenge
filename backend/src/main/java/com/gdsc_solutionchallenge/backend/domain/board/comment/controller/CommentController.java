@@ -20,12 +20,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/comment")
+@RequestMapping("/api/v1/comments")
 @Tag(name = "댓글 API", description = "댓글 API 모음")
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/{userId}/{postId}")
+    @PostMapping("/{userId}/{postId}/create")
     @Operation(summary = "댓글 등록", description = "댓글 등록 API")
     public ResponseEntity<Object> save(@PathVariable("userId") String userId,
                                        @PathVariable("postId") String postId,
@@ -46,7 +46,7 @@ public class CommentController {
         }
     }
 
-    @GetMapping("/{userId}/{postId}")
+    @GetMapping("/{userId}/{postId}/read")
     @Operation(summary = "댓글 조회", description = "댓글 조회 API")
     public ResponseEntity<Object> read(@PathVariable("userId") String userId,
                                        @PathVariable("postId") String postId) {
@@ -66,7 +66,7 @@ public class CommentController {
         }
     }
 
-    @DeleteMapping("/{userId}/{postId}/{commentId}")
+    @DeleteMapping("/{userId}/{postId}/{commentId}/delete")
     @Operation(summary = "댓글 삭제", description = "댓글 삭제 API")
     public ResponseEntity<Object> delete(@PathVariable("userId") String userId,
                                          @PathVariable("postId") String postId,
@@ -88,7 +88,7 @@ public class CommentController {
         }
     }
 
-    @PatchMapping("/{userId}/{postId}/{commentId}")
+    @PatchMapping("/{userId}/{postId}/{commentId}/update")
     @Operation(summary = "댓글 수정", description = "댓글 수정 API")
     public ResponseEntity<Object> update(@PathVariable("userId") String userId,
                                          @PathVariable("postId") String postId,

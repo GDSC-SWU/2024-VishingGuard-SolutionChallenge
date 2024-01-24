@@ -25,7 +25,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}/create")
     @Operation(summary = "게시글 등록", description = "게시글 등록 API")
     public ResponseEntity<Object> save(@PathVariable("userId") String userId,
                                        @RequestBody PostReqDto postReqDto){
@@ -45,7 +45,7 @@ public class PostController {
         }
     }
 
-    @PutMapping("/{userId}/{postId}")
+    @PatchMapping("/{userId}/{postId}/update")
     @Operation(summary = "특정 게시글 수정", description = "특정 게시글 수정 API")
     public ResponseEntity<Object> update(@PathVariable("userId") String userId,
                                          @PathVariable("postId") String postId,
@@ -66,7 +66,7 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{userId}/{postId}")
+    @GetMapping("/{userId}/{postId}/read")
     @Operation(summary = "특정 게시글 조회", description = "특정 게시글 조회 API")
     public ResponseEntity<Object> findById (@PathVariable("userId") String userId,
                                             @PathVariable("postId") String postId){
@@ -87,7 +87,7 @@ public class PostController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("/read")
     @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API")
     public ResponseEntity<Object> readAllPosts() {
         try {
@@ -108,7 +108,7 @@ public class PostController {
     }
 
     // 특정 게시글 삭제
-    @DeleteMapping("/{userId}/{postId}")
+    @DeleteMapping("/{userId}/{postId}/delete")
     @Operation(summary = "특정 게시글 삭제", description = "특정 게시글 삭제 API")
 
     public ResponseEntity<Object> delete(@PathVariable("userId") String userId,
