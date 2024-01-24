@@ -1,10 +1,9 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingRequestDto;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingReqDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.VishingService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +21,9 @@ public class VishingController {
 
     @PostMapping("/vishing")
     @Operation(summary = "전화 피싱", description = "파라미터로 받은 전화 대본 피싱 여부를 반환")
-    public ResponseEntity<Object> postVishing(@RequestBody VishingRequestDto vishingRequestDto) throws Exception {
+    public ResponseEntity<Object> postVishing(@RequestBody VishingReqDto vishingReqDto) throws Exception {
         try{
-            boolean result=vishingService.isVishing(vishingRequestDto);
+            boolean result=vishingService.isVishing(vishingReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다",result));

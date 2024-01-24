@@ -1,11 +1,10 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingResponseDto;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingReqDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingResDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.SmishingService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,12 +21,12 @@ public class SmishingController {
 
     @PostMapping("/smishing")
     @Operation(summary = "메시지 피싱", description = "파라미터로 받은 메시지 피싱 여부를 반환")
-    public ResponseEntity<Object> postSmishing(@RequestBody SmishingRequestDto smishingRequestDto) {
+    public ResponseEntity<Object> postSmishing(@RequestBody SmishingReqDto smishingReqDto) {
         try {
-            SmishingResponseDto smishingResponseDto = smishingService.isSmishing(smishingRequestDto);
+            SmishingResDto smishingResDto = smishingService.isSmishing(smishingReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", smishingResponseDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", smishingResDto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

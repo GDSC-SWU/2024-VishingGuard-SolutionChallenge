@@ -1,13 +1,10 @@
 package com.gdsc_solutionchallenge.backend.domain.result.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingRequestDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumRequsetDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResponseDto;
-import com.gdsc_solutionchallenge.backend.domain.result.service.SmishingService;
+import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumReqDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.SpamNumResDto;
 import com.gdsc_solutionchallenge.backend.domain.result.service.SpamNumService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,9 +23,9 @@ public class SpamNumController {
 
     @PostMapping("/spamNumber")
     @Operation(summary = "스팸 전화번호 판단", description = "스팸 전화번호 여부를 판단")
-    public ResponseEntity<Object> postSpam(@RequestBody SpamNumRequsetDto spamNumRequsetDto) {
+    public ResponseEntity<Object> postSpam(@RequestBody SpamNumReqDto spamNumReqDto) {
         try {
-            SpamNumResponseDto responseDto= spamNumService.isSpamNum(spamNumRequsetDto);
+            SpamNumResDto responseDto= spamNumService.isSpamNum(spamNumReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "스팸 판단 결과입니다", responseDto));

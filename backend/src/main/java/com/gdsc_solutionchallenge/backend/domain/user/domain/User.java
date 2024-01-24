@@ -1,20 +1,24 @@
 package com.gdsc_solutionchallenge.backend.domain.user.domain;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
     @DocumentId
-    private Long id;
+    private String id;
 
     @NotNull
     private String email;
@@ -30,8 +34,7 @@ public class User {
     @NotNull
     private String phone;
 
-    //@CreationTimestamp
-    private LocalDateTime created_at;
+    //private String profileImageUrl; 로그인 이후 구현 예정
 
     @Builder
     public User(String email, String password, String nickname, String phone) {
@@ -51,8 +54,8 @@ public class User {
         this.nickname = nickname;
     }
 
-//    //비밀번호 변경, 회원 탈퇴 시, 비밀번호를 확인하며, 이때 비밀번호의 일치여부를 판단하는 메서드
-//    public boolean matchPassword(PasswordEncoder passwordEncoder, String checkPassword){
-//        return passwordEncoder.matches(checkPassword, getPassword());
-//    }
+    //비밀번호 변경, 회원 탈퇴 시, 비밀번호를 확인하며, 이때 비밀번호의 일치여부를 판단하는 메서드
+    public boolean matchPassword(PasswordEncoder passwordEncoder, String checkPassword){
+        return passwordEncoder.matches(checkPassword, getPassword());
+    }
 }
