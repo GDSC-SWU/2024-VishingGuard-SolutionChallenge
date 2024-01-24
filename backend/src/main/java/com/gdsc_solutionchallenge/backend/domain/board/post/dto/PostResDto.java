@@ -26,14 +26,16 @@ public class PostResDto {
         this.content=post.getContent();
         this.title=post.getTitle();
         this.nickname=post.getUser().getNickname();
-        this.updated_at = formatTimestamp(post.getUpdated_at().toDate().toInstant());
+        this.updated_at = formatTimestamp(post.getUpdated_at());
         this.isMyPost=isMyPost;
     }
 
-    private String formatTimestamp(Instant instant) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = Date.from(instant);
-        return sdf.format(date);
+    private String formatTimestamp(Date date) {
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(date);
+        }
+        return null;
     }
 
 }

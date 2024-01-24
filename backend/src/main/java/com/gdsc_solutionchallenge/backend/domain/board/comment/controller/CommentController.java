@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/{user-id}/{post-id}/comments")
+    @PostMapping("/{userId}/{postId}/comments")
     @Operation(summary = "댓글 등록", description = "댓글 등록 API")
     public ResponseEntity<Object> save(@PathVariable("userId") String userId,
                                        @PathVariable("postId") String postId,

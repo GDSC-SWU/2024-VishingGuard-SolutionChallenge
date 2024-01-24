@@ -27,12 +27,10 @@ public class PostService {
         if (user == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
         }
-        // boardEntity 생성
         Post post = postReqDto.toEntity(user);
         postRepository.save(post);
 
-        // 저장된 엔티티에서 ID를 가져와 반환
-        return new PostResDto(post,null);
+        return new PostResDto(post,true);
     }
 
     public PostResDto updatePost(String userId, String postId, PostUpdateReqDto postUpdateReqDto) throws Exception {

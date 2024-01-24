@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -45,5 +46,10 @@ public class Comment {
 
     public void update(String content) {
         this.content = content;
+        this.updated_at = Timestamp.now();
+    }
+
+    public Date getUpdated_at() {
+        return updated_at != null ? updated_at.toDate() : null;
     }
 }

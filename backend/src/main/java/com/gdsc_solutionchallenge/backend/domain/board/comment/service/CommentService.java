@@ -37,7 +37,6 @@ public class CommentService {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
         }
         // Comment Entity 생성
-        //Comment comment = CommentReqDto.toEntity(user, post);
         Comment comment = Comment.builder()
                 .user(user)
                 .post(post)
@@ -46,8 +45,11 @@ public class CommentService {
 
         commentRepository.save(comment);
 
-        // 저장된 엔티티에서 ID를 가져와 반환
-        return new CommentResDto(comment);
+        if (user.getNickname().equals(post.getUser().getNickname())){
+            return new CommentResDto(comment, post,true);
+        }else{
+            return new CommentResDto(comment, post,false);
+        }
     }
 
 //    public PostResDto updatePost(String id, PostUpdateReqDto postUpdateReqDto) throws Exception {

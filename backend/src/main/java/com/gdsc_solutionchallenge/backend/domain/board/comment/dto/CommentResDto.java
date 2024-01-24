@@ -17,19 +17,23 @@ public class CommentResDto {
     private String content;
     private String updated_at;
     private String profile_image;
-    private Boolean isMyComment;
+    private Boolean isAuthorComment;
 
     @Builder
-    public CommentResDto(Comment comment){
+    public CommentResDto(Comment comment, Post post, Boolean isAuthorComment){
         this.commentId=comment.getId();
+        this.postId=post.getId();
         this.content=comment.getContent();
         this.nickname=comment.getUser().getNickname();
-        this.updated_at = formatTimestamp(comment.getUpdated_at().toDate().toInstant());
+        this.updated_at = formatTimestamp(comment.getUpdated_at());
+        this.isAuthorComment=isAuthorComment;
     }
 
-    private String formatTimestamp(Instant instant) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = Date.from(instant);
-        return sdf.format(date);
+    private String formatTimestamp(Date date) {
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(date);
+        }
+        return null;
     }
 }

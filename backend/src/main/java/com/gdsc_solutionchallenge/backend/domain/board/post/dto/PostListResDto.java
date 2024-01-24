@@ -24,7 +24,7 @@ public class PostListResDto {
         this.id=post.getId();
         this.title=post.getTitle();
         this.nickname=post.getUser().getNickname(); // UserEntity 에서 nickname 가져오기
-        this.updated_at = formatTimestamp(post.getUpdated_at().toDate().toInstant());
+        this.updated_at = formatTimestamp(post.getUpdated_at().toInstant());
         this.contentSnippet=getContentSnippet(post.getContent(), 82);
     }
 

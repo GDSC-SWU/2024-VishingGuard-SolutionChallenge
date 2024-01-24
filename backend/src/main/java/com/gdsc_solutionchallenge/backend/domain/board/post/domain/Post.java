@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -45,5 +47,9 @@ public class Post {
         this.title=title;
         this.content=content;
         this.updated_at = Timestamp.now();
+    }
+
+    public Date getUpdated_at() {
+        return updated_at != null ? updated_at.toDate() : null;
     }
 }
