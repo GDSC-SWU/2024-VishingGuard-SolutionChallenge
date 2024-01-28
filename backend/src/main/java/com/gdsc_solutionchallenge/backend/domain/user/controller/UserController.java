@@ -1,44 +1,80 @@
-package com.gdsc_solutionchallenge.backend.domain.user.controller;
-
-import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostResDto;
-import com.gdsc_solutionchallenge.backend.domain.user.dto.UserSignUpDto;
-import com.gdsc_solutionchallenge.backend.domain.user.service.UserService;
-import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
-import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
-import com.gdsc_solutionchallenge.backend.global.error.BaseException;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
-@Tag(name = "유저 API", description = "유저 API 모음")
-public class UserController {
-    private final UserService userService;
-    @PostMapping("/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody UserSignUpDto userSignUpDto) throws Exception {
-        try {
-            String userId = userService.signUp(userSignUpDto);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "회원가입 성공", userId));
-        } catch (BaseException e) {
-            return ResponseEntity
-                    .status(e.getCode())
-                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
-        }
-    }
-
-    @GetMapping("/jwt-test")
-    public String jwtTest() {
-        return "jwtTest 요청 성공";
-    }
-
-}
+//package com.gdsc_solutionchallenge.backend.domain.user.controller;
+//
+//import com.gdsc_solutionchallenge.backend.domain.user.service.UserService;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.*;
+//
+//import com.gdsc_teamb.servertoyproject.domain.user.domain.UserEntity;
+//import com.gdsc_teamb.servertoyproject.exception.AppException;
+//import com.gdsc_teamb.servertoyproject.exception.ErrorCode;
+//import com.gdsc_teamb.servertoyproject.response.ApiResponse;
+//import com.gdsc_teamb.servertoyproject.service.UserService;
+//import com.gdsc_teamb.servertoyproject.web.dto.*;
+//
+//
+//@RequiredArgsConstructor
+//@RestController
+//public class UserController {
+//
+//    private final UserService userService;
+//
+//    @GetMapping("/")
+//    public String save() throws Exception {
+//        return "hello";
+//    };
+//
+//    // 회원가입
+//    @PostMapping("/api/v1/user/join")
+//    public ResponseEntity<?> join(@RequestBody UserJoinRequestDto dto) throws Exception {
+//        try {
+//            UserResponseDto result = userService.join(dto.getEmail(), dto.getNickname(), dto.getPassword(), dto.getPhone());
+//            return ResponseEntity.status(200).body(null);
+//        } catch (AppException ex) {
+//            ErrorCode errorCode = ex.getErrorCode();
+//            return ResponseEntity.status(errorCode.getStatus()).body(ApiResponse.createError("Error occurred: " + errorCode.getMessage()));
+//        }
+//    };
+//
+//    // 정보 수정 - phone, nickname
+//    @PutMapping("/api/v1/user/update/{email}")
+//    public ResponseEntity<?> update(@PathVariable String email, @RequestBody UserUpdateRequestDto dto) throws Exception {
+//        try {
+//            UserResponseDto result = userService.update(email, dto.nickname(), dto.phone());
+//            return ResponseEntity.status(200).body(null);
+//        } catch (AppException ex) {
+//            ErrorCode errorCode = ex.getErrorCode();
+//            return ResponseEntity.status(errorCode.getStatus()).body(ApiResponse.createError("Error occurred: " + errorCode.getMessage()));
+//        }
+//
+//    }
+//
+//    // 비밀번호 변경
+//    @PutMapping("/api/v1/user/update/password/{email}")
+//    public ResponseEntity<?>  updatePassword(@PathVariable String email,@RequestBody UpdatePasswordDto updatePasswordDto) throws Exception {
+//
+//        try {
+//            userService.updatePassword(email,updatePasswordDto.checkPassword(),updatePasswordDto.toBePassword());
+//            return ResponseEntity.status(200).body(null);
+//        } catch (AppException ex) {
+//            ErrorCode errorCode = ex.getErrorCode();
+//            return ResponseEntity.status(errorCode.getStatus()).body(ApiResponse.createError("Error occurred: " + errorCode.getMessage()));
+//        }
+//
+//    }
+//
+//    // 회원탈퇴
+//    @DeleteMapping("/api/v1/user/{email}")
+//    public ResponseEntity<?> withdraw(@PathVariable String email, @RequestParam(value="password",required = true) String password) throws Exception {
+//
+//        try {
+//            userService.withdraw(email,password);
+//            return ResponseEntity.status(200).body(null);
+//
+//        } catch (AppException ex) {
+//            ErrorCode errorCode = ex.getErrorCode();
+//            return ResponseEntity.status(errorCode.getStatus()).body(ApiResponse.createError("Error occurred: " + errorCode.getMessage()));
+//
+//        }
+//    }
+//}

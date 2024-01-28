@@ -1,6 +1,5 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.domain;
 
-import com.gdsc_solutionchallenge.backend.domain.result.domain.PhishingUrl;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
