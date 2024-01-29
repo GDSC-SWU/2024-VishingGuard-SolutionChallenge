@@ -18,7 +18,7 @@ public class Smishing {
     String script;
     @NotNull
     String phone;
-    @NotNull
+
     String keyword_comment;
 //    @NotNull
 //    String url_comment;

@@ -1,12 +1,16 @@
 package com.gdsc_solutionchallenge.backend.domain.result.smishing.service;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.*;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db.PhishingUrl;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db.PhishingUrlRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db.SmishingKeyword;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db.SmishingKeywordRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingReqDto;
+import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +22,11 @@ public class SmishingService {
     public final SmishingRepository smishingRepository;
     public final SmishingKeywordRepository smishingKeywordRepository;
     public final PhishingUrlRepository phishingUrlRepository;
+    private final UserRepository userRepository;
 
     public Boolean isSmishing(Long userId, SmishingReqDto smishingReqDto) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
         //boolean urlResult = false; // url 결과
         boolean keywordResult = false; // keyword 결과
         String keywordComment = null;
@@ -48,16 +55,20 @@ public class SmishingService {
             }
         }
 
-        // SmishingScript Entity 생성
-        Smishing smishing = Smishing.builder()
-                .user_id(userId)
-                .script(smishingReqDto.getSmishingScript())
-                .phone(smishingReqDto.getPhone())
-                //.url_comment(urlComment)
-                .keyword_comment(keywordComment)
-                .build();
+        if (keywordResult) {
+            // SmishingScript Entity 생성
+            Smishing smishing = Smishing.builder()
+                    .user_id(userId)
+                    .script(smishingReqDto.getSmishingScript())
+                    .phone(smishingReqDto.getPhone())
+                    //.url_comment(urlComment)
+                    .keyword_comment(keywordComment)
+                    .build();
 
-        smishingRepository.save(smishing); // 스크립트 저장
+            smishingRepository.save(smishing); // 스크립트 저장
+        }
+
+
 
         // 두 결과 중 하나라도 true인 경우 true 반환
         return /*urlResult ||*/ keywordResult;

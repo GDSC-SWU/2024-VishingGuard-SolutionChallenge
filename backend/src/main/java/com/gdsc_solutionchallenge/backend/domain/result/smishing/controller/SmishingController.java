@@ -3,6 +3,8 @@ package com.gdsc_solutionchallenge.backend.domain.result.smishing.controller;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingReqDto;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.service.SmishingService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
+import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +29,14 @@ public class SmishingController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", isSmishing));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
         }
     }
 }

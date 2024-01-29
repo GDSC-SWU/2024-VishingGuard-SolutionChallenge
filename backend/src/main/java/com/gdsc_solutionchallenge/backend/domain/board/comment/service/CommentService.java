@@ -25,7 +25,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public CommentResDto saveComment(Long userId, String postId, CommentReqDto commentReqDto) throws Exception {
-        com.gdsc_solutionchallenge.backend.domain.auth.domain.User user = userRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
@@ -46,7 +46,7 @@ public class CommentService {
 
     public CommentResDto updateComment(Long userId, String postId,
                                     String commentId, CommentUpdateReqDto commentUpdateReqDto) throws Exception {
-        com.gdsc_solutionchallenge.backend.domain.auth.domain.User user = userRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
@@ -65,7 +65,7 @@ public class CommentService {
     }
 
     public List<CommentResDto> getAllComments(Long userId, String postId) throws Exception {
-        com.gdsc_solutionchallenge.backend.domain.auth.domain.User user = userRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);

@@ -5,6 +5,8 @@ import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisReqDto;
 import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisResDto;
 import com.gdsc_solutionchallenge.backend.domain.report.service.ReportService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
+import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
+import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +30,14 @@ public class ReportController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 문자", reportSmsReqDto));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
         }
     }
 
@@ -41,9 +49,34 @@ public class ReportController {
             List<ReportVisResDto> reportVisResDtos = reportService.vishingReport(userId, reportVisReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", reportVisResDtos));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 전화", reportVisResDtos));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+        }
+    }
+
+    @GetMapping("/state/{userId}")
+    @Operation(summary = "피싱 레포트 상태", description = "피싱 레포트 상태 API")
+    public ResponseEntity<Object> getPhishingReportRiskStatus(@PathVariable("userId") Long userId) {
+        try {
+            String reportState = reportService.reportState(userId);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 상태", reportState));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
         }
     }
 }

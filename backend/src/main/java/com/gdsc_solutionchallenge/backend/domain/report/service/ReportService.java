@@ -1,5 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.report.service;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.report.domain.Vishing;
 import com.gdsc_solutionchallenge.backend.domain.report.domain.VishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisReqDto;
@@ -23,9 +25,12 @@ public class ReportService {
     public final SmishingRepository smishingRepository;
     public final VishingRepository vishingRepository;
     public final VishingKeywordRepository vishingKeywordRepository;
-
+    private final UserRepository userRepository;
 
     public List<ReportSmsResDto> smishigReport(Long userId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         List<Smishing> smishings = smishingRepository.getAllScriptByUserId(userId);
         List<ReportSmsResDto> reportSmsResDtos = smishings.stream()
                 .map(smishing -> new ReportSmsResDto(smishing))
@@ -34,6 +39,9 @@ public class ReportService {
     }
 
     public List<ReportVisResDto> vishingReport(Long userId, ReportVisReqDto reportVisReqDto) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         String keywordComment = null;
         List<VishingKeyword> vishingKeywordList = vishingKeywordRepository.getAllVishingKeyword();
 
@@ -67,6 +75,23 @@ public class ReportService {
         return reportVisResDtos;
     }
 
+    public String reportState(Long userId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
+        int vishingCount = vishingRepository.getAllScriptByUserId(userId).size();
+        int smishingCount = smishingRepository.getAllScriptByUserId(userId).size();
+
+        int totalCount = vishingCount + smishingCount;
+
+        if (totalCount >= 0 && totalCount <= 1) {
+            return "안전";
+        } else if (totalCount >= 2 && totalCount <= 3) {
+            return "경고";
+        } else {
+            return "위험";
+        }
+    }
 
 
 
