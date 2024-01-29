@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class SignInRequestDto {
-    // 로그인
     private String email;
     private String password;
 }

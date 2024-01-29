@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

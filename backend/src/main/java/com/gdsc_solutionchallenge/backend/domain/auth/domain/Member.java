@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.domain;
 
 
 import jakarta.persistence.*;
@@ -21,22 +21,20 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 public class Member implements UserDetails {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "member_id", updatable = false, unique = true, nullable = false)
     private Long id;
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
+    private String password;
     private String profileImg;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()

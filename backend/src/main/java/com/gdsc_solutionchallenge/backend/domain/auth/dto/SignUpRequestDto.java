@@ -1,5 +1,6 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.dto;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class SignUpRequestDto {
     private String username;
     private String password;
     private String email;
-    private List<String> roles = new ArrayList<>();
+    //private List<String> roles = new ArrayList<>();
 
     public Member toEntity(String encodedPassword, List<String> roles) {
 

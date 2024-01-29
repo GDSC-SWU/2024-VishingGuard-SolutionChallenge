@@ -1,5 +1,6 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.dto;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.Member;
 import lombok.*;
 
 @Getter
@@ -7,19 +8,18 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDto {
+public class MemberResponseDto {
 
     private Long id;
     private String username;
     private String email;
-    private String profileImg;
 
-    static public MemberDto toDto(Member member) {
-        return MemberDto.builder()
+    static public MemberResponseDto toDto(Member member) {
+        return MemberResponseDto.builder()
                 .id(member.getId())
                 .username(member.getUsername())
                 .email(member.getEmail())
-                .profileImg(member.getProfileImg()).build();
+                .build();
     }
 
     public Member toEntity() {
@@ -27,6 +27,6 @@ public class MemberDto {
                 .id(id)
                 .username(username)
                 .email(email)
-                .profileImg(profileImg).build();
+                .build();
     }
 }
