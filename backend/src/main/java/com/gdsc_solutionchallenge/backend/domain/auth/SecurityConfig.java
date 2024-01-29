@@ -27,8 +27,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT 사용 -> 세션 사용 X
                 .authorizeRequests()
-                .requestMatchers(new AntPathRequestMatcher("/members/sign-in")).permitAll()    // 모든 요청 허가
-                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/index.html")).permitAll()    // 모든 요청 허가
+                .requestMatchers(
+                        // -- Swagger UI v3 (OpenAPI)
+                        "/v3/api-docs/**",
+                        "/swagger-ui.html",
+                        "/swagger-ui/**").permitAll()
+                // 모든 요청 허가
+                .requestMatchers(new AntPathRequestMatcher("/members/sign-in")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/members/sign-up")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/members/test")).hasRole("USER") // USER 권한 확인
                 .anyRequest().authenticated() // 이 밖에 모든 요청에 대해 인증 필요
                 .and()
@@ -41,6 +47,5 @@ public class SecurityConfig {
         // BCrypt Encoder 사용
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
 
 }
