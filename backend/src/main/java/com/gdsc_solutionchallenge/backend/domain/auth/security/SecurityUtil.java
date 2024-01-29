@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -22,8 +22,8 @@ public class PostResDto {
     private String postId; // 게시글 ID
     private String title; // 게시글 제목
     private String content; // 게시글 내용
-    private String nickname; // 작성자 정보
-    private String userId; // 작성자 정보
+    private String username; // 작성자 정보
+    private Long userId;
     private String updated_at;
     private String created_at;
     private int comment_count;
@@ -35,7 +35,7 @@ public class PostResDto {
         this.postId=post.getId();
         this.content=post.getContent();
         this.title=post.getTitle();
-        this.nickname=post.getUser().getNickname();
+        this.username=post.getUser().getUsername();
         this.userId=post.getUser_id();
         this.updated_at = formatTimestamp(post.getUpdated_at());
         this.created_at = formatTimestamp(post.getCreated_at());

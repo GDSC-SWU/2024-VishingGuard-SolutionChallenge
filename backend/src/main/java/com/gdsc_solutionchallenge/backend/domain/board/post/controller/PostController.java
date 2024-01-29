@@ -27,7 +27,7 @@ public class PostController {
 
     @PostMapping("/{userId}/create")
     @Operation(summary = "게시글 등록", description = "게시글 등록 API")
-    public ResponseEntity<Object> save(@PathVariable("userId") String userId,
+    public ResponseEntity<Object> save(@PathVariable("userId") Long userId,
                                        @RequestBody PostReqDto postReqDto){
         try {
             PostResDto postResDto = postService.savePost(userId, postReqDto);
@@ -47,7 +47,7 @@ public class PostController {
 
     @PatchMapping("/{userId}/{postId}/update")
     @Operation(summary = "특정 게시글 수정", description = "특정 게시글 수정 API")
-    public ResponseEntity<Object> update(@PathVariable("userId") String userId,
+    public ResponseEntity<Object> update(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId,
                                          @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
         try {
@@ -68,7 +68,7 @@ public class PostController {
 
     @GetMapping("/{userId}/{postId}/read")
     @Operation(summary = "특정 게시글 조회", description = "특정 게시글 조회 API")
-    public ResponseEntity<Object> findById (@PathVariable("userId") String userId,
+    public ResponseEntity<Object> findById (@PathVariable("userId") Long userId,
                                             @PathVariable("postId") String postId){
         try {
             PostResDto postResDto = postService.findPostById(userId, postId);
@@ -111,7 +111,7 @@ public class PostController {
     @DeleteMapping("/{userId}/{postId}/delete")
     @Operation(summary = "특정 게시글 삭제", description = "특정 게시글 삭제 API")
 
-    public ResponseEntity<Object> delete(@PathVariable("userId") String userId,
+    public ResponseEntity<Object> delete(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId){
         try {
             String post_Id = postService.deletePost(userId, postId);

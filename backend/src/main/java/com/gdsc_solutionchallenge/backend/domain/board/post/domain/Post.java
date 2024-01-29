@@ -1,6 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.board.post.domain;
 
-import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.cloud.firestore.annotation.ServerTimestamp;
@@ -24,7 +24,7 @@ public class Post {
     private User user;
 
     @NotNull
-    private String user_id;
+    private Long user_id;
 
     @Size(max = 50)
     @NotNull
@@ -40,7 +40,7 @@ public class Post {
     private Timestamp updated_at;
 
     @Builder
-    public Post(User user, String user_id, String title, String content) {
+    public Post(User user, Long user_id, String title, String content) {
         this.user = user;
         this.user_id = user_id;
         this.title = title;

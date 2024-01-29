@@ -1,7 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.board.comment.domain;
 
-import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
+
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.cloud.firestore.annotation.ServerTimestamp;
@@ -11,9 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Objects;
+
 
 @NoArgsConstructor
 @Getter
@@ -29,7 +28,7 @@ public class Comment {
     private String post_id;
 
     @NotNull
-    private String user_id;
+    private Long user_id;
 
     @NotNull
     private String content;
@@ -41,7 +40,7 @@ public class Comment {
     private Timestamp updated_at;
 
     @Builder
-    public Comment(User user, String post_id, String user_id, String content) {
+    public Comment(User user, String post_id, Long user_id, String content) {
         this.user = user;
         this.post_id = post_id;
         this.user_id = user_id;

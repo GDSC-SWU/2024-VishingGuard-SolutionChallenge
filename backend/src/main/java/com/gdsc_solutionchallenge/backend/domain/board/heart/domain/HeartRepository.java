@@ -1,17 +1,13 @@
 package com.gdsc_solutionchallenge.backend.domain.board.heart.domain;
 
-import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
+
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Repository
 public class HeartRepository {
@@ -28,7 +24,7 @@ public class HeartRepository {
         return heart;
     }
 
-    public void delete(String userId, String postId) throws Exception {
+    public void delete(Long userId, String postId) throws Exception {
         CollectionReference hearts = firestore.collection("heart");
 
         // userId와 postId에 해당하는 문서를 삭제하는 쿼리 생성
@@ -47,7 +43,7 @@ public class HeartRepository {
 
     }
 
-    public Boolean findByUserIdAndPostId(String userId, String postId) throws Exception{
+    public Boolean findByUserIdAndPostId(Long userId, String postId) throws Exception{
         CollectionReference hearts = firestore.collection("heart");
         Query query = hearts.whereEqualTo("user_id", userId).whereEqualTo("post_id", postId);
 
@@ -73,11 +69,11 @@ public class HeartRepository {
         }
     }
 
-    public List<Heart> getAllHeartByPostId(String postid) throws Exception{
+    public List<Heart> getAllHeartByPostId(String postId) throws Exception{
         CollectionReference hearts = firestore.collection("heart");
 
         // whereEqualTo를 사용하여 쿼리 생성
-        Query query = hearts.whereEqualTo("post_id", postid);
+        Query query = hearts.whereEqualTo("post_id", postId);
 
         // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();

@@ -1,12 +1,12 @@
 package com.gdsc_solutionchallenge.backend.domain.board.heart.service;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.heart.domain.Heart;
 import com.gdsc_solutionchallenge.backend.domain.board.heart.domain.HeartRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.heart.dto.HeartResDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +20,10 @@ public class HeartService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public HeartResDto isHeart(String userId, String postId) throws Exception {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
-        }
+    public HeartResDto isHeart(Long userId, String postId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         Post post = postRepository.findById(postId);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");

@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member implements UserDetails {
+public class User implements UserDetails {
     @Id @GeneratedValue
-    @Column(name = "member_id", updatable = false, unique = true, nullable = false)
+    @Column(name = "user_id", updatable = false, unique = true, nullable = false)
     private Long id;
     @Column(nullable = false)
     private String username;
@@ -35,6 +35,7 @@ public class Member implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()

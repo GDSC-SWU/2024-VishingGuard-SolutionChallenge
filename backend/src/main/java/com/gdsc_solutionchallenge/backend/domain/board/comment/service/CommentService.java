@@ -1,5 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.board.comment.service;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.Comment;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.domain.CommentRepository;
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentReqDto;
@@ -7,12 +9,6 @@ import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentResDto
 import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentUpdateReqDto;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
-import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostListResDto;
-import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostReqDto;
-import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostResDto;
-import com.gdsc_solutionchallenge.backend.domain.board.post.dto.PostUpdateReqDto;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.User;
-import com.gdsc_solutionchallenge.backend.domain.user.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,11 +24,10 @@ public class CommentService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
-    public CommentResDto saveComment(String userId, String postId, CommentReqDto commentReqDto) throws Exception {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
-        }
+    public CommentResDto saveComment(Long userId, String postId, CommentReqDto commentReqDto) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         Post post = postRepository.findById(postId);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
@@ -49,12 +44,11 @@ public class CommentService {
         return new CommentResDto(comment, post);
     }
 
-    public CommentResDto updateComment(String userId, String postId,
+    public CommentResDto updateComment(Long userId, String postId,
                                     String commentId, CommentUpdateReqDto commentUpdateReqDto) throws Exception {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
-        }
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         Post post = postRepository.findById(postId);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
@@ -70,11 +64,10 @@ public class CommentService {
         return new CommentResDto(comment, post);
     }
 
-    public List<CommentResDto> getAllComments(String userId, String postId) throws Exception {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
-        }
+    public List<CommentResDto> getAllComments(Long userId, String postId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         Post post = postRepository.findById(postId);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
@@ -88,11 +81,10 @@ public class CommentService {
         return commentResDtos;
     }
 
-    public String deleteComment(String userId, String postId, String commentId) throws Exception {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "User not found");
-        }
+    public String deleteComment(Long userId, String postId, String commentId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         Post post = postRepository.findById(postId);
         if (post == null) {
             throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
