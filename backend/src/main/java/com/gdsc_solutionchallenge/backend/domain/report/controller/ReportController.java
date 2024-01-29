@@ -1,18 +1,18 @@
 package com.gdsc_solutionchallenge.backend.domain.report.controller;
 
+import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportSmsResDto;
+import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisReqDto;
+import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisResDto;
 import com.gdsc_solutionchallenge.backend.domain.report.service.ReportService;
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingScriptReqDto;
-import com.gdsc_solutionchallenge.backend.domain.report.dto.SmishingResDto;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,14 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "피싱 위험 레포트 API", description = "피싱 위험 레포트 API 모음")
 public class ReportController {
     private final ReportService reportService;
-    @PostMapping("/smishing")
-    @Operation(summary = "메시지 피싱", description = "피싱 레포트에서 파라미터로 받은 메시지 피싱 여부와 이유를 반환")
-    public ResponseEntity<Object> identifySmishing(@RequestBody SmishingScriptReqDto smishingScriptReqDto) {
+    @PostMapping("/smishing/{userId}")
+    @Operation(summary = "피싱 레포트 문자 결과", description = "피싱 레포트 문자 결과 API")
+    public ResponseEntity<Object> identifySmishing(@PathVariable("userId") Long userId) {
         try {
-            SmishingResDto smishingResDto = reportService.whySmishing(smishingScriptReqDto);
+            List<ReportSmsResDto> reportSmsReqDto = reportService.smishigReport(userId);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", smishingResDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 문자", reportSmsReqDto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/vishing/{userId}")
+    @Operation(summary = "피싱 레포트 전화 결과", description = "피싱 레포트 전화 결과 API")
+    public ResponseEntity<Object> identifySmishing(@PathVariable("userId") Long userId,
+                                                   @RequestBody ReportVisReqDto reportVisReqDto) {
+        try {
+            List<ReportVisResDto> reportVisResDtos = reportService.vishingReport(userId, reportVisReqDto);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", reportVisResDtos));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

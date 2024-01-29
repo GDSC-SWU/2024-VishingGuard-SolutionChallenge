@@ -9,15 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SmishingScriptReqDto {
-    @Schema(description = "유저 ID")
-    private Long userId;
+public class SmishingReqDto {
     @Schema(description = "피싱 검사할 메시지")
     private String smishingScript;
     @Schema(description = "전화번호")
     private String phone;
     @Builder
-    public SmishingScriptReqDto(String smishingScript){
+    public SmishingReqDto(String smishingScript){
         this.smishingScript=smishingScript;
     }
 }

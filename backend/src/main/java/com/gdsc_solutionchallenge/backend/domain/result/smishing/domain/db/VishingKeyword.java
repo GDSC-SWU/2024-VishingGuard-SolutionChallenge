@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.domain;
+package com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db;
 
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.firebase.database.annotations.NotNull;
@@ -10,17 +10,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PhishingUrl {
+public class VishingKeyword {
     @DocumentId
     private String id;
     @NotNull
-    private String institution;
-    @NotNull
-    private String url;
+    private String vishing_keyword;
 
     @Builder
-    public PhishingUrl(String institution, String url){
-        this.institution=institution;
-        this.url=url;
+    public VishingKeyword(String vishing_keyword){
+        this.vishing_keyword=vishing_keyword;
     }
 }

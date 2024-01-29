@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.domain;
+package com.gdsc_solutionchallenge.backend.domain.report.domain;
 
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.firebase.database.annotations.NotNull;
@@ -9,17 +9,19 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class Smishing {
+public class Vishing {
     @DocumentId
-    String id;
+    private String id;
     @NotNull
-    Long user_id;
+    private Long user_id;
     @NotNull
-    String script;
+    private String script;
     @NotNull
-    String phone;
+    private String phone;
+    @NotNull
+    private String date;
+    @NotNull
+    private String time;
     @NotNull
     String keyword_comment;
-//    @NotNull
-//    String url_comment;
 }

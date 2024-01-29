@@ -1,6 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.result.smishing.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingScriptReqDto;
+import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingReqDto;
 import com.gdsc_solutionchallenge.backend.domain.result.smishing.service.SmishingService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,9 +21,9 @@ public class SmishingController {
     @PostMapping("/{userId}")
     @Operation(summary = "메시지 피싱", description = "메시지가 왔을때 피싱 메시지 스크립트 저장 및 피싱 여부 반환")
     public ResponseEntity<Object> saveAndCheckSmishing(@PathVariable("userId") Long userId,
-                                                       @RequestBody SmishingScriptReqDto smishingScriptReqDto) {
+                                                       @RequestBody SmishingReqDto smishingReqDto) {
         try {
-            Boolean isSmishing = smishingService.isSmishing(smishingScriptReqDto);
+            Boolean isSmishing = smishingService.isSmishing(userId, smishingReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", isSmishing));

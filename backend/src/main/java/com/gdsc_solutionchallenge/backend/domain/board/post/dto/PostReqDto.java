@@ -21,7 +21,6 @@ public class PostReqDto {
     public PostReqDto(String title, String content){
         this.title=title;
         this.content=content;
-
     }
 
     public Post toEntity(User user){
