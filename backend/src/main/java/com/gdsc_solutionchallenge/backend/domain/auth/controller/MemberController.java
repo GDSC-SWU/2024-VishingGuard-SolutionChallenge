@@ -1,11 +1,13 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.controller;
 
+import com.gdsc_solutionchallenge.backend.domain.auth.service.MemberService;
 import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
 import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.UserResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignInRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignUpRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtToken;
+import com.gdsc_solutionchallenge.backend.domain.auth.security.SecurityUtil;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,8 +38,7 @@ public class MemberController {
         Optional<User> memberOptional = userRepository.findByEmail(email);
         String storedPassword = memberOptional.map(User::getPassword)
                 .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED.value(), "User not found"));
-//        System.out.println(storedPassword);
-//        System.out.println(password);
+
         // 저장된 비밀번호와 클라이언트에서 전송된 비밀번호를 비교
         if (passwordEncoder.matches(password, storedPassword)) {
             // 비밀번호가 일치하면 로그인 성공 처리

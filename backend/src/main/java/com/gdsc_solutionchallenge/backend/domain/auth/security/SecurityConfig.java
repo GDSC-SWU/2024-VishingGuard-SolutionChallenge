@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.security;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtAuthenticationFilter;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

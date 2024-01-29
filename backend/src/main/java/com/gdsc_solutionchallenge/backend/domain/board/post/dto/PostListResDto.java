@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class PostListResDto {
     private String postId; // 게시글 ID
     private String title; // 게시글 제목
-    private String nickname; // 작성자 닉네임
+    private String username; // 작성자 이름
     private String updated_at;
     private String contentSnippet;
     private int comment_count;
@@ -32,7 +32,7 @@ public class PostListResDto {
     public PostListResDto(Post post, CommentRepository commentRepository, HeartRepository heartRepository) throws Exception {
         this.postId = post.getId();
         this.title = post.getTitle();
-        this.nickname = post.getUser().getNickname();
+        this.username = post.getUser().getUsername();
         this.updated_at = formatTimestamp(post.getUpdated_at().toInstant());
         this.contentSnippet = getContentSnippet(post.getContent(), 82);
 

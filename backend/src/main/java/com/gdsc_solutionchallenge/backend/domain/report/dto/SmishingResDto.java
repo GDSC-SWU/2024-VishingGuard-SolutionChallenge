@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.dto;
+package com.gdsc_solutionchallenge.backend.domain.report.dto;
 
 import lombok.Getter;
 

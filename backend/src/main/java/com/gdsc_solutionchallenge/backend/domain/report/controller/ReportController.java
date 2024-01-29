@@ -1,9 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.report.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.report.service.ReportService;
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingReqDto;
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingResDto;
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.service.SmishingService;
+import com.gdsc_solutionchallenge.backend.domain.result.smishing.dto.SmishingScriptReqDto;
+import com.gdsc_solutionchallenge.backend.domain.report.dto.SmishingResDto;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,9 +22,9 @@ public class ReportController {
     private final ReportService reportService;
     @PostMapping("/smishing")
     @Operation(summary = "메시지 피싱", description = "피싱 레포트에서 파라미터로 받은 메시지 피싱 여부와 이유를 반환")
-    public ResponseEntity<Object> identifySmishing(@RequestBody SmishingReqDto smishingReqDto) {
+    public ResponseEntity<Object> identifySmishing(@RequestBody SmishingScriptReqDto smishingScriptReqDto) {
         try {
-            SmishingResDto smishingResDto = reportService.whySmishing(smishingReqDto);
+            SmishingResDto smishingResDto = reportService.whySmishing(smishingScriptReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", smishingResDto));

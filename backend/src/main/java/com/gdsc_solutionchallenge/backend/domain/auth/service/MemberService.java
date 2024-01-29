@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.auth;
+package com.gdsc_solutionchallenge.backend.domain.auth.service;
 
 import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.UserResponseDto;
