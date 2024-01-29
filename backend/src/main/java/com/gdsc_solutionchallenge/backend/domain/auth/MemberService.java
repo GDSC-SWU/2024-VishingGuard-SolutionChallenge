@@ -1,8 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.auth;
 
-import com.gdsc_solutionchallenge.backend.domain.auth.domain.Member;
-import com.gdsc_solutionchallenge.backend.domain.auth.domain.MemberRepository;
-import com.gdsc_solutionchallenge.backend.domain.auth.dto.MemberResponseDto;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
+import com.gdsc_solutionchallenge.backend.domain.auth.dto.UserResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignUpRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtToken;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtTokenProvider;
@@ -12,20 +11,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
@@ -49,18 +46,18 @@ public class MemberService {
 
     // 회원가입
     @Transactional
-    public MemberResponseDto signUp(SignUpRequestDto signUpRequestDto) {
-        if (memberRepository.existsByUsername(signUpRequestDto.getUsername())) {
+    public UserResponseDto signUp(SignUpRequestDto signUpRequestDto) {
+        if (userRepository.existsByUsername(signUpRequestDto.getUsername())) {
             throw new BaseException(HttpStatus.CONFLICT.value(), "이미 존재하는 닉네임입니다.");
         }
-        if (memberRepository.existsByEmail(signUpRequestDto.getEmail())) {
+        if (userRepository.existsByEmail(signUpRequestDto.getEmail())) {
             throw new BaseException(HttpStatus.CONFLICT.value(), "이미 가입된 이메일입니다.");
         }
         // Password 암호화
         String encodedPassword = passwordEncoder.encode(signUpRequestDto.getPassword());
         List<String> roles = new ArrayList<>();
         roles.add("USER");  // USER 권한 부여
-        return MemberResponseDto.toDto(memberRepository.save(signUpRequestDto.toEntity(encodedPassword, roles)));
+        return UserResponseDto.toDto(userRepository.save(signUpRequestDto.toEntity(encodedPassword, roles)));
     }
 
 

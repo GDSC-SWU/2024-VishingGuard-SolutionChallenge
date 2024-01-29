@@ -20,7 +20,7 @@ public class HeartController {
     private final HeartService heartService;
     @Operation(summary = "좋아요 설정", description = "좋아요 설정 API")
     @PostMapping("/{userId}/{postId}/create")
-    public ResponseEntity<Object> setHeart(@PathVariable("userId") String userId,
+    public ResponseEntity<Object> setHeart(@PathVariable("userId") Long userId,
                                            @PathVariable("postId") String postId){
         try {
             HeartResDto heart = heartService.isHeart(userId, postId);

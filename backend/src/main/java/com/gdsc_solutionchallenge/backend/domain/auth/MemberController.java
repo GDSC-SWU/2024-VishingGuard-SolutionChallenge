@@ -1,8 +1,8 @@
 package com.gdsc_solutionchallenge.backend.domain.auth;
 
-import com.gdsc_solutionchallenge.backend.domain.auth.domain.Member;
-import com.gdsc_solutionchallenge.backend.domain.auth.domain.MemberRepository;
-import com.gdsc_solutionchallenge.backend.domain.auth.dto.MemberResponseDto;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
+import com.gdsc_solutionchallenge.backend.domain.auth.dto.UserResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignInRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignUpRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtToken;
@@ -25,7 +25,7 @@ import java.util.Optional;
 @Tag(name = "로그인 API", description = "로그인 API 모음")
 public class MemberController {
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @PostMapping("/sign-in")
     @Operation(summary = "로그인", description = "로그인")
@@ -33,8 +33,8 @@ public class MemberController {
         String email = signInDto.getEmail(); // 이메일
         String password = signInDto.getPassword(); // 비번
         // 저장된 회원의 비밀번호를 가져옴
-        Optional<Member> memberOptional = memberRepository.findByEmail(email);
-        String storedPassword = memberOptional.map(Member::getPassword)
+        Optional<User> memberOptional = userRepository.findByEmail(email);
+        String storedPassword = memberOptional.map(User::getPassword)
                 .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED.value(), "User not found"));
 //        System.out.println(storedPassword);
 //        System.out.println(password);
@@ -58,9 +58,9 @@ public class MemberController {
 
     @PostMapping("/sign-up")
     @Operation(summary = "회원가입", description = "회원가입")
-    public ResponseEntity<MemberResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
-        MemberResponseDto savedMemberResponseDto = memberService.signUp(signUpRequestDto);
-        return ResponseEntity.ok(savedMemberResponseDto);
+    public ResponseEntity<UserResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
+        UserResponseDto savedUserResponseDto = memberService.signUp(signUpRequestDto);
+        return ResponseEntity.ok(savedUserResponseDto);
     }
 
 }

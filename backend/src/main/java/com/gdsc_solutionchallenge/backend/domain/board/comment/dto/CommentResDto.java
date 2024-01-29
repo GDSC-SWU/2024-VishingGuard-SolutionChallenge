@@ -17,8 +17,8 @@ import java.util.Date;
 public class CommentResDto {
     private String commentId;
     private String postId;
-    private String userId;
-    private String nickname;
+    private Long userId;
+    private String username;
     private String content;
     private String updated_at;
     private String created_at;
@@ -31,7 +31,7 @@ public class CommentResDto {
         this.postId=comment.getPost_id();
         this.userId=comment.getUser_id();
         this.content=comment.getContent();
-        this.nickname=comment.getUser().getNickname();
+        this.username=comment.getUser().getUsername();
         this.updated_at = formatTimestamp(comment.getUpdated_at());
         this.created_at = formatTimestamp(comment.getCreated_at());
         this.isAuthorComment=comment.getUser_id().equals(post.getUser_id());
