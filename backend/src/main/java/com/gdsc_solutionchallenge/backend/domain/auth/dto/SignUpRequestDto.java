@@ -12,14 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignUpDto {
-
+public class SignUpRequestDto {
+    // 회원가입
     private String username;
     private String password;
-    private String nickname;
-    private String address;
-    private String phone;
-    private String profileImg;
+    private String email;
     private List<String> roles = new ArrayList<>();
 
     public Member toEntity(String encodedPassword, List<String> roles) {
@@ -27,10 +24,7 @@ public class SignUpDto {
         return Member.builder()
                 .username(username)
                 .password(encodedPassword)
-                .nickname(nickname)
-                .address(address)
-                .phone(phone)
-                .profileImg(profileImg)
+                .email(email)
                 .roles(roles)
                 .build();
     }

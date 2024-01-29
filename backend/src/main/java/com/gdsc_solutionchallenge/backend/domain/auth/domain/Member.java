@@ -25,19 +25,12 @@ public class Member implements UserDetails {
     @GeneratedValue
     @Column(name = "member_id", updatable = false, unique = true, nullable = false)
     private Long id;
-
     @Column(nullable = false)
     private String username;
-
     @Column(nullable = false)
     private String password;
-
-    private String nickname;
-
-    private String address; // 도로명 주소
-
-    private String phone;
-
+    @Column(nullable = false)
+    private String email;
     private String profileImg;
 
     @ElementCollection(fetch = FetchType.EAGER)
