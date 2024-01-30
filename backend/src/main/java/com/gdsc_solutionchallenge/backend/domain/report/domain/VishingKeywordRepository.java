@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.db;
+package com.gdsc_solutionchallenge.backend.domain.report.domain;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;

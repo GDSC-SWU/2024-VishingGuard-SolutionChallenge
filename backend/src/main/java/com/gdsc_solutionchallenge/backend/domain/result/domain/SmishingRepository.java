@@ -1,6 +1,5 @@
-package com.gdsc_solutionchallenge.backend.domain.report.domain;
+package com.gdsc_solutionchallenge.backend.domain.result.domain;
 
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.Smishing;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Repository;
@@ -9,23 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class VishingRepository {
+public class SmishingRepository {
     private final Firestore firestore;
 
-    public VishingRepository(Firestore firestore) {
+    public SmishingRepository(Firestore firestore) {
         this.firestore = firestore;
     }
 
-    public Vishing save(Vishing vishing) throws Exception {
-        CollectionReference vishings = firestore.collection("vishing");
-        ApiFuture<DocumentReference> apiFuture = vishings.add(vishing);
+    public Smishing save(Smishing smishing) throws Exception {
+        CollectionReference smishings = firestore.collection("smishing");
+        ApiFuture<DocumentReference> apiFuture = smishings.add(smishing);
         DocumentReference documentReference = apiFuture.get();
-        vishing.setId(documentReference.getId());
-        return vishing;
+        smishing.setId(documentReference.getId());
+        return smishing;
     }
 
-    public List<Vishing> getAllScriptByUserId(Long userId) throws Exception{
-        CollectionReference smishings = firestore.collection("vishing");
+    public List<Smishing> getAllScriptByUserId(Long userId) throws Exception{
+        CollectionReference smishings = firestore.collection("smishing");
 
         // whereEqualTo를 사용하여 쿼리 생성
         Query query = smishings.whereEqualTo("user_id", userId);
@@ -34,9 +33,9 @@ public class VishingRepository {
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
-        List<Vishing> result = new ArrayList<>();
+        List<Smishing> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
-            result.add(document.toObject(Vishing.class));
+            result.add(document.toObject(Smishing.class));
         }
 
         return result;

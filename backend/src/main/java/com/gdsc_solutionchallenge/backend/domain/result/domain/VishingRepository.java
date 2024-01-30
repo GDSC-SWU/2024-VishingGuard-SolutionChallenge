@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.domain;
+package com.gdsc_solutionchallenge.backend.domain.result.domain;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -8,23 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SmishingRepository {
+public class VishingRepository {
     private final Firestore firestore;
 
-    public SmishingRepository(Firestore firestore) {
+    public VishingRepository(Firestore firestore) {
         this.firestore = firestore;
     }
 
-    public Smishing save(Smishing smishing) throws Exception {
-        CollectionReference smishings = firestore.collection("smishing");
-        ApiFuture<DocumentReference> apiFuture = smishings.add(smishing);
+    public Vishing save(Vishing vishing) throws Exception {
+        CollectionReference vishings = firestore.collection("vishing");
+        ApiFuture<DocumentReference> apiFuture = vishings.add(vishing);
         DocumentReference documentReference = apiFuture.get();
-        smishing.setId(documentReference.getId());
-        return smishing;
+        vishing.setId(documentReference.getId());
+        return vishing;
     }
 
-    public List<Smishing> getAllScriptByUserId(Long userId) throws Exception{
-        CollectionReference smishings = firestore.collection("smishing");
+    public List<Vishing> getAllScriptByUserId(Long userId) throws Exception{
+        CollectionReference smishings = firestore.collection("vishing");
 
         // whereEqualTo를 사용하여 쿼리 생성
         Query query = smishings.whereEqualTo("user_id", userId);
@@ -33,9 +33,9 @@ public class SmishingRepository {
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
-        List<Smishing> result = new ArrayList<>();
+        List<Vishing> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
-            result.add(document.toObject(Smishing.class));
+            result.add(document.toObject(Vishing.class));
         }
 
         return result;

@@ -1,6 +1,6 @@
-package com.gdsc_solutionchallenge.backend.domain.banner.controller;
+package com.gdsc_solutionchallenge.backend.domain.home.banner.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.banner.service.FSSOpenApiService;
+import com.gdsc_solutionchallenge.backend.domain.home.banner.service.FSSOpenApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.result.smishing.dto;
+package com.gdsc_solutionchallenge.backend.domain.result.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

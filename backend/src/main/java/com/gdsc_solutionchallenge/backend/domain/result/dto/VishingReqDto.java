@@ -1,6 +1,5 @@
-package com.gdsc_solutionchallenge.backend.domain.report.dto;
+package com.gdsc_solutionchallenge.backend.domain.result.dto;
 
-import com.gdsc_solutionchallenge.backend.domain.report.domain.Vishing;
 import lombok.*;
 
 @Getter
@@ -9,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class ReportVisReqDto {
+public class VishingReqDto {
     private String vishingScript;
     private String phone;
     private String date;

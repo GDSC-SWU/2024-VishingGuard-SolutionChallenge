@@ -1,7 +1,7 @@
 package com.gdsc_solutionchallenge.backend.domain.report.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportSmsResDto;
-import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisReqDto;
+import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingReqDto;
 import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisResDto;
 import com.gdsc_solutionchallenge.backend.domain.report.service.ReportService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
@@ -43,10 +43,9 @@ public class ReportController {
 
     @PostMapping("/vishing/{userId}")
     @Operation(summary = "피싱 레포트 전화 결과", description = "피싱 레포트 전화 결과 API")
-    public ResponseEntity<Object> identifySmishing(@PathVariable("userId") Long userId,
-                                                   @RequestBody ReportVisReqDto reportVisReqDto) {
+    public ResponseEntity<Object> identifyVishing(@PathVariable("userId") Long userId) {
         try {
-            List<ReportVisResDto> reportVisResDtos = reportService.vishingReport(userId, reportVisReqDto);
+            List<ReportVisResDto> reportVisResDtos = reportService.vishingReport(userId);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 전화", reportVisResDtos));

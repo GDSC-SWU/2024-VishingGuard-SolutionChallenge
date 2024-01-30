@@ -1,4 +1,4 @@
-package com.gdsc_solutionchallenge.backend.domain.banner.service;
+package com.gdsc_solutionchallenge.backend.domain.home.banner.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
