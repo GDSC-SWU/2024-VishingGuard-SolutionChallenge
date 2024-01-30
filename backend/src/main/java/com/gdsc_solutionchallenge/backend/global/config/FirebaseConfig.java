@@ -26,7 +26,7 @@ public class FirebaseConfig {
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://Message.firebaseio.com")
+                    .setDatabaseUrl("https://vishingguard.firebaseio.com")
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {

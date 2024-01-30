@@ -9,7 +9,6 @@ import com.gdsc_solutionchallenge.backend.domain.result.domain.SmishingRepositor
 import com.gdsc_solutionchallenge.backend.domain.result.domain.Vishing;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.VishingRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingReqDto;
-import com.gdsc_solutionchallenge.backend.domain.result.domain.db.PhishingUrlRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.db.SmishingKeyword;
 import com.gdsc_solutionchallenge.backend.domain.result.domain.db.SmishingKeywordRepository;
 import com.gdsc_solutionchallenge.backend.domain.result.dto.SmishingReqDto;
@@ -26,7 +25,7 @@ import java.util.List;
 public class ResultService {
     public final SmishingRepository smishingRepository;
     public final SmishingKeywordRepository smishingKeywordRepository;
-    public final PhishingUrlRepository phishingUrlRepository;
+    //public final PhishingUrlRepository phishingUrlRepository;
     private final UserRepository userRepository;
     public final VishingRepository vishingRepository;
     public final VishingKeywordRepository vishingKeywordRepository;
