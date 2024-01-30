@@ -31,44 +31,12 @@ public class FirebaseConfig {
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
+                System.out.println("FirebaseApp initialized successfully!");
+            } else {
+                System.out.println("FirebaseApp already initialized.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-/*@Configuration
-public class FirebaseConfig {
-    @Bean
-    @PostConstruct
-    public static void initialize() {
-        try {
-            FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://Message.firebaseio.com")
-                    .build();
-            FirebaseApp.initializeApp(options);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-   /* @PostConstruct
-    public Firestore firestore() throws IOException {
-        FileInputStream serviceAccount =
-                new FileInputStream("src/main/resources/serviceAccountKey.json");
-
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://Message.firebaseio.com")
-                .build();
-
-        if (FirebaseApp.getApps().isEmpty()) {
-            FirebaseApp.initializeApp(options);
-        }
-
-        return FirestoreClient.getFirestore();
-    }*/
