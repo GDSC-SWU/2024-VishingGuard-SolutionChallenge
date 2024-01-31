@@ -24,9 +24,9 @@ import java.util.List;
 public class HomeController {
     private final HomeService homeService;
 
-    @PostMapping("/{userId}")
+    @PostMapping("/")
     @Operation(summary = "홈 불러오기", description = "홈 불러오기 API")
-    public ResponseEntity<Object> save(){
+    public ResponseEntity<Object> loadHome(){
         try {
             List<HomeResDto> homeResDto = homeService.loadHome();
             return ResponseEntity

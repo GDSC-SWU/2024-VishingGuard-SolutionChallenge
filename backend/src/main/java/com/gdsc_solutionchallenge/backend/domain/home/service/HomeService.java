@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class HomeService {
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     public List<HomeResDto> loadHome() throws Exception {
