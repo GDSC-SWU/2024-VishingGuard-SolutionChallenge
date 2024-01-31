@@ -28,6 +28,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VishingGuard"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="GOOGLE_MAPS_API_KEY" />
+
         <activity
             android:name=".smishing.SmishingActivity"
             android:exported="false" />
@@ -44,15 +48,15 @@
         <activity
             android:name=".vishing.VishingActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
         </activity>
     </application>
 </manifest>
