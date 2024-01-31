@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">VishingGuard</string>
 
-
     <!--bottom navigation text-->
-    <string name="tv_home_bot">홈</string>
-    <string name="tv_map_bot">이동 경로</string>
-    <string name="tv_pishing_bot">피싱 위험</string>
-    <string name="tv_mypage_bot">마이 페이지</string>
+    <string name="title_home">홈</string>
+    <string name="title_map">이동 경로</string>
+    <string name="title_pishing">피싱 위험</string>
+    <string name="title_mypage">마이 페이지</string>
+    <string name="title_pishing_report">피싱 위험 리포트</string>
 
     <!--sms text-->
     <string name="tv_sms_title">Message</string>
@@ -17,4 +17,28 @@
     <string name="btn_speech">시작</string>
     <string name="tv_speech">인식된 음성이 없습니다.</string>
     <string name="tv_state">상태 체크</string>
+
+    <!--home text-->
+    <string name="tv_procedure_home">신고 절차</string>
+    <string name="tv_report_home">신고처</string>
+    <string name="tv_prevention_home">사전 예방</string>
+    <string name="tv_search_home">스팸 번호 검색</string>
+
+    <!--map text-->
+    <string name="tv_route_map">피싱 위험 이동 경로가 발견되지 않았어요!\n보이스피싱으로부터 안전한 생활 중입니다!</string>
+    <string name="tv_no_route_map">발견된 피싱 위험 이동 경로가 없습니다</string>
+
+    <!--pishing text-->
+    <string name="tv_result_pishing">이번주 피싱 위험 리포트 결과는 안전합니다 :)\n보이스피싱에 아주 잘 대응하고 있어요!</string>
+    <string name="tv_standard_pishing">위 분석 결과는 최근 7일간을 기준으로 합니다.</string>
+
+    <!--my page text-->
+    <string name="tv_update_mypage">정보 수정</string>
+    <string name="tv_withdrawal_mypage">회원 탈퇴</string>
+    <string name="tv_logout_mypage">로그아웃</string>
+    <string name="tv_name">이름</string>
+    <string name="tv_pw">비밀번호</string>
+    <string name="hint_name">이름을 입력해주세요.</string>
+    <string name="hint_pw">새로운 비밀번호를 입력해주세요.</string>
+    <string name="hint_check_pw">비밀번호를 다시 입력해주세요.</string>
 </resources>
