@@ -8,25 +8,35 @@ import com.google.firebase.cloud.FirestoreClient;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.FileInputStream;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Configuration
 public class FirebaseConfig {
+
+    @Value("${firebase.serviceAccountKeyPath}")
+    private String serviceAccountKeyPath;
+
+    @Value("${firebase.databaseUrl}")
+    private String databaseUrl;
+
     @Bean
     public Firestore firestore() {
         return FirestoreClient.getFirestore();
     }
+
     @PostConstruct
     public void initialize() {
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/serviceAccountKey.json");
+            Resource resource = new ClassPathResource(serviceAccountKeyPath);
+            InputStream serviceAccount = resource.getInputStream();
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://vishingguard.firebaseio.com")
+                    .setDatabaseUrl(databaseUrl)
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {
@@ -35,7 +45,7 @@ public class FirebaseConfig {
             } else {
                 System.out.println("FirebaseApp already initialized.");
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

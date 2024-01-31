@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository {
@@ -73,5 +74,18 @@ public class PostRepository {
         }
 
         return result;
+    }
+
+    public List<String> getAllTitles() throws Exception {
+        CollectionReference posts = firestore.collection("post");
+        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
+
+        List<String> titles = querySnapshot.get().getDocuments()
+                .stream()
+                .map(document -> document.getString("title"))
+                .filter(title -> title != null)
+                .collect(Collectors.toList());
+
+        return titles;
     }
 }
