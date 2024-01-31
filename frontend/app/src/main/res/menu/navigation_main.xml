@@ -3,17 +3,17 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/bot_ic_home"
-        android:title="@string/tv_home_bot" />
+        android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_map"
         android:icon="@drawable/bot_ic_map"
-        android:title="@string/tv_map_bot" />
+        android:title="@string/title_map" />
     <item
         android:id="@+id/navigation_pishing"
         android:icon="@drawable/bot_ic_pishing"
-        android:title="@string/tv_pishing_bot" />
+        android:title="@string/title_pishing" />
     <item
         android:id="@+id/navigation_my_page"
         android:icon="@drawable/bot_ic_mypage"
-        android:title="@string/tv_mypage_bot" />
+        android:title="@string/title_mypage" />
 </menu>
