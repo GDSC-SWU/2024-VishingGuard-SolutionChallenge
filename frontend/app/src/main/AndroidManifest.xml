@@ -36,6 +36,16 @@
             android:name=".smishing.SmishingActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".smishing.SMSReceiver"
             android:enabled="true"
@@ -49,14 +59,10 @@
             android:name=".vishing.VishingActivity"
             android:exported="true">
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 </manifest>
