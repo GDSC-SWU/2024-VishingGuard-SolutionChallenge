@@ -8,6 +8,17 @@
     <string name="title_mypage">마이 페이지</string>
     <string name="title_pishing_report">피싱 위험 리포트</string>
 
+    <!--signUp text-->
+    <string name="tv_start_title">VishingGuard로 안전한 생활!</string>
+    <string name="tv_start_sub">반가워요! \n원하는 방법으로 회원가입하고\n보이스피싱 위험에서 벗어나 안전한 생활 누려봐요 :)</string>
+    <string name="tv_signUp_title">계정 생성이 거의 끝났어요!</string>
+    <string name="tv_signUp_sub">이름과 이메일, 비밀번호를 입력해주세요.</string>
+
+    <!--login text-->
+    <string name="tv_login_title">등록한 계정으로 로그인을 해주세요!</string>
+    <string name="tv_login_sub">번거로운 로그인 과정을 줄이는 \n자동 로그인을 이용해보세요!</string>
+    <string name="tv_login_email">이메일과 비밀번호를 입력해주세요!</string>
+
     <!--sms text-->
     <string name="tv_sms_title">Message</string>
     <string name="tv_message">수신된 문자가 없습니다.</string>
@@ -36,9 +47,14 @@
     <string name="tv_update_mypage">정보 수정</string>
     <string name="tv_withdrawal_mypage">회원 탈퇴</string>
     <string name="tv_logout_mypage">로그아웃</string>
+
     <string name="tv_name">이름</string>
-    <string name="tv_pw">비밀번호</string>
     <string name="hint_name">이름을 입력해주세요.</string>
-    <string name="hint_pw">새로운 비밀번호를 입력해주세요.</string>
+    <string name="hint_new_name">5자 이내의 이름을 입력해주세요.</string>
+    <string name="hint_email">이메일을 입력해주세요.</string>
+
+    <string name="tv_pw">비밀번호</string>
+    <string name="hint_pw">비밀번호를 입력해주세요.</string>
+    <string name="hint_new_pw">새로운 비밀번호를 입력해주세요.</string>
     <string name="hint_check_pw">비밀번호를 다시 입력해주세요.</string>
 </resources>
