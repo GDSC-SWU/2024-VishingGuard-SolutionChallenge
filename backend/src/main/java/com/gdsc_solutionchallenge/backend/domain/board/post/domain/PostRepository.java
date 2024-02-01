@@ -78,7 +78,7 @@ public class PostRepository {
 
     public List<String> getAllTitles() throws Exception {
         CollectionReference posts = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
+        ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();
 
         List<String> titles = querySnapshot.get().getDocuments()
                 .stream()

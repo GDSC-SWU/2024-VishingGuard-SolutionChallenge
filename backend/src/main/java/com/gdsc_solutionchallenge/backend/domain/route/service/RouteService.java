@@ -1,15 +1,11 @@
 package com.gdsc_solutionchallenge.backend.domain.route.service;
 
-import com.gdsc_solutionchallenge.backend.domain.board.post.domain.PostRepository;
-import com.gdsc_solutionchallenge.backend.domain.home.dto.HomeResDto;
 import com.gdsc_solutionchallenge.backend.domain.route.domain.Route;
 import com.gdsc_solutionchallenge.backend.domain.route.domain.RouteRepository;
-import com.gdsc_solutionchallenge.backend.domain.route.dto.RouteResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

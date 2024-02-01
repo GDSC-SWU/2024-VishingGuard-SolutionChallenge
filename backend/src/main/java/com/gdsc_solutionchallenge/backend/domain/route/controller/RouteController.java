@@ -1,9 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.route.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.home.dto.HomeResDto;
-import com.gdsc_solutionchallenge.backend.domain.home.service.HomeService;
 import com.gdsc_solutionchallenge.backend.domain.route.domain.Route;
-import com.gdsc_solutionchallenge.backend.domain.route.dto.RouteResDto;
 import com.gdsc_solutionchallenge.backend.domain.route.service.RouteService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
