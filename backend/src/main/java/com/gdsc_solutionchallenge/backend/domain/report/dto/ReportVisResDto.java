@@ -1,7 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.report.dto;
 
-import com.gdsc_solutionchallenge.backend.domain.report.domain.Vishing;
-import com.gdsc_solutionchallenge.backend.domain.result.smishing.domain.Smishing;
+import com.gdsc_solutionchallenge.backend.domain.result.domain.Vishing;
 import lombok.Builder;
 import lombok.Getter;
 

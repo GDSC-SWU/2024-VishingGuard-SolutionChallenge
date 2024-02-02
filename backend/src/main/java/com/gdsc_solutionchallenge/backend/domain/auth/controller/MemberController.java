@@ -59,9 +59,21 @@ public class MemberController {
 
     @PostMapping("/sign-up")
     @Operation(summary = "회원가입", description = "회원가입")
-    public ResponseEntity<UserResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
-        UserResponseDto savedUserResponseDto = memberService.signUp(signUpRequestDto);
-        return ResponseEntity.ok(savedUserResponseDto);
+    public ResponseEntity<Object> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
+        try {
+            UserResponseDto savedUserResponseDto = memberService.signUp(signUpRequestDto);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "회원가입 완료", savedUserResponseDto));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getCause()));
+        }
     }
 
 }

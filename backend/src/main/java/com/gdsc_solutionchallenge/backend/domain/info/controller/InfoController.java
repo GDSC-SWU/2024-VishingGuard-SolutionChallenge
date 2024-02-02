@@ -1,35 +1,43 @@
-package com.gdsc_solutionchallenge.backend.domain.report.controller;
+package com.gdsc_solutionchallenge.backend.domain.info.controller;
 
-import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportSmsResDto;
-import com.gdsc_solutionchallenge.backend.domain.result.dto.VishingReqDto;
-import com.gdsc_solutionchallenge.backend.domain.report.dto.ReportVisResDto;
-import com.gdsc_solutionchallenge.backend.domain.report.service.ReportService;
+import com.gdsc_solutionchallenge.backend.domain.info.domain.Prevention;
+import com.gdsc_solutionchallenge.backend.domain.info.domain.ReportPlace;
+import com.gdsc_solutionchallenge.backend.domain.info.domain.ReportProcedure;
+import com.gdsc_solutionchallenge.backend.domain.info.service.InfoService;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/report")
-@Tag(name = "피싱 위험 레포트 API", description = "피싱 위험 레포트 API 모음")
-public class ReportController {
-    private final ReportService reportService;
-    @PostMapping("/smishing/{userId}")
-    @Operation(summary = "피싱 레포트 문자 결과", description = "피싱 레포트 문자 결과 API")
-    public ResponseEntity<Object> identifySmishing(@PathVariable("userId") Long userId) {
+@RequestMapping("/api/v1/info")
+@Tag(name = "사전 예방 & 신고 절차 & 신고처 API", description = "사전 예방 & 신고 절차 & 신고처 API 모음")
+public class InfoController {
+    private final InfoService infoService;
+
+    @GetMapping("/report_procedure")
+    @Operation(summary = "신고 절차", description = "신고 절차 API")
+    public ResponseEntity<Object> loadReportProcedure(){
         try {
-            List<ReportSmsResDto> reportSmsReqDto = reportService.smishigReport(userId);
+            List<ReportProcedure> reportProcedures = infoService.loadReportProcedure();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 문자", reportSmsReqDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "신고 절차 로딩 완료", reportProcedures));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -41,14 +49,14 @@ public class ReportController {
         }
     }
 
-    @PostMapping("/vishing/{userId}")
-    @Operation(summary = "피싱 레포트 전화 결과", description = "피싱 레포트 전화 결과 API")
-    public ResponseEntity<Object> identifyVishing(@PathVariable("userId") Long userId) {
+    @GetMapping("/prevention")
+    @Operation(summary = "사전 예방", description = "사전 예방 API")
+    public ResponseEntity<Object> loadPrevention(){
         try {
-            List<ReportVisResDto> reportVisResDtos = reportService.vishingReport(userId);
+            List<Prevention> preventions = infoService.loadPrevention();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 - 전화", reportVisResDtos));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "사전 예방 로딩 완료", preventions));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -60,14 +68,16 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/state/{userId}")
-    @Operation(summary = "피싱 레포트 상태", description = "피싱 레포트 상태 API")
-    public ResponseEntity<Object> getPhishingReportRiskStatus(@PathVariable("userId") Long userId) {
+
+
+    @GetMapping("/place")
+    @Operation(summary = "신고처", description = "신고처 API")
+    public ResponseEntity<Object> loadReportPlace(){
         try {
-            String reportState = reportService.reportState(userId);
+            List<ReportPlace> reportPlaces = infoService.loadReportPlace();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 레포트 상태", reportState));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "신고처 로딩 완료", reportPlaces));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())

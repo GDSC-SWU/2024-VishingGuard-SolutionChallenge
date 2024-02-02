@@ -8,67 +8,49 @@ import com.google.firebase.cloud.FirestoreClient;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.FileInputStream;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Configuration
 public class FirebaseConfig {
+
+    @Value("${firebase.serviceAccountKeyPath}")
+    private String serviceAccountKeyPath;
+
+    @Value("${firebase.databaseUrl}")
+    private String databaseUrl;
+
+    @Value("${firebase.storageUrl}")
+    private String storageUrl;
+
     @Bean
     public Firestore firestore() {
         return FirestoreClient.getFirestore();
     }
+
     @PostConstruct
     public void initialize() {
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/serviceAccountKey.json");
+            Resource resource = new ClassPathResource(serviceAccountKeyPath);
+            InputStream serviceAccount = resource.getInputStream();
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://Message.firebaseio.com")
+                    .setDatabaseUrl(databaseUrl)
+                    .setStorageBucket(storageUrl)
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
+                System.out.println("FirebaseApp initialized successfully!");
+            } else {
+                System.out.println("FirebaseApp already initialized.");
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-/*@Configuration
-public class FirebaseConfig {
-    @Bean
-    @PostConstruct
-    public static void initialize() {
-        try {
-            FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://Message.firebaseio.com")
-                    .build();
-            FirebaseApp.initializeApp(options);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-   /* @PostConstruct
-    public Firestore firestore() throws IOException {
-        FileInputStream serviceAccount =
-                new FileInputStream("src/main/resources/serviceAccountKey.json");
-
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://Message.firebaseio.com")
-                .build();
-
-        if (FirebaseApp.getApps().isEmpty()) {
-            FirebaseApp.initializeApp(options);
-        }
-
-        return FirestoreClient.getFirestore();
-    }*/
