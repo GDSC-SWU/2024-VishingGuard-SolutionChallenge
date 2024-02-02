@@ -58,6 +58,7 @@ public class MyPageService {
     public String logout(Long userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
+
         SecurityContextHolder.clearContext();
 
         return user.getUsername();
