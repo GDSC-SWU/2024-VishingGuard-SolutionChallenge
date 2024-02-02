@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,4 +63,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void updatePassword(String password){
+        this.password = password;
+    }
+    public void updateUsername(String username){
+        this.username = username;
+    }
+
 }
