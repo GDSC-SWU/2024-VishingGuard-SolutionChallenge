@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,23 +64,30 @@ public class MyPageController {
                     .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
         }
     }
-//
-//    @PostMapping("/{userId}/logout")
-//    @Operation(summary = "로그아웃", description = "로그아웃 API")
-//    public ResponseEntity<Object> logout(){
-//        try {
-//            List<ReportProcedure> reportProcedures = myPageService.loadReportProcedure();
-//            return ResponseEntity
-//                    .status(HttpStatus.OK)
-//                    .body(new BaseResponse<>(HttpStatus.OK.value(), "로그아웃 완료", reportProcedures));
-//        } catch (BaseException e) {
-//            return ResponseEntity
-//                    .status(e.getCode())
-//                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
-//        } catch (Exception e) {
-//            return ResponseEntity
-//                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
-//        }
-//    }
+
+    @PostMapping("/{userId}/logout")
+    @Operation(summary = "로그아웃", description = "로그아웃 API")
+    public ResponseEntity<Object> logout(@PathVariable("userId") Long userId){
+        try {
+            String logoutedUserName = myPageService.logout(userId);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null || !authentication.isAuthenticated()) {
+                System.out.println("로그아웃");
+            } else {
+                // 사용자가 현재 로그인 상태입니다.
+                System.out.println("로그인");
+            }
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "로그아웃 완료", logoutedUserName));
+        } catch (BaseException e) {
+            return ResponseEntity
+                    .status(e.getCode())
+                    .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+        }
+    }
 }
