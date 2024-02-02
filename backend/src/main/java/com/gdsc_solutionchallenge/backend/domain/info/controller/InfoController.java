@@ -68,9 +68,7 @@ public class InfoController {
         }
     }
 
-
-
-    @GetMapping("/place")
+    @GetMapping("/report_place")
     @Operation(summary = "신고처", description = "신고처 API")
     public ResponseEntity<Object> loadReportPlace(){
         try {

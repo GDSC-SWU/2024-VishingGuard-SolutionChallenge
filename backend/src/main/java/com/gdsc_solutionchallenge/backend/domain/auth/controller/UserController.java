@@ -1,15 +1,12 @@
 package com.gdsc_solutionchallenge.backend.domain.auth.controller;
 
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignInResDto;
-import com.gdsc_solutionchallenge.backend.domain.auth.service.MemberService;
-import com.gdsc_solutionchallenge.backend.domain.auth.domain.User;
+import com.gdsc_solutionchallenge.backend.domain.auth.service.UserService;
 import com.gdsc_solutionchallenge.backend.domain.auth.domain.UserRepository;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.UserResponseDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignInRequestDto;
 import com.gdsc_solutionchallenge.backend.domain.auth.dto.SignUpRequestDto;
-import com.gdsc_solutionchallenge.backend.domain.auth.jwt.JwtToken;
 import com.gdsc_solutionchallenge.backend.domain.auth.security.SecurityUtil;
-import com.gdsc_solutionchallenge.backend.domain.board.comment.dto.CommentResDto;
 import com.gdsc_solutionchallenge.backend.global.common.BaseResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseErrorResponse;
 import com.gdsc_solutionchallenge.backend.global.error.BaseException;
@@ -27,8 +24,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/members")
 @Tag(name = "로그인 API", description = "로그인 API 모음")
-public class MemberController {
-    private final MemberService memberService;
+public class UserController {
+    private final UserService userService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @PostMapping("/sign-in")
@@ -37,7 +34,7 @@ public class MemberController {
         try {
             String email = signInDto.getEmail(); // 이메일
             String password = signInDto.getPassword(); // 비번
-            SignInResDto signInResDto = memberService.getJwtToken(email,password);
+            SignInResDto signInResDto = userService.getJwtToken(email,password);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "로그인 완료", signInResDto));
@@ -61,7 +58,7 @@ public class MemberController {
     @Operation(summary = "회원가입", description = "회원가입")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
         try {
-            UserResponseDto savedUserResponseDto = memberService.signUp(signUpRequestDto);
+            UserResponseDto savedUserResponseDto = userService.signUp(signUpRequestDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new BaseResponse<>(HttpStatus.OK.value(), "회원가입 완료", savedUserResponseDto));
