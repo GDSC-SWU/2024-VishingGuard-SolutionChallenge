@@ -9,13 +9,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Prevention {
+public class ReportProcedure {
     @DocumentId
     private String id;
     @NotNull
     private String title;
     @NotNull
     private String content;
+    private String url;
     @NotNull
     private int order;
+
 }

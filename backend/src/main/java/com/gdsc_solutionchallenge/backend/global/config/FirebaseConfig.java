@@ -23,6 +23,9 @@ public class FirebaseConfig {
     @Value("${firebase.databaseUrl}")
     private String databaseUrl;
 
+    @Value("${firebase.storageUrl}")
+    private String storageUrl;
+
     @Bean
     public Firestore firestore() {
         return FirestoreClient.getFirestore();
@@ -37,6 +40,7 @@ public class FirebaseConfig {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl(databaseUrl)
+                    .setStorageBucket(storageUrl)
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {

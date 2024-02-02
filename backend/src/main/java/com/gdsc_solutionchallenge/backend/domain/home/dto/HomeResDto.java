@@ -16,10 +16,10 @@ public class HomeResDto {
     }
 
     private String getTitleSnippet(String title) {
-        if (title.length() <= 27) {
+        if (title.length() <= 38) {
             return title;
         } else {
-            return title.substring(0, 27);
+            return title.substring(0, 38);
         }
     }
 }

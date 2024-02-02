@@ -57,7 +57,7 @@ public class ResultService {
             if (keyword != null && removeSpaces(smishingReqDto.getSmishingScript())
                     .contains(removeSpaces(keyword.getSmishing_keyword()))) {
                 keywordResult = true; // 하나라도 일치하는 경우 true로 설정
-                keywordComment = "스미싱 위험 키워드가 포함되어있습니다. ("+ keyword.getSmishing_keyword() + ")";
+                keywordComment = "It contains a risk keyword related to smishing. ("+ keyword.getSmishing_keyword() + ")";
                 break; // 일치하는 경우 반복 중단
             }
         }
@@ -89,10 +89,10 @@ public class ResultService {
         for (VishingKeyword keyword : vishingKeywordList) {
             if (keyword != null && removeSpaces(vishingReqDto.getVishingScript())
                     .contains(removeSpaces(keyword.getVishing_keyword()))) {
-                keywordComment = "보이스피싱 위험 키워드가 포함되어있습니다. ("+ keyword.getVishing_keyword() + ")";
+                keywordComment = "Contains a risk keyword related to voice phishing. ("+ keyword.getVishing_keyword() + ")";
                 break; // 일치하는 경우 반복 중단
             }else{
-                keywordComment = "보이스피싱 위험 키워드가 포함되어있습니다.";
+                keywordComment = "Contains a risk keyword related to voice phishing.";
             }
         }
 

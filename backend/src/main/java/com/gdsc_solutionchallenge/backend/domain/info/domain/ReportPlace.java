@@ -9,13 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Prevention {
+public class ReportPlace {
     @DocumentId
     private String id;
     @NotNull
-    private String title;
+    private String number;
     @NotNull
-    private String content;
+    private String place;
     @NotNull
     private int order;
+    private String tag;
 }
