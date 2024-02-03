@@ -15,11 +15,13 @@ public class SpamNumber {
     private String id;
     @NotNull
     private String number;
-
+    @NotNull
     private String name;
+    private int count;
     @Builder
-    public SpamNumber(String number,String name){
+    public SpamNumber(String number,String name, int count){
         this.number=number;
         this.name=name;
+        this.count=count;
     }
 }

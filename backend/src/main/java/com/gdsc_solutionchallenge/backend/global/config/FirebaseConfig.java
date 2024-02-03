@@ -40,7 +40,7 @@ public class FirebaseConfig {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl(databaseUrl)
-                    .setStorageBucket(storageUrl)
+                    //.setStorageBucket(storageUrl)
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {

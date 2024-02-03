@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/members/test")).hasRole("USER") // USER 권한 확인
                 .anyRequest().authenticated() // 이 밖에 모든 요청에 대해 인증 필요
                 .and()
+
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
