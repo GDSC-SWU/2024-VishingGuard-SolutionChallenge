@@ -1,7 +1,6 @@
 package com.example.vishingguard
 
-import com.example.vishingguard.smishing.SmishingApiService
-import com.example.vishingguard.vishing.VishingApiService
+import com.example.vishingguard.login.data.LoginApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -9,7 +8,7 @@ import retrofit2.Retrofit
 
 object ApiFactory {
     private const val BASE_URL =
-        "https://2b43a12b-51c2-41ce-88ca-35dc29deefa4.mock.pstmn.io/"
+        "http://35.216.77.51:8080"
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -20,6 +19,5 @@ object ApiFactory {
 }
 
 object ServicePool {
-    val postSmishing = ApiFactory.retrofit.create(SmishingApiService::class.java)
-    val postVishing = ApiFactory.retrofit.create(VishingApiService::class.java)
+    val postSignUp = ApiFactory.retrofit.create(LoginApiService::class.java)
 }
