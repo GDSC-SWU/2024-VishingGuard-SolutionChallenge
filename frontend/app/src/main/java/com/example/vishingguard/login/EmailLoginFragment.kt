@@ -2,6 +2,7 @@ package com.example.vishingguard.login
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.vishingguard.MainActivity
 import com.example.vishingguard.R
@@ -46,6 +47,7 @@ class EmailLoginFragment : BindingFragment<FragmentEmailLoginBinding>(R.layout.f
         if (viewModel.postLogin.value?.status == STATUS_SUCCESS) {
             binding.inputPw.error = null
             navigateToMainActivity() // 화면 이동
+            Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
             Log.d("success", "로그인 성공 : ${viewModel.postLogin.value}")
         }
         // 로그인 실패
