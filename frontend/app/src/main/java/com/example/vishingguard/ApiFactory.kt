@@ -20,4 +20,5 @@ object ApiFactory {
 
 object ServicePool {
     val postSignUp = ApiFactory.retrofit.create(LoginApiService::class.java)
+    val postLogin = ApiFactory.retrofit.create(LoginApiService::class.java)
 }
