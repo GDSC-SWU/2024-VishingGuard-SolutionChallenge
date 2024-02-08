@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/fragment_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -44,8 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="27dp"
-            android:fontFamily="sans-serif-black"
-            android:text="이메일"
+            android:text="@string/tv_email"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_input" />
@@ -54,7 +52,7 @@
             android:id="@+id/input_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray"
+            app:hintEnabled="false"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,10 +61,12 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="50dp"
+                android:textColor="@color/basic_text"
+                android:textColorHint="@color/gray"
+                android:hint="@string/hint_email"
                 android:background="@drawable/ic_rectangle_white"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
-                android:hint="@string/hint_name"/>
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -74,7 +74,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-black"
             android:text="@string/tv_pw"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             app:layout_constraintStart_toStartOf="@+id/tv_email"
@@ -84,19 +83,25 @@
             android:id="@+id/input_pw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textColorHint="@color/gray"
+            app:errorIconTint="@color/red"
+            app:errorTextColor="@color/red"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/input_email"
             app:layout_constraintStart_toStartOf="@+id/tv_pw"
             app:layout_constraintTop_toBottomOf="@+id/tv_pw">
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="50dp"
                 android:background="@drawable/ic_rectangle_white"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
                 android:hint="@string/hint_pw"
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"
+                android:textColor="@color/basic_text"
                 android:textColorHint="@color/gray" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
@@ -104,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:background="@drawable/ic_rectangle_blue"
-            android:text="로그인"
+            android:text="@string/btn_sign_in"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             android:textColor="@color/blue"
             app:layout_constraintEnd_toEndOf="@+id/input_pw"

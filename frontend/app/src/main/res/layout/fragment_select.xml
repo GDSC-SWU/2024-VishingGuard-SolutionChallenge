@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +43,7 @@
             android:drawableStart="@drawable/img_google_logo"
             android:paddingHorizontal="40dp"
             android:paddingVertical="0dp"
-            android:text="구글로 회원가입"
+            android:text="@string/btn_sign_up_google"
             android:textAppearance="@style/TextAppearance.Vishing.SubTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +61,7 @@
             android:drawableStart="@drawable/ic_mail"
             android:paddingHorizontal="40dp"
             android:paddingVertical="0dp"
-            android:text="메일로 회원가입"
+            android:text="@string/btn_sign_up_email"
             android:textAppearance="@style/TextAppearance.Vishing.SubTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="62dp"
-            android:text="회원이신가요?"
+            android:text="@string/tv_account"
             android:textAppearance="@style/TextAppearance.Vishing.Content2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +89,7 @@
             android:background="@drawable/ic_rectangle_white"
             android:paddingHorizontal="40dp"
             android:paddingVertical="0dp"
-            android:text="로그인"
+            android:text="@string/btn_sign_in"
             android:textAppearance="@style/TextAppearance.Vishing.SubTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

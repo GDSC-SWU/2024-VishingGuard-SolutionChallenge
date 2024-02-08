@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/fragment_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -36,7 +35,7 @@
             android:text="@string/tv_signUp_title"
             android:textAppearance="@style/TextAppearance.Vishing.Title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
         <TextView
             android:id="@+id/tv_signUp_sub"
@@ -53,18 +52,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="sans-serif-black"
+            android:layout_marginTop="30dp"
             android:text="@string/tv_name"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_signUp_sub" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_signUp_sub"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray"
+            app:hintEnabled="false"
+            app:errorTextColor="@color/red"
+            app:errorIconTint="@color/red"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,9 +74,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:hint="@string/hint_new_name"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/basic_text"
                 android:background="@drawable/ic_rectangle_white"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
-                android:hint="@string/hint_new_name"/>
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -85,17 +87,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="18dp"
-            android:fontFamily="sans-serif-black"
-            android:text="이메일"
+            android:text="@string/tv_email"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_name" />
+            app:layout_constraintTop_toBottomOf="@+id/input_name"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray"
+            app:hintEnabled="false"
+            app:errorTextColor="@color/red"
+            app:errorIconTint="@color/red"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,9 +108,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:hint="@string/hint_email"
+                android:textColor="@color/basic_text"
+                android:textColorHint="@color/gray"
                 android:background="@drawable/ic_rectangle_white"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
-                android:hint="@string/hint_email"/>
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -115,17 +120,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:fontFamily="sans-serif-black"
             android:text="@string/tv_pw"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             app:layout_constraintStart_toStartOf="@+id/tv_email"
-            app:layout_constraintTop_toBottomOf="@+id/input_email" />
+            app:layout_constraintTop_toBottomOf="@+id/input_email"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_pw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray"
+            android:layout_marginTop="8dp"
+            app:errorIconTint="@color/red"
+            app:errorTextColor="@color/red"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/input_email"
             app:layout_constraintStart_toStartOf="@+id/tv_pw"
             app:layout_constraintTop_toBottomOf="@+id/tv_pw">
@@ -134,17 +141,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_rectangle_white"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
                 android:hint="@string/hint_pw"
-                android:textColorHint="@color/gray" />
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"
+                android:textColor="@color/basic_text"
+                android:textColorHint="@color/gray"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_check_pw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorTextColor="@color/red"
+            app:errorIconTint="@color/red"
             android:layout_marginTop="14dp"
-            android:textColorHint="@color/gray"
             app:layout_constraintEnd_toEndOf="@+id/input_email"
             app:layout_constraintStart_toStartOf="@+id/tv_pw"
             app:layout_constraintTop_toBottomOf="@+id/input_pw">
@@ -152,10 +162,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_rectangle_white"
                 android:hint="@string/hint_check_pw"
-                android:textAppearance="@style/TextAppearance.Vishing.Content2"
-                android:textColorHint="@color/gray" />
+                android:textColor="@color/basic_text"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/ic_rectangle_white"
+                android:textAppearance="@style/TextAppearance.Vishing.Content2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -164,11 +175,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:background="@drawable/ic_rectangle_blue"
-            android:text="계속하기"
+            android:text="@string/tv_continue"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             android:textColor="@color/blue"
             app:layout_constraintEnd_toEndOf="@+id/input_check_pw"
             app:layout_constraintStart_toStartOf="@+id/input_check_pw"
-            app:layout_constraintTop_toBottomOf="@+id/input_check_pw" />
+            app:layout_constraintTop_toBottomOf="@+id/input_check_pw"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
