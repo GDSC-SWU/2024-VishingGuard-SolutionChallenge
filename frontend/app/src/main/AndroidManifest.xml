@@ -26,19 +26,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VishingGuard"
+        android:theme="@style/Base.Theme.VishingGuard"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="GOOGLE_MAPS_API_KEY" />
-
-        <activity
-            android:name=".smishing.SmishingActivity"
-            android:exported="false" />
-
         <activity
             android:name=".login.LoginActivity"
             android:exported="true">
+
         </activity>
 
         <activity
@@ -50,20 +43,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".smishing.SMSReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name=".vishing.VishingActivity"
             android:exported="true">
         </activity>
+
+        <receiver
+            android:name=".vishing.CallReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAz_piev8tAgdcMtlFhaDGwyZ8MqtRwDyI" />
+
+        <activity
+            android:name=".smishing.SmishingActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".smishing.SMSReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MainActivity"
