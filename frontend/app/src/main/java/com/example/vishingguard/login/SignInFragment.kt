@@ -17,6 +17,11 @@ class SignInFragment : BindingFragment<FragmentSignInBinding>(R.layout.fragment_
         binding.btnGoogleLogin.setOnClickListener {
 
         }
+
+        // 뒤로가기
+        binding.btnBack.setOnClickListener {
+            navigateBack()
+        }
     }
 
     // 프래그먼트 이동
@@ -25,5 +30,10 @@ class SignInFragment : BindingFragment<FragmentSignInBinding>(R.layout.fragment_
             .replace(R.id.container_login, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    // 뒤로가기
+    private fun navigateBack() {
+        requireActivity().supportFragmentManager.popBackStack()
     }
 }
