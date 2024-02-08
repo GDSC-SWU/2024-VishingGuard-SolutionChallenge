@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Vishing" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Title">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.SubTitle">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Post">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Content">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Content2">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Content3">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Content.Bold">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

@@ -2,24 +2,109 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
+    <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/fragment_background">
 
-        <TextView
-            android:id="@+id/tv_test"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_map_bot"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/title_map"
+                android:textAppearance="@style/TextAppearance.Vishing.Title"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/bg_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/ic_rectangle_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+        <ImageView
+            android:id="@+id/img_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_light"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toTopOf="@+id/bg_result" />
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="22dp"
+            android:text="@string/tv_route_map"
+            android:textAppearance="@style/TextAppearance.Vishing.Content"
+            app:layout_constraintBottom_toBottomOf="@+id/img_result"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toEndOf="@+id/img_result"
+            app:layout_constraintTop_toTopOf="@+id/img_result" />
+
+        <fragment
+            android:id="@+id/fragment_map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toBottomOf="@+id/bg_result"/>
+
+        <ImageView
+            android:id="@+id/backGround_road"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="33dp"
+            android:background="@drawable/ic_dot_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_map" />
+
+        <ImageView
+            android:id="@+id/img_no_road"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_no_road"
+            app:layout_constraintBottom_toBottomOf="@+id/backGround_road"
+            app:layout_constraintEnd_toEndOf="@+id/backGround_road"
+            app:layout_constraintStart_toStartOf="@+id/backGround_road"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_map"
+            app:layout_constraintVertical_bias="0.45" />
+
+        <TextView
+            android:id="@+id/tv_no_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text="@string/tv_no_route_map"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
+            app:layout_constraintEnd_toEndOf="@+id/backGround_road"
+            app:layout_constraintStart_toStartOf="@+id/backGround_road"
+            app:layout_constraintTop_toBottomOf="@+id/img_no_road" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
