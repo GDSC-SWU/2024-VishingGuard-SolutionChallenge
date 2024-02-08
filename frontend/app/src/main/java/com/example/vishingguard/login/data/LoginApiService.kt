@@ -9,4 +9,9 @@ interface LoginApiService {
     fun postSignUp(
         @Body params: SignUpRequest
     ): Call<SignUpResponse>
+
+    @POST("/members/sign-in")
+    fun postLogin(
+        @Body params: LoginRequest
+    ): Call<LoginResponse>
 }
