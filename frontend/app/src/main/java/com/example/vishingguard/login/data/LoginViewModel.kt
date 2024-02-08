@@ -14,6 +14,11 @@ class LoginViewModel : ViewModel() {
     val postSignUp: LiveData<SignUpResponse> = _postSignUp //read
     private val postSignUpService = ServicePool.postSignUp
 
+    // Login LiveData
+    private val _postLogin: MutableLiveData<LoginResponse> = MutableLiveData()  //read, write
+    val postLogin: LiveData<LoginResponse> = _postLogin //read
+    private val postLoginService = ServicePool.postLogin
+
     // Failure LiveData
     private val _failureMessage: MutableLiveData<String> = MutableLiveData()
     val failureMessage: LiveData<String> = _failureMessage
@@ -38,6 +43,29 @@ class LoginViewModel : ViewModel() {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 Log.e("error SignUp", "서버 통신 실패", t)
                 t.message?.let { Log.d("error SignUp", it) } ?: Log.d("error SignUp", "서버통신 실패(응답값 X)")
+            }
+        })
+    }
+
+    // Login
+    fun postLogin(loginDto: LoginRequest) {
+        postLoginService.postLogin(loginDto).enqueue(object : retrofit2.Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    _postLogin.value = response.body()
+                    Log.d("success Login", "통신 성공 : ${_postLogin.value}")
+                } else {
+                    Log.d("error Login", "실패한 응답 : ${response.code()}")
+                    response.errorBody()?.string()?.let {
+                        _failureMessage.value = it
+                        Log.d("error Login", it)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e("error", "서버 통신 실패", t)
+                t.message?.let { Log.d("error Login", it) } ?: Log.d("error Login", "서버통신 실패(응답값 X)")
             }
         })
     }
