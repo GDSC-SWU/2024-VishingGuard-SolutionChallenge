@@ -1,6 +1,7 @@
 package com.example.vishingguard.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.vishingguard.R
@@ -23,7 +24,7 @@ class SignUpFragment : BindingFragment<FragmentSignUpBinding>(R.layout.fragment_
             navigateBack()
         }
 
-        // 회워가입
+        // 회원가입
         binding.btnNext.setOnClickListener {
             postSignUp()
         }
@@ -44,6 +45,7 @@ class SignUpFragment : BindingFragment<FragmentSignUpBinding>(R.layout.fragment_
         if (viewModel.postSignUp.value?.status == STATUS_SUCCESS) {
             binding.inputPw.error = null
             replaceFragment(EmailLoginFragment())  // 화면 이동
+            Toast.makeText(requireContext(), "Sign-up successful", Toast.LENGTH_SHORT).show()
             Log.d("success", "회원가입 성공 : ${viewModel.postSignUp.value}")
         }
         // 회원가입 실패
