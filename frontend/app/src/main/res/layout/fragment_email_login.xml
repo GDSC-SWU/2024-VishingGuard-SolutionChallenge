@@ -99,9 +99,9 @@
                 android:hint="@string/hint_pw"
                 android:textAppearance="@style/TextAppearance.Vishing.Content2"
                 android:textColor="@color/basic_text"
-                android:textColorHint="@color/gray" />
+                android:textColorHint="@color/gray"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
