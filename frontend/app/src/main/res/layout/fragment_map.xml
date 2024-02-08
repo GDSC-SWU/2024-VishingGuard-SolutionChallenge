@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
+    <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,9 +24,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="@string/title_map"
-                android:textColor="@color/basic_text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.Vishing.Title"/>
         </androidx.appcompat.widget.Toolbar>
 
         <ImageView
@@ -48,7 +43,7 @@
             android:id="@+id/img_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="15dp"
             android:src="@drawable/ic_light"
             app:layout_constraintBottom_toBottomOf="@+id/bg_result"
             app:layout_constraintStart_toStartOf="@+id/bg_result"
@@ -60,20 +55,20 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="22dp"
-            android:layout_marginEnd="4dp"
             android:text="@string/tv_route_map"
-            android:textColor="@color/basic_text"
+            android:textAppearance="@style/TextAppearance.Vishing.Content"
             app:layout_constraintBottom_toBottomOf="@+id/img_result"
             app:layout_constraintEnd_toEndOf="@+id/bg_result"
             app:layout_constraintStart_toEndOf="@+id/img_result"
             app:layout_constraintTop_toTopOf="@+id/img_result" />
 
         <fragment
-            android:id="@+id/map_road"
+            android:id="@+id/fragment_map"
             class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/bg_result"
             app:layout_constraintStart_toStartOf="@+id/bg_result"
             app:layout_constraintTop_toBottomOf="@+id/bg_result"/>
@@ -88,7 +83,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/bg_result"
             app:layout_constraintStart_toStartOf="@+id/bg_result"
-            app:layout_constraintTop_toBottomOf="@+id/map_road" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_map" />
 
         <ImageView
             android:id="@+id/img_no_road"
@@ -98,7 +93,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/backGround_road"
             app:layout_constraintEnd_toEndOf="@+id/backGround_road"
             app:layout_constraintStart_toStartOf="@+id/backGround_road"
-            app:layout_constraintTop_toBottomOf="@+id/map_road"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_map"
             app:layout_constraintVertical_bias="0.45" />
 
         <TextView
@@ -107,8 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:text="@string/tv_no_route_map"
-            android:textColor="@color/basic_text"
-            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
             app:layout_constraintEnd_toEndOf="@+id/backGround_road"
             app:layout_constraintStart_toStartOf="@+id/backGround_road"
             app:layout_constraintTop_toBottomOf="@+id/img_no_road" />

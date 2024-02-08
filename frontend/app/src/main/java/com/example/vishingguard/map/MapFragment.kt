@@ -9,7 +9,7 @@ class MapFragment : BindingFragment<FragmentMapBinding>(R.layout.fragment_map) {
     override fun initView() {
 
         // 지도 숨기기
-        val mapFragment = view?.findViewById<View>(R.id.map_road)
+        val mapFragment = view?.findViewById<View>(R.id.fragment_map)
         mapFragment?.visibility = View.GONE
     }
 }
