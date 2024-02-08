@@ -2,13 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#C34F52</color>
+    <color name="red">#FF6362</color>
     <color name="basic_text">#212529</color>
     <color name="blue">#108DC7</color>
+    <color name="sky_blue">#92C8ED</color>
 
     <color name="line">#4F4F4F</color>
     <color name="gray">#ACACAC</color>
     <color name="light_gray">#EEEEEE</color>
+    <color name="light_gray_line">#DFE1E6</color>
+
+    <color name="dot_selected">#868E96</color>
+    <color name="dot_unSelected">#E0E0E0</color>
 
     <color name="bot_nav_background">#F6FBFF</color>
     <color name="fragment_background">#F3F4F6</color>

@@ -27,16 +27,25 @@
 
     <style name="TextAppearance.Vishing.Content">
         <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.Vishing.Content2">
         <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Vishing.Content3">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/basic_text</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Vishing.Content.Bold">
         <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textColor">@color/basic_text</item>
         <item name="android:textSize">14sp</item>
     </style>
 </resources>
