@@ -53,6 +53,15 @@ class LoginViewModel : ViewModel() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     _postLogin.value = response.body()
+
+                    // 응답에서 userId와 token 추출
+                    val userId = response.body()?.data?.userId
+                    val accessToken = response.body()?.data?.jwtToken?.accessToken
+
+                    // LoginResponseHolder에 userId와 accessToken 저장
+                    if (userId != null && accessToken != null) {
+                        UserData.setLoginResponse(userId, accessToken)
+                    }
                     Log.d("success Login", "통신 성공 : ${_postLogin.value}")
                 } else {
                     Log.d("error Login", "실패한 응답 : ${response.code()}")
