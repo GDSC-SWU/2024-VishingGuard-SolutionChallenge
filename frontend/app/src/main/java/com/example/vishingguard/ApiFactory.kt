@@ -1,6 +1,7 @@
 package com.example.vishingguard
 
 import com.example.vishingguard.login.data.LoginApiService
+import com.example.vishingguard.smishing.data.SmsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,6 +20,10 @@ object ApiFactory {
 }
 
 object ServicePool {
+    // Login
     val postSignUp = ApiFactory.retrofit.create(LoginApiService::class.java)
     val postLogin = ApiFactory.retrofit.create(LoginApiService::class.java)
+
+    // Pishing
+    val postSms = ApiFactory.retrofit.create(SmsApiService::class.java)
 }
