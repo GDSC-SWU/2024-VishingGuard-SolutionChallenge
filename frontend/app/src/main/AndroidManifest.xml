@@ -61,12 +61,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAz_piev8tAgdcMtlFhaDGwyZ8MqtRwDyI" />
 
-        <activity
-            android:name=".smishing.SmishingActivity"
-            android:exported="false" />
-
         <receiver
-            android:name=".smishing.SMSReceiver"
+            android:name=".smishing.SmsReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
