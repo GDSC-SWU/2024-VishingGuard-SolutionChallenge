@@ -5,45 +5,49 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
-import android.util.Log
+import com.example.vishingguard.MainActivity
 
-class SMSReceiver : BroadcastReceiver() {
+@Suppress("DEPRECATION")
+class SmsReceiver : BroadcastReceiver() {
 
-    // 문자가 왔을 때 실행
+    // When a message arrives
     override fun onReceive(context: Context?, intent: Intent?) {
         if(intent?.action.equals("android.provider.Telephony.SMS_RECEIVED")){
+            // Extract the message from the intent's extras
             val bundle = intent?.extras
             val messages = MessageParse(bundle!!)
 
+            // If there are messages
             if(messages?.size!! > 0){
+                val sender = messages[0]?.originatingAddress
                 val content = messages[0]?.messageBody.toString()
-                if (content != null) {
-                    // 문자 내용 전달
-                    Log.d("message contents", content)
-                    context?.let { sendToActivity(it, content) }
+                if (sender != null) {
+                    // pass data to the activity
+                    context?.let { sendToActivity(it, sender, content) }
                 }
             }
         }
     }
 
-    // 문자 내용 추출
-    fun MessageParse(bundle: Bundle): Array<SmsMessage?>? {
-        val objs = bundle["pdus"] as Array<Any>?
+    // Extract message content
+    fun MessageParse(bundle: Bundle): Array<SmsMessage?> {
+        val objs = bundle["pdus"] as Array<*>?
         val messages: Array<SmsMessage?> = arrayOfNulls<SmsMessage>(objs!!.size)
-        for (i in objs!!.indices) {
+        for (i in objs.indices) {
             messages[i] = SmsMessage.createFromPdu(objs[i] as ByteArray)
         }
         return messages
     }
 
-    // 메시지 내용 전달
-    private fun sendToActivity(context: Context, content: String) {
-        val intent = Intent(context, SmishingActivity::class.java)
+    // Send message content to the activity
+    private fun sendToActivity(context: Context, sender: String, content: String) {
+        val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(
             Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     or Intent.FLAG_ACTIVITY_CLEAR_TOP
         )
+        intent.putExtra("sender", sender)
         intent.putExtra("content", content)
         context.startActivity(intent)
     }
