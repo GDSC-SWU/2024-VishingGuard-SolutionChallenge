@@ -18,8 +18,9 @@ public class Smishing {
     String script;
     @NotNull
     String phone;
-
+    @NotNull
+    private String date;
+    @NotNull
+    private String time;
     String keyword_comment;
-//    @NotNull
-//    String url_comment;
 }

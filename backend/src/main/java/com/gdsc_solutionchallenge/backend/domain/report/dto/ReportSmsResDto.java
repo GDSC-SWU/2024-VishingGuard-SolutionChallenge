@@ -8,14 +8,16 @@ import lombok.Getter;
 public class ReportSmsResDto {
     private String smishingScript;
     private String phone;
-    //private String urlComment;
+    private String date;
+    private String time;
     private String keywordComment;
 
     @Builder
     public ReportSmsResDto(Smishing smishing) {
         this.smishingScript = smishing.getScript();
         this.phone = smishing.getPhone();
-        //this.urlComment = smishing.getUrl_comment();
+        this.date = smishing.getDate();
+        this.time = smishing.getTime();
         this.keywordComment = smishing.getKeyword_comment();
     }
 }

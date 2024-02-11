@@ -30,7 +30,7 @@ public class RouteController {
             List<Route> routes = routeService.loadRoute();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "홈 화면 로딩 완료", routes));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "지점 로딩 완료", routes));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
