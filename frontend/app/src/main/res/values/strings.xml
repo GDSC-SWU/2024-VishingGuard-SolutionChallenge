@@ -41,15 +41,24 @@
     <string name="tv_no_route_map">No phishing risk routes found.</string>
 
     <!--pishing text-->
-    <string name="tv_title_result">Safe</string>
-    <string name="tv_result_pishing">The phishing risk report for this week shows that everything is safe :)</string>
     <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
-    <string name="tv_result_content">"We're handling voice phishing well! 👍🏻"</string>
     <string name="tv_record">Main Phishing Records</string>
     <string name="tv_call">Call</string>
     <string name="tv_result_call">No phishing call records.</string>
     <string name="tv_message">Message</string>
     <string name="tv_result_massage">No phishing message records.</string>
+
+    <string name="tv_title_safe">Safe</string>
+    <string name="tv_result_safe">The phishing risk report for this week shows that everything is safe :)</string>
+    <string name="tv_content_safe">"We're handling voice phishing well! 👍🏻"</string>
+
+    <string name="tv_title_moderate">Moderate</string>
+    <string name="tv_result_moderate">"This week's phishing risk report indicates moderate risk."</string>
+    <string name="tv_content_moderate">"Please pay attention to voice phishing ✊🏻"</string>
+
+    <string name="tv_title_risky">Risky</string>
+    <string name="tv_result_risky">"This week's phishing risk report results are risky :("</string>
+    <string name="tv_content_risky">"More vigilance on voice phishing 🙏🏻</string>
 
     <!--my page text-->
     <string name="tv_update_mypage">Update Information</string>

@@ -26,6 +26,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun setNavigation() {
+        // Find the navigation controller
         val navController =
             supportFragmentManager.findFragmentById(R.id.container_main)?.findNavController()
 
@@ -61,9 +62,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             // Extract SMS content and sender's phone number
             val smishingScript = intent.getStringExtra("content").toString()
             val phone = intent.getStringExtra("sender").toString()
+            val date = intent.getStringExtra("date").toString()
+            val time = intent.getStringExtra("time").toString()
 
             // Send SMS data to ViewModel for processing
-            val smsRequest = SmsRequest(smishingScript = smishingScript, phone = phone)
+            val smsRequest = SmsRequest(
+                smishingScript = smishingScript, phone = phone, date = date, time = time)
             viewModel.postSms(smsRequest)
         }
     }

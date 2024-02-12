@@ -6,15 +6,18 @@
     <color name="basic_text">#212529</color>
     <color name="blue">#108DC7</color>
     <color name="sky_blue">#92C8ED</color>
+    <color name="navy">#0E477C</color>
 
     <color name="line">#4F4F4F</color>
     <color name="gray">#ACACAC</color>
     <color name="light_gray">#EEEEEE</color>
+    <color name="light_gray2">#C7C7C7</color>
     <color name="light_gray_line">#DFE1E6</color>
 
     <color name="dot_selected">#868E96</color>
     <color name="dot_unSelected">#E0E0E0</color>
 
+    <color name="bg_comment">#F1F1F1</color>
     <color name="bot_nav_background">#F6FBFF</color>
     <color name="fragment_background">#F3F4F6</color>
 </resources>
