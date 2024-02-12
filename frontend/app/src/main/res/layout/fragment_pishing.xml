@@ -43,11 +43,10 @@
                 <ImageView
                     android:id="@+id/img_step_safe"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="44dp"
                     android:layout_marginTop="21dp"
-                    android:layout_marginEnd="36dp"
-                    android:background="@drawable/ic_step_safe"
+                    android:layout_marginEnd="44dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +58,6 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginEnd="22dp"
-                    android:background="@drawable/ic_frame_pishing"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_step_safe" />
@@ -81,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="30dp"
-                    android:text="@string/tv_title_result"
                     android:textAppearance="@style/TextAppearance.Vishing.Post"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
@@ -93,7 +90,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/tv_result_pishing"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_title_result"
@@ -103,21 +99,22 @@
 
                 <TextView
                     android:id="@+id/tv_result_content"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="29dp"
-                    android:text="@string/tv_result_content"
+                    android:layout_marginEnd="32dp"
                     android:textAppearance="@style/TextAppearance.Vishing.Content2"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_result"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_result" />
 
                 <TextView
                     android:id="@+id/tv_standard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="@string/tv_standard_pishing"
                     android:textColor="@color/gray"
                     android:textSize="8sp"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
@@ -127,15 +124,13 @@
                     tools:ignore="DuplicateIds"/>
 
                 <ImageView
-                    android:id="@+id/img_result_safe"
+                    android:id="@+id/img_result"
                     android:layout_width="206dp"
                     android:layout_height="102dp"
-                    android:layout_marginBottom="12dp"
-                    android:src="@drawable/ic_result_safe"
+                    android:layout_marginBottom="13dp"
                     app:layout_constraintBottom_toBottomOf="@+id/img_frame_safe"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_standard"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_record"
@@ -157,7 +152,20 @@
                     app:layout_constraintStart_toStartOf="@+id/tv_record"
                     app:layout_constraintTop_toBottomOf="@+id/tv_record"/>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_vishing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
+                    app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_call"
+                    tools:listitem="@layout/item_vishing"/>
+
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/bg_call"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
@@ -165,9 +173,10 @@
                     android:background="@drawable/ic_dot_rectangle"
                     app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_call"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_call" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/img_call"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
@@ -178,6 +187,7 @@
                     app:layout_constraintTop_toTopOf="@+id/bg_call" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_result_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -194,13 +204,28 @@
                     android:id="@+id/tv_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="180dp"
                     android:text="@string/tv_message"
                     android:textAppearance="@style/TextAppearance.Vishing.SubTitle"
                     app:layout_constraintStart_toStartOf="@+id/tv_call"
-                    app:layout_constraintTop_toBottomOf="@+id/bg_call"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_call"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_smishing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
+                    app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_message"
+                    tools:listitem="@layout/item_smishing" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/bg_message"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
@@ -213,6 +238,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_message"/>
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/img_message"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
@@ -223,6 +249,7 @@
                     app:layout_constraintTop_toTopOf="@+id/bg_message" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_result_massage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
