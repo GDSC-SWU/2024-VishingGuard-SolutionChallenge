@@ -24,6 +24,12 @@ class ReportViewModel : ViewModel() {
     val postSmishing: LiveData<SmishingResponse> = _postSmishing //read
     private val postSmishingService = ServicePool.postSmishing
 
+    // State LiveData
+    private val _getState: MutableLiveData<StateResponse> = MutableLiveData()  //read, write
+    val getState: LiveData<StateResponse> = _getState //read
+    private val getStateService = ServicePool.getState
+
+
     // Server interaction
     fun postVishing() {
         if (accessToken != null && userId != null) {
@@ -58,6 +64,25 @@ class ReportViewModel : ViewModel() {
 
                 override fun onFailure(call: Call<SmishingResponse>, t: Throwable) {
                     t.message?.let { Log.d("error postSmishing", it) } ?: "Failed server communication (no response)"
+                }
+            })
+        }
+    }
+
+    fun getState() {
+        if (accessToken != null && userId != null) {
+            getStateService.getState(accessToken, userId).enqueue(object : retrofit2.Callback<StateResponse> {
+                override fun onResponse(call: Call<StateResponse>, response: Response<StateResponse>) {
+                    if (response.isSuccessful) {
+                        _getState.value = response.body()
+                        Log.d("success getState", _getState.value.toString())
+                    } else {
+                        Log.d("error getState", "Failed response")
+                    }
+                }
+
+                override fun onFailure(call: Call<StateResponse>, t: Throwable) {
+                    t.message?.let { Log.d("error getState", it) } ?: "Failed server communication (no response)"
                 }
             })
         }
