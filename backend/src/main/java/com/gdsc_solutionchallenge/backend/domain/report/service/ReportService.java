@@ -60,11 +60,11 @@ public class ReportService {
         int totalCount = vishingCount + smishingCount;
 
         if (totalCount >= 0 && totalCount <= 1) {
-            return "안전";
+            return "Safe";
         } else if (totalCount >= 2 && totalCount <= 3) {
-            return "경고";
+            return "Moderate";
         } else {
-            return "위험";
+            return "Risky";
         }
     }
 
