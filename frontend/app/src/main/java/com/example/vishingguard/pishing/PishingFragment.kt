@@ -7,6 +7,7 @@ import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
 import com.example.vishingguard.databinding.FragmentPishingBinding
 import com.example.vishingguard.pishing.data.ReportViewModel
+import com.example.vishingguard.pishing.data.SmishingReportAdapter
 import com.example.vishingguard.pishing.data.VishingReportAdapter
 
 class PishingFragment : BindingFragment<FragmentPishingBinding>(R.layout.fragment_pishing) {
@@ -15,6 +16,7 @@ class PishingFragment : BindingFragment<FragmentPishingBinding>(R.layout.fragmen
     override fun initView() {
         // Request to post reports to the server
         viewModel.postVishing()
+        viewModel.postSmishing()
 
         // Handle the response from ViewModel
         handleReportResponse()
@@ -31,6 +33,19 @@ class PishingFragment : BindingFragment<FragmentPishingBinding>(R.layout.fragmen
             } else {
                 // No Vishing Data views
                 showNoDataViews(binding.bgCall, binding.imgCall, binding.tvResultCall)
+            }
+        }
+
+        // Observe Smishing data
+        viewModel.postSmishing.observe(viewLifecycleOwner) { response ->
+            if (response.data.isNotEmpty()) {
+                // populate RecyclerView with Smishing reports
+                val data = response.data
+                val adapter = SmishingReportAdapter(data)
+                binding.rvSmishing.adapter = adapter
+            } else {
+                // No Smishing Data views
+                showNoDataViews(binding.bgMessage, binding.imgMessage, binding.tvResultMassage)
             }
         }
     }
