@@ -19,6 +19,11 @@ class ReportViewModel : ViewModel() {
     val postVishing: LiveData<VishingResponse> = _postVishing //read
     private val postVishingService = ServicePool.postVishing
 
+    // Smishing LiveData
+    private val _postSmishing: MutableLiveData<SmishingResponse> = MutableLiveData()  //read, write
+    val postSmishing: LiveData<SmishingResponse> = _postSmishing //read
+    private val postSmishingService = ServicePool.postSmishing
+
     // Server interaction
     fun postVishing() {
         if (accessToken != null && userId != null) {
@@ -34,6 +39,25 @@ class ReportViewModel : ViewModel() {
 
                 override fun onFailure(call: Call<VishingResponse>, t: Throwable) {
                     t.message?.let { Log.d("error postVishing", it) } ?: "Failed server communication (no response)"
+                }
+            })
+        }
+    }
+
+    fun postSmishing() {
+        if (accessToken != null && userId != null) {
+            postSmishingService.postSmishing(accessToken, userId).enqueue(object : retrofit2.Callback<SmishingResponse> {
+                override fun onResponse(call: Call<SmishingResponse>, response: Response<SmishingResponse>) {
+                    if (response.isSuccessful) {
+                        _postSmishing.value = response.body()
+                        Log.d("success postSmishing", _postSmishing.value.toString())
+                    } else {
+                        Log.d("error postSmishing", "Failed response")
+                    }
+                }
+
+                override fun onFailure(call: Call<SmishingResponse>, t: Throwable) {
+                    t.message?.let { Log.d("error postSmishing", it) } ?: "Failed server communication (no response)"
                 }
             })
         }
