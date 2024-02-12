@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
 
 app = FastAPI()
+
 
 # 모델 및 토크나이저 불러오기
 model_name = "chaeyeon1/vp_kobert_model"
@@ -35,3 +36,10 @@ async def predict(payload: PredictInput):
     except Exception as e:
         print(f"에러 발생: {str(e)}")
         raise HTTPException(status_code=500, detail=f"내부 서버 오류: {str(e)}")
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.detail}
+    )
