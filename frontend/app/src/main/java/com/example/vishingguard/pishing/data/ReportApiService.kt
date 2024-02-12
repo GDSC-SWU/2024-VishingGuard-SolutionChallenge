@@ -11,4 +11,10 @@ interface ReportApiService {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int
     ): Call<VishingResponse>
+
+    @POST("/api/v1/report/smishing/{userId}")
+    fun postSmishing(
+        @Header("Authorization") accessToken: String,
+        @Path("userId") userId: Int
+    ): Call<SmishingResponse>
 }
