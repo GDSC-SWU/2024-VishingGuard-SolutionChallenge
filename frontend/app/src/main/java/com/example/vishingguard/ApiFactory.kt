@@ -29,4 +29,5 @@ object ServicePool {
     val postSms = ApiFactory.retrofit.create(SmsApiService::class.java)
     val postVishing = ApiFactory.retrofit.create(ReportApiService::class.java)
     val postSmishing = ApiFactory.retrofit.create(ReportApiService::class.java)
+    val getState = ApiFactory.retrofit.create(ReportApiService::class.java)
 }
