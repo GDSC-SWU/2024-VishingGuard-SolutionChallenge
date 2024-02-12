@@ -1,6 +1,7 @@
 package com.example.vishingguard.pishing.data
 
 import retrofit2.Call
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -17,4 +18,10 @@ interface ReportApiService {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int
     ): Call<SmishingResponse>
+
+    @GET("/api/v1/report/state/{userId}")
+    fun getState(
+        @Header("Authorization") accessToken: String,
+        @Path("userId") userId: Int
+    ): Call<StateResponse>
 }
