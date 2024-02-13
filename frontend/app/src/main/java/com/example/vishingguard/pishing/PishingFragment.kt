@@ -95,8 +95,8 @@ class PishingFragment : BindingFragment<FragmentPishingBinding>(R.layout.fragmen
         binding.tvTitleResult.text = context?.getString(titleResId)
         binding.tvResult.text = context?.getString(resultResId)
         binding.tvResultContent.text = context?.getString(contentResId)
-        binding.imgStepSafe.setImageResource(stepResId)
-        binding.imgFrameSafe.setImageResource(frameResId)
-        binding.imgResult.setImageResource(resultImageResId)
+        binding.imgStepSafe.setBackgroundResource(stepResId)
+        binding.imgFrameSafe.setBackgroundResource(frameResId)
+        binding.imgResult.setBackgroundResource(resultImageResId)
     }
 }
