@@ -1,5 +1,6 @@
 package com.example.vishingguard
 
+import com.example.vishingguard.home.data.HomeApiService
 import com.example.vishingguard.login.data.LoginApiService
 import com.example.vishingguard.pishing.data.ReportApiService
 import com.example.vishingguard.smishing.data.SmsApiService
@@ -30,4 +31,7 @@ object ServicePool {
     val postVishing = ApiFactory.retrofit.create(ReportApiService::class.java)
     val postSmishing = ApiFactory.retrofit.create(ReportApiService::class.java)
     val getState = ApiFactory.retrofit.create(ReportApiService::class.java)
+
+    // Home
+    val getProcedure = ApiFactory.retrofit.create(HomeApiService::class.java)
 }
