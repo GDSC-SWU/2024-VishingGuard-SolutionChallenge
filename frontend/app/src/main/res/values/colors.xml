@@ -3,6 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF6362</color>
+    <color name="green">#5DD78B</color>
+    <color name="yellow">#FFD95E</color>
+
+    <color name="MainBlack">#212529</color>
+    <color name="SubBlack">#4F5767</color>
+    <color name="light_yellow">#FFF5D4</color>
+    <color name="light_sky_blue">#DAEAF7</color>
+
     <color name="basic_text">#212529</color>
     <color name="blue">#108DC7</color>
     <color name="sky_blue">#92C8ED</color>
