@@ -22,7 +22,7 @@ For these reasons, certain demographics are more likely to suffer financial loss
 As voice phishing can disproportionately impact economically vulnerable groups, it may contribute to inequalities in the restoration and recovery process for individuals affected.   
 Preventing voice phishing contributes to enhancing the social safety of local communities. As inequalities diminish, it fosters a more equal and secure society, including specific demographics.   
 ## 🚨 Tech Stack
-서버: 스프링부트, 파이어베이스, mySQL, google cloud platform - compute engine, cloud sql   
+서버: 스프링부트, 파이어베이스, mySQL, google cloud platform - compute engine, cloud sql, fss open api   
 프론트: 안드로이드 스튜디오, 구글맵, (GCP Storage)   
 AI:    
 ux/ui: 피그마    
