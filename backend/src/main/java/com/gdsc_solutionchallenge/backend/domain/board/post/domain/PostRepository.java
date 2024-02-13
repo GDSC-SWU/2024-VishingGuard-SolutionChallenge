@@ -18,6 +18,8 @@ public class PostRepository {
     public PostRepository(Firestore firestore) {
         this.firestore = firestore;
     }
+
+    // Save a post to the Firestore collection
     public Post save(Post post) throws Exception {
         CollectionReference posts = firestore.collection("post");
         ApiFuture<DocumentReference> apiFuture = posts.add(post);
@@ -26,6 +28,7 @@ public class PostRepository {
         return post;
     }
 
+    // Delete a post from the Firestore collection based on its ID
     public String delete(String id) throws Exception {
         CollectionReference posts = firestore.collection("post");
         DocumentReference documentReference = posts.document(id);
@@ -33,38 +36,40 @@ public class PostRepository {
         return id;
     }
 
-    public Post update(Post post) throws Exception{
+    // Update a post in the Firestore collection
+    public Post update(Post post) throws Exception {
         CollectionReference posts = firestore.collection("post");
         DocumentReference documentReference = firestore.collection("post").document(post.getId());
 
-        // 업데이트할 데이터를 Map으로 생성
+        // Create a map with data to be updated
         Map<String, Object> updates = new HashMap<>();
         updates.put("title", post.getTitle());
         updates.put("content", post.getContent());
         updates.put("updated_at", Timestamp.now());
 
-        // 해당 문서에 업데이트 적용
+        // Apply the updates to the document
         ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
-        writeResultApiFuture.get();  // 결과를 기다림
+        writeResultApiFuture.get();  // Wait for the result
 
         return post;
     }
 
-    public Post findById(String id) throws Exception{
+    // Find a post in the Firestore collection based on its ID
+    public Post findById(String id) throws Exception {
         CollectionReference posts = firestore.collection("post");
-        DocumentReference documentReference = posts.document(id); // 특정 ID에 해당하는 문서를 참조
+        DocumentReference documentReference = posts.document(id); // Reference to the document with a specific ID
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
         if (documentSnapshot.exists()) {
             return documentSnapshot.toObject(Post.class);
         } else {
-            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
             return null;
         }
     }
 
-    public List<Post> getAllPost() throws Exception{
+    // Get a list of all posts ordered by creation time (descending)
+    public List<Post> getAllPost() throws Exception {
         CollectionReference posts = firestore.collection("post");
         ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();
 
@@ -76,6 +81,7 @@ public class PostRepository {
         return result;
     }
 
+    // Get a list of all post titles ordered by creation time (descending)
     public List<String> getAllTitles() throws Exception {
         CollectionReference posts = firestore.collection("post");
         ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();

@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class CommentReqDto {
-    @Schema(description = "댓글 내용")
+    @Schema(description = "Comment content")
     private String content;
 
     @Builder

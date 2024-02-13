@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class CommentUpdateReqDto {
-    @Schema(description = "수정할 댓글 내용")
+    @Schema(description = "updated Comment content")
     private String content;
 
     @Builder

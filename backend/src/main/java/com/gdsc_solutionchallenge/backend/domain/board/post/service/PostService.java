@@ -25,70 +25,74 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final HeartRepository heartRepository;
 
-
+    // Save a new post
     public PostResDto savePost(Long userId, PostReqDto postReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postReqDto.toEntity(user);
         postRepository.save(post);
-        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
-        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
+        int comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
         return new PostResDto(post, true, comment_count, heart_count);
     }
 
+    // Update an existing post
     public PostResDto updatePost(Long userId, String postId, PostUpdateReqDto postUpdateReqDto) throws Exception {
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
-        if (!user.getId().equals(post.getUser_id())){
-            throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to modify");
+        if (!user.getId().equals(post.getUser_id())) {
+            throw new BaseException(HttpStatus.FORBIDDEN.value(), "No permission to modify");
         }
 
         post.update(postUpdateReqDto.getTitle(), postUpdateReqDto.getContent());
         postRepository.update(post);
-        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
-        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
+        int comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
         return new PostResDto(post, true, comment_count, heart_count);
     }
 
-    public PostResDto findPostById (Long userId, String postId) throws Exception {
+    // Find a post by its ID
+    public PostResDto findPostById(Long userId, String postId) throws Exception {
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
-        int comment_count= commentRepository.getAllCommentByPostId(post.getId()).size();
-        int heart_count=heartRepository.getAllHeartByPostId(post.getId()).size();
+        int comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
+        int heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
-        if (!user.getId().equals(post.getUser_id())){
+        if (!user.getId().equals(post.getUser_id())) {
             return new PostResDto(post, false, comment_count, heart_count);
         }
 
         return new PostResDto(post, true, comment_count, heart_count);
     }
 
+    // Get a list of all posts
     public List<PostListResDto> getAllPosts() throws Exception {
         List<Post> posts = postRepository.getAllPost();
         return PostListResDto.convertToDtoList(posts, commentRepository, heartRepository);
     }
 
+    // Delete a post
     public String deletePost(Long userId, String postId) throws Exception {
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
-        if (!user.getId().equals(post.getUser_id())){
-            throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to delete");
+        if (!user.getId().equals(post.getUser_id())) {
+            throw new BaseException(HttpStatus.FORBIDDEN.value(), "No permission to delete");
         }
 
         return postRepository.delete(postId);

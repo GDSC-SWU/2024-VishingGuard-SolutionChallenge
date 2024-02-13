@@ -18,6 +18,8 @@ public class CommentRepository {
     public CommentRepository(Firestore firestore) {
         this.firestore = firestore;
     }
+
+    // Save a new comment to the Firestore database
     public Comment save(Comment comment) throws Exception {
         CollectionReference comments = firestore.collection("comment");
         ApiFuture<DocumentReference> apiFuture = comments.add(comment);
@@ -26,6 +28,7 @@ public class CommentRepository {
         return comment;
     }
 
+    // Delete a comment from the Firestore database by its ID
     public String delete(String id) throws Exception {
         CollectionReference comments = firestore.collection("comment");
         DocumentReference documentReference = comments.document(id);
@@ -33,43 +36,46 @@ public class CommentRepository {
         return id;
     }
 
-    public Comment update(Comment comment) throws Exception{
+    // Update a comment in the Firestore database
+    public Comment update(Comment comment) throws Exception {
         CollectionReference comments = firestore.collection("comment");
         DocumentReference documentReference = firestore.collection("comment").document(comment.getId());
 
-        // 업데이트할 데이터를 Map으로 생성
+        // Create a Map with update data
         Map<String, Object> updates = new HashMap<>();
         updates.put("content", comment.getContent());
         updates.put("updated_at", Timestamp.now());
 
-        // 해당 문서에 업데이트 적용
+        // Apply the update to the specified document
         ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
-        writeResultApiFuture.get();  // 결과를 기다림
+        writeResultApiFuture.get();  // Wait for the result
 
         return comment;
     }
 
-    public Comment findById(String commentId) throws Exception{
+    // Find a comment by its ID in the Firestore database
+    public Comment findById(String commentId) throws Exception {
         CollectionReference comments = firestore.collection("comment");
-        DocumentReference documentReference = comments.document(commentId); // 특정 ID에 해당하는 문서를 참조
+        DocumentReference documentReference = comments.document(commentId);
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
         if (documentSnapshot.exists()) {
             return documentSnapshot.toObject(Comment.class);
         } else {
-            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
+            // Handle the case where no document matches the specified ID
             return null;
         }
     }
 
+    // Get all comments associated with a specific post ID from the Firestore database
     public List<Comment> getAllCommentByPostId(String postId) throws Exception {
         CollectionReference comments = firestore.collection("comment");
 
-        // whereEqualTo를 사용하여 쿼리 생성
+        // Create a query using whereEqualTo
         Query query = comments.whereEqualTo("post_id", postId).orderBy("created_at", Query.Direction.ASCENDING);
 
-        // 쿼리를 실행하여 결과 가져오기
+        // Execute the query and retrieve the results
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
@@ -77,30 +83,6 @@ public class CommentRepository {
         for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
             result.add(document.toObject(Comment.class));
         }
-        return result;
-    }
-
-    public List<Post> getAllPost() throws Exception{
-        CollectionReference posts = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();
-
-        List<Post> result = new ArrayList<>();
-        for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            result.add(document.toObject(Post.class));
-        }
-
-        return result;
-    }
-
-    public List<Comment> getAll() throws Exception{
-        CollectionReference comments = firestore.collection("comment");
-        ApiFuture<QuerySnapshot> querySnapshot = comments.get();
-
-        List<Comment> result = new ArrayList<>();
-        for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            result.add(document.toObject(Comment.class));
-        }
-
         return result;
     }
 }

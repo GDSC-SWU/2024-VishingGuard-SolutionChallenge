@@ -24,15 +24,16 @@ public class CommentService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
+    // Save a new comment and return the result as CommentResDto
     public CommentResDto saveComment(Long userId, String postId, CommentReqDto commentReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
-        // Comment Entity 생성
+
         Comment comment = Comment.builder()
                 .user(user)
                 .post_id(post.getId())
@@ -44,18 +45,19 @@ public class CommentService {
         return new CommentResDto(comment, post);
     }
 
-    public CommentResDto updateComment(Long userId, String postId,
-                                    String commentId, CommentUpdateReqDto commentUpdateReqDto) throws Exception {
+    // Update an existing comment and return the result as CommentResDto
+    public CommentResDto updateComment(Long userId, String postId, String commentId, CommentUpdateReqDto commentUpdateReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
+
         Comment comment = commentRepository.findById(commentId);
         if (comment == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "comment not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Comment not found");
         }
 
         comment.update(commentUpdateReqDto.getContent());
@@ -64,14 +66,16 @@ public class CommentService {
         return new CommentResDto(comment, post);
     }
 
+    // Get all comments associated with a specific post and return them as a list of CommentResDto
     public List<CommentResDto> getAllComments(Long userId, String postId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
+
         List<Comment> comments = commentRepository.getAllCommentByPostId(postId);
 
         List<CommentResDto> commentResDtos = comments.stream()
@@ -81,23 +85,25 @@ public class CommentService {
         return commentResDtos;
     }
 
+    // Delete a comment and return its ID
     public String deleteComment(Long userId, String postId, String commentId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         Post post = postRepository.findById(postId);
         if (post == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "post not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Post not found");
         }
+
         Comment comment = commentRepository.findById(commentId);
         if (comment == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "comment not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Comment not found");
         }
 
         if (!comment.getPost_id().equals(postId)){
-            throw new BaseException(HttpStatus.NOT_FOUND.value(), "resource not found");
+            throw new BaseException(HttpStatus.NOT_FOUND.value(), "Resource not found");
         } else if (!comment.getUser_id().equals(userId)){
-            throw new BaseException(HttpStatus.FORBIDDEN.value(), "no permission to delete");
+            throw new BaseException(HttpStatus.FORBIDDEN.value(), "No permission to delete");
         }
 
         return commentRepository.delete(commentId);

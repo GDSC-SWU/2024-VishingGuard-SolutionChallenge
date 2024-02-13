@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +18,9 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class PostListResDto {
-    private String postId; // 게시글 ID
-    private String title; // 게시글 제목
-    private String username; // 작성자 이름
+    private String postId; // Post ID
+    private String title; // Post title
+    private String username; // Author's name
     private String updated_at;
     private String created_at;
     private String contentSnippet;
@@ -38,12 +36,12 @@ public class PostListResDto {
         this.created_at = formatTimestamp(post.getCreated_at());
         this.contentSnippet = getSnippet(post.getContent(), 73);
 
-        // 댓글 수와 좋아요 수를 설정
+        // Set the comment count and heart count
         this.comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
         this.heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
     }
 
-
+    // Get a snippet of the content with a maximum number of characters
     private String getSnippet(String content, int maxChars) {
         if (content.length() <= maxChars) {
             return content;
@@ -52,12 +50,7 @@ public class PostListResDto {
         }
     }
 
-//    private String formatTimestamp(Instant instant) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date date = Date.from(instant);
-//        return sdf.format(date);
-//    }
-
+    // Format the timestamp to a readable date and time string
     private String formatTimestamp(Date date) {
         if (date != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -66,6 +59,7 @@ public class PostListResDto {
         return null;
     }
 
+    // Convert a list of Post entities to a list of PostListResDto
     public static List<PostListResDto> convertToDtoList(List<Post> posts, CommentRepository commentRepository, HeartRepository heartRepository) {
         return posts.stream()
                 .map(post -> {

@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class HeartResDto {
-    private Long user_Id; // 좋아요 한 유저의 ID
-    private String post_Id; // 좋아요 한 게시물의 ID
+    private Long user_Id; // ID of the user who liked
+    private String post_Id; // ID of the post that was liked
     private boolean isHeart;
 
     @Builder
