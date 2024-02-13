@@ -22,11 +22,19 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Update user information including username and password.
+     *
+     * @param userId            ID of the user to be updated.
+     * @param userUpdateReqDto  DTO containing updated user information.
+     * @return                  Updated username.
+     * @throws Exception        If the user is not found or an error occurs during the update.
+     */
     public String update(Long userId, UserUpdateReqDto userUpdateReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
-        // Password 암호화
+        // Encrypt the password
         String encodedPassword = passwordEncoder.encode(userUpdateReqDto.getPassword());
         user.updatePassword(encodedPassword);
         System.out.println(userUpdateReqDto.getUsername());
@@ -37,17 +45,26 @@ public class MyPageService {
         return user.getUsername();
     }
 
+    /**
+     * Withdraw the user by deleting the account.
+     *
+     * @param userId                ID of the user to be withdrawn.
+     * @param userWithdrawReqDto    DTO containing user information for withdrawal.
+     * @return                      Email of the withdrawn user.
+     * @throws Exception            If the user is not found, password mismatch, or an error occurs during withdrawal.
+     */
     public String withdraw(Long userId, UserWithdrawReqDto userWithdrawReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
         String email = user.getEmail();
-        // Password 암호화
-        //String checkPassword = passwordEncoder.encode(userWithdrawReqDto.getPassword());
+
+        // Encrypt the entered password for comparison
         System.out.println(userWithdrawReqDto.getPassword());
         System.out.println(user.getPassword());
-        // 비밀번호 불일치
+
+        // Password mismatch
         if (!passwordEncoder.matches(userWithdrawReqDto.getPassword(), user.getPassword())) {
-            throw new BaseException(HttpStatus.FORBIDDEN.value(), "비밀번호 불일치");
+            throw new BaseException(HttpStatus.FORBIDDEN.value(), "Password mismatch");
         }
 
         userRepository.delete(user);
@@ -55,6 +72,13 @@ public class MyPageService {
         return email;
     }
 
+    /**
+     * Logout the user by clearing the security context.
+     *
+     * @param userId        ID of the user to be logged out.
+     * @return              Username of the logged-out user.
+     * @throws Exception    If the user is not found during logout.
+     */
     public String logout(Long userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));

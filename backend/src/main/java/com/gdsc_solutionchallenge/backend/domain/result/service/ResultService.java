@@ -19,37 +19,43 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @RequiredArgsConstructor
 @Service
 public class ResultService {
-    public final SmishingRepository smishingRepository;
-    public final SmishingKeywordRepository smishingKeywordRepository;
+    private final SmishingRepository smishingRepository;
+    private final SmishingKeywordRepository smishingKeywordRepository;
     private final UserRepository userRepository;
-    public final VishingRepository vishingRepository;
-    public final VishingKeywordRepository vishingKeywordRepository;
+    private final VishingRepository vishingRepository;
+    private final VishingKeywordRepository vishingKeywordRepository;
 
-
+    /**
+     * Check if the received message is Smishing and save the script if it contains risky keywords.
+     *
+     * @param userId            User ID for checking Smishing.
+     * @param smishingReqDto    Smishing request data containing the script and timestamp.
+     * @return Boolean indicating if the message is Smishing.
+     * @throws Exception if the user is not found or an error occurs during keyword check.
+     */
     public Boolean isSmishing(Long userId, SmishingReqDto smishingReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
-        boolean keywordResult = false; // keyword 결과
+        boolean keywordResult = false; // Keyword result
         String keywordComment = null;
 
         List<SmishingKeyword> smishingKeywordList = smishingKeywordRepository.getAllSmishingKeyword();
 
-        // 키워드 검사
+        // Keyword check
         for (SmishingKeyword keyword : smishingKeywordList) {
             if (keyword != null && removeSpaces(smishingReqDto.getSmishingScript())
                     .contains(removeSpaces(keyword.getSmishing_keyword()))) {
-                keywordResult = true; // 하나라도 일치하는 경우 true로 설정
-                keywordComment = "Contains a risk keyword related to smishing. ("+ keyword.getSmishing_keyword() + ")";
-                break; // 일치하는 경우 반복 중단
+                keywordResult = true; // Set to true if any keyword matches
+                keywordComment = "Contains a risk keyword related to smishing. (" + keyword.getSmishing_keyword() + ")";
+                break; // Break the loop if a match is found
             }
         }
 
         if (keywordResult) {
-            // SmishingScript Entity 생성
+            // Create SmishingScript Entity
             Smishing smishing = Smishing.builder()
                     .user_id(userId)
                     .script(smishingReqDto.getSmishingScript())
@@ -57,12 +63,20 @@ public class ResultService {
                     .keyword_comment(keywordComment)
                     .build();
 
-            smishingRepository.save(smishing); // 스크립트 저장
+            smishingRepository.save(smishing); // Save the script
         }
 
-        // 결과 반환 (T/F)
+        // Return result (T/F)
         return keywordResult;
     }
+
+    /**
+     * Save Vishing (voice phishing) script when a Vishing call is received.
+     *
+     * @param userId          User ID for saving Vishing script.
+     * @param vishingReqDto   Vishing request data containing the script and timestamp.
+     * @throws Exception if the user is not found or an error occurs during keyword check.
+     */
     public void saveVishing(Long userId, VishingReqDto vishingReqDto) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
@@ -70,18 +84,18 @@ public class ResultService {
         String keywordComment = null;
         List<VishingKeyword> vishingKeywordList = vishingKeywordRepository.getAllVishingKeyword();
 
-        // 키워드 검사
+        // Keyword check
         for (VishingKeyword keyword : vishingKeywordList) {
             if (keyword != null && removeSpaces(vishingReqDto.getVishingScript())
                     .contains(removeSpaces(keyword.getVishing_keyword()))) {
-                keywordComment = "Contains a risk keyword related to voice phishing. ("+ keyword.getVishing_keyword() + ")";
-                break; // 일치하는 경우 반복 중단
-            }else{
+                keywordComment = "Contains a risk keyword related to voice phishing. (" + keyword.getVishing_keyword() + ")";
+                break; // Break the loop if a match is found
+            } else {
                 keywordComment = "Contains a risk keyword related to voice phishing.";
             }
         }
 
-        // Vishing Entity 생성
+        // Create Vishing Entity
         Vishing vishing = Vishing.builder()
                 .script(vishingReqDto.getVishingScript())
                 .phone(vishingReqDto.getPhone())
@@ -89,9 +103,15 @@ public class ResultService {
                 .keyword_comment(keywordComment)
                 .build();
 
-        vishingRepository.save(vishing); // 스크립트 저장
+        vishingRepository.save(vishing); // Save the script
     }
 
+    /**
+     * Remove spaces from the given input string.
+     *
+     * @param input Input string.
+     * @return String with removed spaces and converted to lowercase.
+     */
     private String removeSpaces(String input) {
         return input.replaceAll("\\s", "").toLowerCase();
     }

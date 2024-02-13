@@ -20,18 +20,23 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/home")
-@Tag(name = "홈 API", description = "홈 API 모음")
+@Tag(name = "Home API", description = "Collection of APIs for the home screen")
 public class HomeController {
     private final HomeService homeService;
 
+    /**
+     * API endpoint to load the home screen.
+     *
+     * @return ResponseEntity containing the result of the home screen loading.
+     */
     @PostMapping("/")
-    @Operation(summary = "홈 불러오기", description = "홈 불러오기 API")
-    public ResponseEntity<Object> loadHome(){
+    @Operation(summary = "Load Home", description = "API to load the home screen")
+    public ResponseEntity<Object> loadHome() {
         try {
             List<HomeResDto> homeResDto = homeService.loadHome();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "홈 화면 로딩 완료", homeResDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Home screen loaded successfully", homeResDto));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -39,7 +44,7 @@ public class HomeController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 }

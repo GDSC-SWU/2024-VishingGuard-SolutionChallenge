@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SpamNumReqDto {
-    @Schema(description = "스팸 검사할 전화번호")
+    @Schema(description = "number to test spam number")
     private String spamNumber;
     @Builder
     public SpamNumReqDto(String spamNumber){

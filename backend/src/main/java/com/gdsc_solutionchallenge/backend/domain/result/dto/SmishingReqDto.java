@@ -10,9 +10,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class SmishingReqDto {
-    @Schema(description = "피싱 검사할 메시지")
+    @Schema(description = "message to test smishing")
     private String smishingScript;
-    @Schema(description = "전화번호")
+    @Schema(description = "phone number")
     private String phone;
     @Builder
     public SmishingReqDto(String smishingScript){

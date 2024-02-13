@@ -13,7 +13,6 @@ public class ReportVisResDto {
     private String keywordComment;
     private String created_at;
 
-
     @Builder
     public ReportVisResDto(Vishing vishing) {
         this.phone = vishing.getPhone();

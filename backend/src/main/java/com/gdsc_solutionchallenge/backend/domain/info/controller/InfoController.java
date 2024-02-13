@@ -26,18 +26,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/info")
-@Tag(name = "사전 예방 & 신고 절차 & 신고처 API", description = "사전 예방 & 신고 절차 & 신고처 API 모음")
+@Tag(name = "Prevention & Report Procedure & Report Place API", description = "API collection for Prevention, Report Procedure, and Report Place")
 public class InfoController {
     private final InfoService infoService;
 
-    @GetMapping("/report_procedure")
-    @Operation(summary = "신고 절차", description = "신고 절차 API")
+    @GetMapping("/reportProcedure")
+    @Operation(summary = "Report Procedure", description = "Report Procedure API")
     public ResponseEntity<Object> loadReportProcedure(){
         try {
+            // Load information about the report procedure
             List<ReportProcedure> reportProcedures = infoService.loadReportProcedure();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "신고 절차 로딩 완료", reportProcedures));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Report Procedure loaded successfully", reportProcedures));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -45,18 +46,19 @@ public class InfoController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
     @GetMapping("/prevention")
-    @Operation(summary = "사전 예방", description = "사전 예방 API")
+    @Operation(summary = "Prevention", description = "Prevention API")
     public ResponseEntity<Object> loadPrevention(){
         try {
+            // Load information about prevention measures
             List<Prevention> preventions = infoService.loadPrevention();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "사전 예방 로딩 완료", preventions));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Prevention loaded successfully", preventions));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -64,18 +66,19 @@ public class InfoController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
-    @GetMapping("/report_place")
-    @Operation(summary = "신고처", description = "신고처 API")
+    @GetMapping("/reportPlace")
+    @Operation(summary = "Report Place", description = "Report Place API")
     public ResponseEntity<Object> loadReportPlace(){
         try {
+            // Load information about places to report
             List<ReportPlace> reportPlaces = infoService.loadReportPlace();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "신고처 로딩 완료", reportPlaces));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Report Place loaded successfully", reportPlaces));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -83,7 +86,7 @@ public class InfoController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 }

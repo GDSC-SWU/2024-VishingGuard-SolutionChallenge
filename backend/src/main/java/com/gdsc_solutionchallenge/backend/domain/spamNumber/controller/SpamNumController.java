@@ -17,18 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/result")
-@Tag(name = "피싱 API", description = "피싱 API 모음")
+@Tag(name = "SpamNumber API", description = "Collection of SpamNumber APIs")
 public class SpamNumController {
     private final SpamNumService spamNumService;
 
+    /**
+     * Determine if a phone number is spam.
+     *
+     * @param spamNumReqDto DTO containing the phone number to be checked for spam.
+     * @return ResponseEntity containing the result of the spam check.
+     */
     @PostMapping("/spamNumber")
-    @Operation(summary = "스팸 전화번호 판단", description = "스팸 전화번호 여부를 판단")
+    @Operation(summary = "Detect Spam Phone Number", description = "Determine whether the phone number is spam")
     public ResponseEntity<Object> postSpam(@RequestBody SpamNumReqDto spamNumReqDto) {
         try {
-            SpamNumResDto responseDto= spamNumService.isSpamNum(spamNumReqDto);
+            SpamNumResDto responseDto = spamNumService.isSpamNum(spamNumReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "스팸 판단 결과입니다", responseDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Spam detection result", responseDto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
