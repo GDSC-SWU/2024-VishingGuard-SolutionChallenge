@@ -19,7 +19,7 @@ class ReportViewModel : ViewModel() {
     private val getReportService = ServicePool.getReport
 
     // Server interaction
-    fun getReportCenter() {
+    fun getReport() {
         if (accessToken != null) {
             getReportService.getReport(accessToken).enqueue(object : retrofit2.Callback<ReportResponse> {
                 override fun onResponse(call: Call<ReportResponse>, response: Response<ReportResponse>) {
