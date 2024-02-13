@@ -20,10 +20,11 @@ public class SpamNumService {
         for (SpamNumber spamNumber : spamNumberList){
             if (spamNumber != null && removeHyphens(spamNumReqDto.getSpamNumber())
                     .equals(removeHyphens(spamNumber.getNumber()))) {
-                return new SpamNumResDto(true, spamNumber.getName());
+                int count = spamNumberRepository.updateCount(spamNumber);
+                return new SpamNumResDto(true, spamNumber.getName(), count);
             }
         }
-        return new SpamNumResDto(false, null);
+        return new SpamNumResDto(false, null, 0);
     }
 
     // 하이픈 삭제

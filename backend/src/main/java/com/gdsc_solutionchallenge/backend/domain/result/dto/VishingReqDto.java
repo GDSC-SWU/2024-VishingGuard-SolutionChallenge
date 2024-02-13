@@ -11,7 +11,5 @@ import lombok.*;
 public class VishingReqDto {
     private String vishingScript;
     private String phone;
-    private String date;
-    private String time;
 
 }

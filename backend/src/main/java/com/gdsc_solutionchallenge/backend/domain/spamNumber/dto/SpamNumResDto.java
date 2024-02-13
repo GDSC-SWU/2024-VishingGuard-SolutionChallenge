@@ -6,9 +6,11 @@ import lombok.Getter;
 public class SpamNumResDto {
     private boolean result;
     private String name;
+    private int count;
 
-    public SpamNumResDto(boolean result, String name) {
+    public SpamNumResDto(boolean result, String name, int count) {
         this.result = result;
         this.name = name;
+        this.count=count;
     }
 }

@@ -24,6 +24,7 @@ public class PostListResDto {
     private String title; // 게시글 제목
     private String username; // 작성자 이름
     private String updated_at;
+    private String created_at;
     private String contentSnippet;
     private int comment_count;
     private int heart_count;
@@ -31,10 +32,11 @@ public class PostListResDto {
     @Builder
     public PostListResDto(Post post, CommentRepository commentRepository, HeartRepository heartRepository) throws Exception {
         this.postId = post.getId();
-        this.title = post.getTitle();
+        this.title = getSnippet(post.getTitle(), 39);
         this.username = post.getUser().getUsername();
-        this.updated_at = formatTimestamp(post.getUpdated_at().toInstant());
-        this.contentSnippet = getContentSnippet(post.getContent(), 82);
+        this.updated_at = formatTimestamp(post.getUpdated_at());
+        this.created_at = formatTimestamp(post.getCreated_at());
+        this.contentSnippet = getSnippet(post.getContent(), 73);
 
         // 댓글 수와 좋아요 수를 설정
         this.comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
@@ -42,7 +44,7 @@ public class PostListResDto {
     }
 
 
-    private String getContentSnippet(String content, int maxChars) {
+    private String getSnippet(String content, int maxChars) {
         if (content.length() <= maxChars) {
             return content;
         } else {
@@ -50,10 +52,18 @@ public class PostListResDto {
         }
     }
 
-    private String formatTimestamp(Instant instant) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = Date.from(instant);
-        return sdf.format(date);
+//    private String formatTimestamp(Instant instant) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = Date.from(instant);
+//        return sdf.format(date);
+//    }
+
+    private String formatTimestamp(Date date) {
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(date);
+        }
+        return null;
     }
 
     public static List<PostListResDto> convertToDtoList(List<Post> posts, CommentRepository commentRepository, HeartRepository heartRepository) {

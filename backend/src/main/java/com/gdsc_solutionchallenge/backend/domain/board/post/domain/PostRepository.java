@@ -64,9 +64,9 @@ public class PostRepository {
         }
     }
 
-    public List<Post> getAll() throws Exception{
+    public List<Post> getAllPost() throws Exception{
         CollectionReference posts = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
+        ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();
 
         List<Post> result = new ArrayList<>();
         for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
