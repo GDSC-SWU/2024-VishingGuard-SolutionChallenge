@@ -75,7 +75,7 @@ public class PostService {
     }
 
     public List<PostListResDto> getAllPosts() throws Exception {
-        List<Post> posts = postRepository.getAll();
+        List<Post> posts = postRepository.getAllPost();
         return PostListResDto.convertToDtoList(posts, commentRepository, heartRepository);
     }
 

@@ -14,8 +14,6 @@ public class SmishingReqDto {
     private String smishingScript;
     @Schema(description = "전화번호")
     private String phone;
-    private String date;
-    private String time;
     @Builder
     public SmishingReqDto(String smishingScript){
         this.smishingScript=smishingScript;

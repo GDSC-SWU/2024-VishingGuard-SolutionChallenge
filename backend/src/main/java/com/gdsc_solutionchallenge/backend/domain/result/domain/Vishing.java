@@ -1,8 +1,12 @@
 package com.gdsc_solutionchallenge.backend.domain.result.domain;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.firebase.database.annotations.NotNull;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,10 +22,12 @@ public class Vishing {
     private String script;
     @NotNull
     private String phone;
-    @NotNull
-    private String date;
-    @NotNull
-    private String time;
+    @ServerTimestamp
+    private Timestamp created_at;
     @NotNull
     String keyword_comment;
+
+    public Date getCreated_at() {
+        return created_at != null ? created_at.toDate() : Timestamp.now().toDate();
+    }
 }

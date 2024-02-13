@@ -1,8 +1,12 @@
 package com.gdsc_solutionchallenge.backend.domain.result.domain;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.firebase.database.annotations.NotNull;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -11,16 +15,18 @@ import lombok.*;
 @AllArgsConstructor
 public class Smishing {
     @DocumentId
-    String id;
+    private String id;
     @NotNull
-    Long user_id;
+    private Long user_id;
     @NotNull
-    String script;
+    private String script;
     @NotNull
-    String phone;
-    @NotNull
-    private String date;
-    @NotNull
-    private String time;
-    String keyword_comment;
+    private String phone;
+    @ServerTimestamp
+    private Timestamp created_at;
+    private String keyword_comment;
+
+    public Date getCreated_at() {
+        return created_at != null ? created_at.toDate() : Timestamp.now().toDate();
+    }
 }

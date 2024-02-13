@@ -25,7 +25,6 @@ import java.util.List;
 public class ResultService {
     public final SmishingRepository smishingRepository;
     public final SmishingKeywordRepository smishingKeywordRepository;
-    //public final PhishingUrlRepository phishingUrlRepository;
     private final UserRepository userRepository;
     public final VishingRepository vishingRepository;
     public final VishingKeywordRepository vishingKeywordRepository;
@@ -44,7 +43,7 @@ public class ResultService {
             if (keyword != null && removeSpaces(smishingReqDto.getSmishingScript())
                     .contains(removeSpaces(keyword.getSmishing_keyword()))) {
                 keywordResult = true; // 하나라도 일치하는 경우 true로 설정
-                keywordComment = "It contains a risk keyword related to smishing. ("+ keyword.getSmishing_keyword() + ")";
+                keywordComment = "Contains a risk keyword related to smishing. ("+ keyword.getSmishing_keyword() + ")";
                 break; // 일치하는 경우 반복 중단
             }
         }
@@ -55,8 +54,6 @@ public class ResultService {
                     .user_id(userId)
                     .script(smishingReqDto.getSmishingScript())
                     .phone(smishingReqDto.getPhone())
-                    .date(smishingReqDto.getDate())
-                    .time(smishingReqDto.getTime())
                     .keyword_comment(keywordComment)
                     .build();
 
@@ -88,8 +85,6 @@ public class ResultService {
         Vishing vishing = Vishing.builder()
                 .script(vishingReqDto.getVishingScript())
                 .phone(vishingReqDto.getPhone())
-                .date(vishingReqDto.getDate())
-                .time(vishingReqDto.getTime())
                 .user_id(userId)
                 .keyword_comment(keywordComment)
                 .build();
@@ -98,6 +93,6 @@ public class ResultService {
     }
 
     private String removeSpaces(String input) {
-        return input.replaceAll("\\s", "");
+        return input.replaceAll("\\s", "").toLowerCase();
     }
 }

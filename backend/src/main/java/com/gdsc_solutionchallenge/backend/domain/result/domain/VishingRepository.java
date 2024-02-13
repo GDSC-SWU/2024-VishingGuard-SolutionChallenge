@@ -23,11 +23,11 @@ public class VishingRepository {
         return vishing;
     }
 
-    public List<Vishing> getAllScriptByUserId(Long userId) throws Exception{
-        CollectionReference smishings = firestore.collection("vishing");
+    public List<Vishing> getAllScriptByUserId(Long userId) throws Exception {
+        CollectionReference vishings = firestore.collection("vishing");
 
         // whereEqualTo를 사용하여 쿼리 생성
-        Query query = smishings.whereEqualTo("user_id", userId);
+        Query query = vishings.whereEqualTo("user_id", userId).orderBy("created_at", Query.Direction.DESCENDING);
 
         // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
@@ -40,4 +40,5 @@ public class VishingRepository {
 
         return result;
     }
+
 }

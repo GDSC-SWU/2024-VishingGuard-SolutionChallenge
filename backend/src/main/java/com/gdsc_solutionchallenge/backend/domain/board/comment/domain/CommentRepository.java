@@ -1,5 +1,6 @@
 package com.gdsc_solutionchallenge.backend.domain.board.comment.domain;
 
+import com.gdsc_solutionchallenge.backend.domain.board.post.domain.Post;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
@@ -62,11 +63,11 @@ public class CommentRepository {
         }
     }
 
-    public List<Comment> getAllCommentByPostId(String postId) throws Exception{
+    public List<Comment> getAllCommentByPostId(String postId) throws Exception {
         CollectionReference comments = firestore.collection("comment");
 
         // whereEqualTo를 사용하여 쿼리 생성
-        Query query = comments.whereEqualTo("post_id", postId);
+        Query query = comments.whereEqualTo("post_id", postId).orderBy("created_at", Query.Direction.ASCENDING);
 
         // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
@@ -76,6 +77,18 @@ public class CommentRepository {
         for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
             result.add(document.toObject(Comment.class));
         }
+        return result;
+    }
+
+    public List<Post> getAllPost() throws Exception{
+        CollectionReference posts = firestore.collection("post");
+        ApiFuture<QuerySnapshot> querySnapshot = posts.orderBy("created_at", Query.Direction.DESCENDING).get();
+
+        List<Post> result = new ArrayList<>();
+        for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            result.add(document.toObject(Post.class));
+        }
+
         return result;
     }
 
