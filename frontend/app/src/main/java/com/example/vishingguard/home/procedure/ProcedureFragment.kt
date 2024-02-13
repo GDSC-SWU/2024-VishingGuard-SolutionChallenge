@@ -1,12 +1,15 @@
 package com.example.vishingguard.home.procedure
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
+import com.example.vishingguard.MainActivity
 import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
 import com.example.vishingguard.databinding.FragmentProcedureBinding
 import com.example.vishingguard.home.procedure.data.ProcedureAdapter
 import com.example.vishingguard.home.procedure.data.ProcedureViewModel
 
+@Suppress("DEPRECATION")
 class ProcedureFragment : BindingFragment<FragmentProcedureBinding>(R.layout.fragment_procedure) {
 
     private val viewModel by viewModels<ProcedureViewModel>()
@@ -17,9 +20,8 @@ class ProcedureFragment : BindingFragment<FragmentProcedureBinding>(R.layout.fra
 
         handleCenterResponse()
 
-        // Navigate back
         binding.btnBack.setOnClickListener {
-            navigateBack()
+            navigateToMainActivity()
         }
     }
 
@@ -34,8 +36,10 @@ class ProcedureFragment : BindingFragment<FragmentProcedureBinding>(R.layout.fra
         }
     }
 
-    // Navigate back
-    private fun navigateBack() {
-        requireActivity().supportFragmentManager.popBackStack()
+    // Navigate to the main activity
+    private fun navigateToMainActivity() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().overridePendingTransition(0, 0)
     }
 }
