@@ -7,7 +7,7 @@ import retrofit2.http.Header
 
 interface HomeApiService {
 
-    @GET("/api/v1/info/report_procedure")
+    @GET("/api/v1/info/reportProcedure")
     fun getProcedure(
         @Header("Authorization") authorization: String
     ): Call<ProcedureResponse>
