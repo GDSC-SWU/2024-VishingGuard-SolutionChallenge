@@ -26,19 +26,30 @@
     <string name="tv_account">Already have an account?</string>
 
     <!--home text-->
-    <string name="tv_procedure_home">Reporting \nProcedure</string>
-    <string name="tv_report_home">Report \nCenter</string>
-    <string name="tv_prevention_home">Preventive \nMeasures</string>
-    <string name="tv_search_home">Spam \nnumbers</string>
+    <string name="title_procedure_home">Reporting Procedure</string>
+    <string name="title_report_home">Reporting Center</string>
+    <string name="title_prevention_home">Preventive Measures</string>
+    <string name="title_search_home">Spam Check</string>
     <string name="tv_pishing_home">Check for any phishing risks discovered this week.</string>
     <string name="btn_check_home">Check</string>
 
+    <string name="tv_procedure">Dealing with Voice Phishing</string>
+    <string name="tv_prevention">10 Tips to Avoid Voice Phishing</string>
+
+    <!--search text-->
+    <string name="tv_title_search">Phishing Search</string>
+    <string name="hint_search">Enter suspicious number</string>
+    <string name="tv_result_search">The number is</string>
+    <string name="tv_search_count">This number has been searched</string>
+    <string name="safe">Safe</string>
+
     <!--community text-->
-    <string name="tv_community_title">Community Forum</string>
+    <string name="tv_community_title">Community</string>
 
     <!--map text-->
-    <string name="tv_route_map">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
+    <string name="tv_map_safe">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
     <string name="tv_no_route_map">No phishing risk routes found.</string>
+    <string name="tv_map_risky">"It looks like you've been to the bank a lot lately. \nAre you caught up in voice phishing?"</string>
 
     <!--pishing text-->
     <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
