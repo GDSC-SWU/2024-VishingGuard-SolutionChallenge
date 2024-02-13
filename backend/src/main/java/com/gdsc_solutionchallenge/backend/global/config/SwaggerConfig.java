@@ -42,7 +42,7 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("VishingGuard API")
-                .description("VishingGuard API 모음")
+                .description("VishingGuard API Collection")
                 .version("1.0.0");
     }
 

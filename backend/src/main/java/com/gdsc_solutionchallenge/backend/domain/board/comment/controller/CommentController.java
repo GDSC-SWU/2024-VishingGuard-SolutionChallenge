@@ -21,12 +21,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/comments")
-@Tag(name = "댓글 API", description = "댓글 API 모음")
+@Tag(name = "Comment API", description = "Collection of Comment APIs")
 public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/{userId}/{postId}/create")
-    @Operation(summary = "댓글 등록", description = "댓글 등록 API")
+    @Operation(summary = "Create Comment", description = "API to create a comment")
     public ResponseEntity<Object> save(@PathVariable("userId") Long userId,
                                        @PathVariable("postId") String postId,
                                        @RequestBody CommentReqDto commentReqDto) {
@@ -34,7 +34,7 @@ public class CommentController {
             CommentResDto commentResDto = commentService.saveComment(userId, postId, commentReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "댓글 작성 완료", commentResDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Comment created successfully", commentResDto));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -42,19 +42,19 @@ public class CommentController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 
     @GetMapping("/{userId}/{postId}/read")
-    @Operation(summary = "댓글 조회", description = "댓글 조회 API")
+    @Operation(summary = "Read Comments", description = "API to read comments")
     public ResponseEntity<Object> read(@PathVariable("userId") Long userId,
                                        @PathVariable("postId") String postId) {
         try {
             List<CommentResDto> commentList = commentService.getAllComments(userId,postId);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "댓글 목록 조회 완료", commentList));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Comment list retrieved successfully", commentList));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -62,12 +62,12 @@ public class CommentController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 
     @DeleteMapping("/{userId}/{postId}/{commentId}/delete")
-    @Operation(summary = "댓글 삭제", description = "댓글 삭제 API")
+    @Operation(summary = "Delete Comment", description = "API to delete a comment")
     public ResponseEntity<Object> delete(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId,
                                          @PathVariable("commentId") String commentId) {
@@ -76,7 +76,7 @@ public class CommentController {
             String comment_id = commentService.deleteComment(userId, postId, commentId);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "댓글 삭제 완료", comment_id));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Comment deleted successfully", comment_id));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -84,12 +84,12 @@ public class CommentController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 
     @PatchMapping("/{userId}/{postId}/{commentId}/update")
-    @Operation(summary = "댓글 수정", description = "댓글 수정 API")
+    @Operation(summary = "Update Comment", description = "API to update a comment")
     public ResponseEntity<Object> update(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId,
                                          @PathVariable("commentId") String commentId,
@@ -98,7 +98,7 @@ public class CommentController {
             CommentResDto comment = commentService.updateComment(userId, postId, commentId, commentUpdateReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "댓글 수정 완료", comment));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Comment updated successfully", comment));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -106,9 +106,7 @@ public class CommentController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
-
-
 }

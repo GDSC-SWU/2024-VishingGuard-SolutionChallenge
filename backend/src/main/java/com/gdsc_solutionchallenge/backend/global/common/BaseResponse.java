@@ -9,19 +9,20 @@ public class BaseResponse<T> {
     private String message;
     private T data;
 
-    // status, message, data 모두 넘겨주는 Response
+    // Response constructor that includes status, message, and data
     public BaseResponse(int status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
     }
-    // status, message 만 넘겨주는 Response
+
+    // Response constructor that includes status and message only
     public BaseResponse(int status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    // status, data 만 넘겨주는 Response
+    // Response constructor that includes status and data only
     public BaseResponse(int status, T data) {
         this.status = status;
         this.data = data;

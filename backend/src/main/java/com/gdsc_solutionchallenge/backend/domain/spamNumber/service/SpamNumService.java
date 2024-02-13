@@ -14,10 +14,17 @@ import java.util.List;
 public class SpamNumService {
     public final SpamNumberRepository spamNumberRepository;
 
+    /**
+     * Determine if a phone number is listed as spam.
+     *
+     * @param spamNumReqDto DTO containing the phone number to be checked for spam.
+     * @return SpamNumResDto containing the result of the spam check.
+     * @throws Exception if an error occurs during the spam check.
+     */
     public SpamNumResDto isSpamNum(SpamNumReqDto spamNumReqDto) throws Exception {
         List<SpamNumber> spamNumberList = spamNumberRepository.getAllNumbers();
 
-        for (SpamNumber spamNumber : spamNumberList){
+        for (SpamNumber spamNumber : spamNumberList) {
             if (spamNumber != null && removeHyphens(spamNumReqDto.getSpamNumber())
                     .equals(removeHyphens(spamNumber.getNumber()))) {
                 int count = spamNumberRepository.updateCount(spamNumber);
@@ -27,9 +34,8 @@ public class SpamNumService {
         return new SpamNumResDto(false, null, 0);
     }
 
-    // 하이픈 삭제
+    // Remove hyphens from the input string
     private String removeHyphens(String input) {
         return input.replaceAll("-", "");
     }
-
 }

@@ -13,11 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class SignUpRequestDto {
-    // 회원가입
     private String username;
     private String password;
     private String email;
-    //private List<String> roles = new ArrayList<>();
 
     public User toEntity(String encodedPassword, List<String> roles) {
         return User.builder()

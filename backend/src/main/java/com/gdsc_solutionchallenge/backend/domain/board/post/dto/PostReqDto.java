@@ -12,15 +12,15 @@ import org.springframework.http.HttpStatus;
 @ToString
 @NoArgsConstructor
 public class PostReqDto {
-    @Schema(description = "게시글 제목")
+    @Schema(description = "Post title")
     private String title;
-    @Schema(description = "게시글 내용")
+    @Schema(description = "Post content")
     private String content;
 
     @Builder
     public PostReqDto(String title, String content){
-        this.title=title;
-        this.content=content;
+        this.title = title;
+        this.content = content;
     }
 
     public Post toEntity(User user){
@@ -33,20 +33,18 @@ public class PostReqDto {
         return build;
     }
 
-    // 게시글 제목 관련 설정 메서드
-    // 제목이 공백이거나 50자 이상을 초과할 경우 BaseException 발생됨
+    // Method for setting the post title
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
-            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "게시판 제목은 공백일 수 없습니다.");
+            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "Post title cannot be empty.");
         }
         this.title = title;
     }
 
-    // 게시글 내용 관련 설정 메서드
-    // 내용이 공백일 경우 BaseException 발생됨
+    // Method for setting the post content
     public void setContent(String content) {
         if (content == null || content.trim().isEmpty()) {
-            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "게시판 내용은 공백일 수 없습니다.");
+            throw new BaseException(HttpStatus.BAD_REQUEST.value(), "Post content cannot be empty.");
         }
         this.content = content;
     }

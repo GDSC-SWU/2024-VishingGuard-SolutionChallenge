@@ -26,10 +26,8 @@ public class SmishingRepository {
     public List<Smishing> getAllScriptByUserId(Long userId) throws Exception{
         CollectionReference smishings = firestore.collection("smishing");
 
-        // whereEqualTo를 사용하여 쿼리 생성
         Query query = smishings.whereEqualTo("user_id", userId).orderBy("created_at", Query.Direction.DESCENDING);
 
-        // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 

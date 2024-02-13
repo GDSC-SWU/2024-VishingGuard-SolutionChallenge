@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @Getter
 @RequiredArgsConstructor
 public class PostResDto {
-    private String postId; // 게시글 ID
-    private String title; // 게시글 제목
-    private String content; // 게시글 내용
-    private String username; // 작성자 정보
+    private String postId;
+    private String title;
+    private String content;
+    private String username;
     private Long userId;
     private String updated_at;
     private String created_at;
@@ -39,10 +39,10 @@ public class PostResDto {
         this.userId=post.getUser_id();
         this.updated_at = formatTimestamp(post.getUpdated_at());
         this.created_at = formatTimestamp(post.getCreated_at());
-        // 댓글 수 설정
+        // set comment count
         this.comment_count = comment_count;
 
-        // 좋아요 수 설정
+        // set heart count
         this.heart_count = heart_count;
         this.isMyPost=isMyPost;
     }

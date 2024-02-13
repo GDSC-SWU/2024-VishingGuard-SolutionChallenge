@@ -10,43 +10,58 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class FSSOpenApiService {
+
+    /**
+     * Parses the response data to extract the "atchfileUrl".
+     *
+     * @param responseData The response data from the FSS API.
+     * @return The "atchfileUrl" extracted from the response.
+     * @throws ParseException           If there is an error in parsing JSON.
+     * @throws JsonProcessingException   If there is an error in processing JSON.
+     */
     public String fileParsing(String responseData) throws ParseException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseData);
 
-        // "reponse" 객체 가져오기
+        // Get the "reponse" object
         JsonNode jsonResponse = jsonNode.get("reponse");
 
-        // "result" 배열 가져오기
+        // Get the "result" array
         JsonNode jsonResult = jsonResponse.get("result");
 
-        // "result" 배열에서 마지막 요소 가져오기
+        // Get the last element from the "result" array
         JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
 
-        // 마지막 요소에서 "atchfileUrl" 가져오기
+        // Get the "atchfileUrl" from the last element
         JsonNode atchfileUrl = lastResult.get("atchfileUrl");
 
         return atchfileUrl.asText();
-
     }
+
+    /**
+     * Parses the response data to extract the "atchfileNm".
+     *
+     * @param responseData The response data from the FSS API.
+     * @return The "atchfileNm" extracted from the response.
+     * @throws ParseException           If there is an error in parsing JSON.
+     * @throws JsonProcessingException   If there is an error in processing JSON.
+     */
     public String fileNameParsing(String responseData) throws ParseException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseData);
 
-        // "reponse" 객체 가져오기
+        // Get the "reponse" object
         JsonNode jsonResponse = jsonNode.get("reponse");
 
-        // "result" 배열 가져오기
+        // Get the "result" array
         JsonNode jsonResult = jsonResponse.get("result");
 
-        // "result" 배열에서 마지막 요소 가져오기
+        // Get the last element from the "result" array
         JsonNode lastResult = jsonResult.get(jsonResult.size() - 2);
 
-        // 마지막 요소에서 "atchfileNm" 가져오기
+        // Get the "atchfileNm" from the last element
         JsonNode atchfileNm = lastResult.get("atchfileNm");
 
         return atchfileNm.asText();
-
     }
-
 }

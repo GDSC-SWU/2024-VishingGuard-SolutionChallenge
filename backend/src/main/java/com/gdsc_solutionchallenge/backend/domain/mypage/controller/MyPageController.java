@@ -22,18 +22,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/myPage")
-@Tag(name = "마이페이지 API", description = "마이페이지 API 모음")
+@Tag(name = "MyPage API", description = "MyPage API Collection")
 public class MyPageController {
     private final MyPageService myPageService;
+
     @PostMapping("/{userId}/modify")
-    @Operation(summary = "정보 수정", description = "정보 수정 API")
+    @Operation(summary = "Update Information", description = "API to update user information")
     public ResponseEntity<Object> updateInfo(@PathVariable("userId") Long userId,
                                              @RequestBody UserUpdateReqDto userUpdateReqDto){
         try {
             String updatedUserName = myPageService.update(userId, userUpdateReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "정보 수정 완료", updatedUserName));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Information updated successfully", updatedUserName));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -41,19 +42,19 @@ public class MyPageController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
     @PostMapping("/{userId}/withdraw")
-    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴 API")
+    @Operation(summary = "Withdraw Membership", description = "API to withdraw user membership")
     public ResponseEntity<Object> withdraw(@PathVariable("userId") Long userId,
                                            @RequestBody UserWithdrawReqDto userWithdrawReqDto){
         try {
             String withdrawUserEmail = myPageService.withdraw(userId, userWithdrawReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "회원 탈퇴 완료", withdrawUserEmail));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Membership withdrawal completed", withdrawUserEmail));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -61,25 +62,25 @@ public class MyPageController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
     @PostMapping("/{userId}/logout")
-    @Operation(summary = "로그아웃", description = "로그아웃 API")
+    @Operation(summary = "Logout", description = "API to logout user")
     public ResponseEntity<Object> logout(@PathVariable("userId") Long userId){
         try {
             String logoutedUserName = myPageService.logout(userId);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication == null || !authentication.isAuthenticated()) {
-                System.out.println("로그아웃");
+                System.out.println("Logged out");
             } else {
-                // 사용자가 현재 로그인 상태입니다.
-                System.out.println("로그인");
+                // The user is currently logged in.
+                System.out.println("Logged in");
             }
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "로그아웃 완료", logoutedUserName));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Logout completed", logoutedUserName));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -87,7 +88,7 @@ public class MyPageController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 }

@@ -15,26 +15,33 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/heart")
-@Tag(name = "좋아요 API", description = "좋아요 API 모음")
+@Tag(name = "Like API", description = "Collection of APIs for managing likes")
 public class HeartController {
     private final HeartService heartService;
-    @Operation(summary = "좋아요 설정", description = "좋아요 설정 API")
+
+    // API endpoint for setting a like on a post
+    @Operation(summary = "Set Like", description = "API to set a like on a post")
     @PostMapping("/{userId}/{postId}/create")
     public ResponseEntity<Object> setHeart(@PathVariable("userId") Long userId,
                                            @PathVariable("postId") String postId){
         try {
+            // Call the HeartService to check and set the like
             HeartResDto heart = heartService.isHeart(userId, postId);
+
+            // Return a success response with the HeartResDto
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "좋아요 설정 완료", heart));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Like set successfully", heart));
         } catch (BaseException e) {
+            // Return an error response for BaseException
             return ResponseEntity
                     .status(e.getCode())
                     .body(new BaseErrorResponse(e.getCode(), e.getMessage()));
         } catch (Exception e) {
+            // Return an internal server error response for other exceptions
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 }

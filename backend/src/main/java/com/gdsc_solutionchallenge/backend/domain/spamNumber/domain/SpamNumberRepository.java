@@ -19,14 +19,6 @@ public class SpamNumberRepository {
         this.firestore = firestore;
     }
 
-    public SpamNumber saveNumber(SpamNumber spamNumber) throws Exception {
-        CollectionReference spamNumbers = firestore.collection("spam_number");
-        ApiFuture<DocumentReference> apiFuture = spamNumbers.add(spamNumber);
-        DocumentReference documentReference = apiFuture.get();
-        spamNumber.setId(documentReference.getId());
-        return spamNumber;
-    }
-
     public SpamNumber findById(String id) throws Exception{
         CollectionReference spamNumbers = firestore.collection("spam_number");
         DocumentReference documentReference = spamNumbers.document(id); // 특정 ID에 해당하는 문서를 참조
@@ -57,15 +49,13 @@ public class SpamNumberRepository {
         CollectionReference spamNumbers = firestore.collection("spam_number");
         DocumentReference documentReference = firestore.collection("spam_number").document(spamNumber.getId());
 
-        // 업데이트할 데이터를 Map으로 생성
         Map<String, Object> updates = new HashMap<>();
         updates.put("count", spamNumber.getCount()+1);
 
-        // 해당 문서에 업데이트 적용
         ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
-        writeResultApiFuture.get();  // 결과를 기다림
+        writeResultApiFuture.get();
 
-        return spamNumber.getCount()+1;
+        return spamNumber.getCount()+1; // count up
     }
 
 }

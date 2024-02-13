@@ -21,19 +21,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/posts")
-@Tag(name = "게시판 API", description = "게시판 API 모음")
+@Tag(name = "Board API", description = "Board API Collection")
 public class PostController {
     private final PostService postService;
 
     @PostMapping("/{userId}/create")
-    @Operation(summary = "게시글 등록", description = "게시글 등록 API")
+    @Operation(summary = "Create Post", description = "API to create a new post")
     public ResponseEntity<Object> save(@PathVariable("userId") Long userId,
                                        @RequestBody PostReqDto postReqDto){
         try {
             PostResDto postResDto = postService.savePost(userId, postReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 작성 완료", postResDto));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Post created successfully", postResDto));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -41,12 +41,12 @@ public class PostController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
     @PatchMapping("/{userId}/{postId}/update")
-    @Operation(summary = "특정 게시글 수정", description = "특정 게시글 수정 API")
+    @Operation(summary = "Update Specific Post", description = "API to update a specific post")
     public ResponseEntity<Object> update(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId,
                                          @RequestBody PostUpdateReqDto postUpdateReqDto) throws Exception {
@@ -54,7 +54,7 @@ public class PostController {
             PostResDto updatedPost = postService.updatePost(userId, postId, postUpdateReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-        .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 수정 완료", updatedPost));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Post updated successfully", updatedPost));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -62,12 +62,12 @@ public class PostController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 
     @GetMapping("/{userId}/{postId}/read")
-    @Operation(summary = "특정 게시글 조회", description = "특정 게시글 조회 API")
+    @Operation(summary = "Get Specific Post", description = "API to get details of a specific post")
     public ResponseEntity<Object> findById (@PathVariable("userId") Long userId,
                                             @PathVariable("postId") String postId){
         try {
@@ -75,7 +75,7 @@ public class PostController {
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "특정 게시글 조회 완료", postResDto ));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Post details retrieved successfully", postResDto ));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -83,19 +83,19 @@ public class PostController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
     @GetMapping("/read")
-    @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API")
+    @Operation(summary = "Get All Posts", description = "API to get a list of all posts")
     public ResponseEntity<Object> readAllPosts() {
         try {
             List<PostListResDto> posts = postService.getAllPosts();
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "게시글 목록 조회 완료", posts));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "All posts retrieved successfully", posts));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -103,14 +103,13 @@ public class PostController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
-    // 특정 게시글 삭제
+    // Delete a specific post
     @DeleteMapping("/{userId}/{postId}/delete")
-    @Operation(summary = "특정 게시글 삭제", description = "특정 게시글 삭제 API")
-
+    @Operation(summary = "Delete Specific Post", description = "API to delete a specific post")
     public ResponseEntity<Object> delete(@PathVariable("userId") Long userId,
                                          @PathVariable("postId") String postId){
         try {
@@ -118,7 +117,7 @@ public class PostController {
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "특정 게시글 삭제 완료", post_Id));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Post deleted successfully", post_Id));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -126,7 +125,7 @@ public class PostController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error"));
         }
     }
 }

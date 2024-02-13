@@ -13,23 +13,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/result")
-@Tag(name = "스미싱 API", description = "스미싱 API 모음")
+@Tag(name = "Smishing API", description = "Smishing API Collection")
 public class ResultController {
     private final ResultService resultService;
 
+    /**
+     * Save and check for Smishing (SMS phishing) messages.
+     *
+     * @param userId          User ID for saving and checking Smishing.
+     * @param smishingReqDto  Smishing request data containing the message and timestamp.
+     * @return ResponseEntity indicating the Smishing result.
+     */
     @PostMapping("/smishing/{userId}")
-    @Operation(summary = "메시지 피싱", description = "메시지가 왔을때 피싱 메시지 스크립트 저장 및 피싱 여부 반환")
+    @Operation(summary = "SMS Phishing", description = "Save and check for Smishing messages")
     public ResponseEntity<Object> saveAndCheckSmishing(@PathVariable("userId") Long userId,
                                                        @RequestBody SmishingReqDto smishingReqDto) {
         try {
             Boolean isSmishing = resultService.isSmishing(userId, smishingReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "피싱 결과입니다", isSmishing));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Phishing result", isSmishing));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -37,19 +43,26 @@ public class ResultController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 
+    /**
+     * Save Vishing (voice phishing) script when a Vishing call is received.
+     *
+     * @param userId          User ID for saving Vishing script.
+     * @param vishingReqDto   Vishing request data containing the script and timestamp.
+     * @return ResponseEntity indicating the successful saving of Vishing script.
+     */
     @PostMapping("/vishing/{userId}")
-    @Operation(summary = "보이스 피싱", description = "보이스 피싱 전화가 왔을때 피싱 스크립트 저장")
-    public ResponseEntity<Object> saveAndCheckSmishing(@PathVariable("userId") Long userId,
+    @Operation(summary = "Vishing (Voice Phishing)", description = "Save Vishing script when a Vishing call is received")
+    public ResponseEntity<Object> saveAndCheckVishing(@PathVariable("userId") Long userId,
                                                        @RequestBody VishingReqDto vishingReqDto) {
         try {
             resultService.saveVishing(userId, vishingReqDto);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "보이스 피싱 스크립트 저장 완료"));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Vishing script saved successfully"));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -57,7 +70,7 @@ public class ResultController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 }

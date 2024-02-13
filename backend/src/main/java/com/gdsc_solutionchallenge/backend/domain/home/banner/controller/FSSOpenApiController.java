@@ -16,26 +16,29 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-@Tag(name = "금감원 API", description = "금감원 open api 호출 API")
+@Tag(name = "FSS API", description = "FSS Open API Invocation API")
 public class FSSOpenApiController {
     private final FSSOpenApiService fssOpenApiService;
     @Value("${fss.api.url}")
     private String apiUrl;
+
     @GetMapping("/financial/download/{number}")
-    @Operation(summary = "금감원 API", description = "금감원 API 통신 및 파일 다운로드")
+    @Operation(summary = "FSS API", description = "Communicate with FSS API and Download Files")
     public ResponseEntity<Object> downloadFile(@PathVariable("number") int number){
         try {
-            // RestTemplate을 사용하여 GET 요청 보내기
+            // Use RestTemplate to send a GET request
             RestTemplate restTemplate = new RestTemplate();
             String responseData = restTemplate.getForObject(apiUrl, String.class);
-            // 응답받은 data parsing 진행
+
+            // Parse the received data
             String parsedFile = fssOpenApiService.fileParsing(responseData);
             String parsedFileName = fssOpenApiService.fileNameParsing(responseData);
-            // | 기준으로 분리
-            String[] fileUrls=parsedFile.split("\\|");
-            String[] fileUrlsName=parsedFileName.split("\\|");
 
-            // 파일 다운로드
+            // Split using the "|" delimiter
+            String[] fileUrls = parsedFile.split("\\|");
+            String[] fileUrlsName = parsedFileName.split("\\|");
+
+            // File download
             if (fileUrls != null && number >= 0 && number < fileUrls.length) {
                 String fileUrl = fileUrls[number];
                 String fileUrlName = fileUrlsName[number];

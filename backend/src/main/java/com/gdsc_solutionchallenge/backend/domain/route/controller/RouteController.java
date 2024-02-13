@@ -19,18 +19,23 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/route")
-@Tag(name = "이동경로 API", description = "이동경로 API 모음")
+@Tag(name = "Location API", description = "Collection of APIs for retrieving location information")
 public class RouteController {
     private final RouteService routeService;
 
+    /**
+     * Retrieve list of routes (locations).
+     *
+     * @return ResponseEntity containing the list of routes on success, or an error response on failure.
+     */
     @PostMapping("/")
-    @Operation(summary = "지점 불러오기", description = "지점 불러오기 API")
-    public ResponseEntity<Object> loadHome(){
+    @Operation(summary = "Load Routes", description = "API to load available routes (locations)")
+    public ResponseEntity<Object> loadRoutes() {
         try {
             List<Route> routes = routeService.loadRoute();
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new BaseResponse<>(HttpStatus.OK.value(), "지점 로딩 완료", routes));
+                    .body(new BaseResponse<>(HttpStatus.OK.value(), "Routes loaded successfully", routes));
         } catch (BaseException e) {
             return ResponseEntity
                     .status(e.getCode())
@@ -38,7 +43,7 @@ public class RouteController {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 오류"+e.getMessage()));
+                    .body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Server error: " + e.getMessage()));
         }
     }
 }

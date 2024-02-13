@@ -21,8 +21,14 @@ import java.util.stream.Collectors;
 public class HomeService {
     private final PostRepository postRepository;
 
+    /**
+     * Loads data for the home screen.
+     *
+     * @return List of HomeResDto containing titles of all posts.
+     * @throws Exception if there is an error during the loading process.
+     */
     public List<HomeResDto> loadHome() throws Exception {
-        // post 레포에서 게시글의 title 전부 빼와서  Dto List 생성
+        // Retrieve all post titles from the post repository and create a list of HomeResDto
         List<String> allTitles = postRepository.getAllTitles();
         List<HomeResDto> homeResDtos = allTitles.stream()
                 .map(title -> {

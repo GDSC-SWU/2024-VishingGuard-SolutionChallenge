@@ -10,11 +10,10 @@ import java.util.List;
 @Repository
 public class SmishingKeywordRepository {
     private final Firestore firestore;
-
     public SmishingKeywordRepository(Firestore firestore) {
         this.firestore = firestore;
     }
-    // Message Keyword 저장하는 메서드
+
     public SmishingKeyword saveMessage(SmishingKeyword smishingKeyword) throws Exception {
         CollectionReference smishings = firestore.collection("smishing_keyword");
         ApiFuture<DocumentReference> apiFuture = smishings.add(smishingKeyword);
@@ -25,14 +24,13 @@ public class SmishingKeywordRepository {
 
     public SmishingKeyword findById(String id) throws Exception{
         CollectionReference smishings = firestore.collection("smishing_keyword");
-        DocumentReference documentReference = smishings.document(id); // 특정 ID에 해당하는 문서를 참조
+        DocumentReference documentReference = smishings.document(id);
         ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = documentSnapshotApiFuture.get();
 
         if (documentSnapshot.exists()) {
             return documentSnapshot.toObject(SmishingKeyword.class);
         } else {
-            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
             return null;
         }
     }
@@ -48,8 +46,4 @@ public class SmishingKeywordRepository {
 
         return result;
     }
-
-
-
-
 }

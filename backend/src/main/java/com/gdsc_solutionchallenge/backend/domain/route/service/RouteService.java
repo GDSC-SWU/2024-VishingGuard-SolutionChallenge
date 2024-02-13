@@ -12,8 +12,13 @@ import java.util.List;
 public class RouteService {
     private final RouteRepository routeRepository;
 
+    /**
+     * Retrieve the list of routes (locations).
+     *
+     * @return List of Route entities representing routes.
+     * @throws Exception if an error occurs during the route retrieval process.
+     */
     public List<Route> loadRoute() throws Exception {
-        // post 레포에서 게시글의 title 전부 빼와서  Dto List 생성
         List<Route> routes = routeRepository.getAll();
 
         return routes;

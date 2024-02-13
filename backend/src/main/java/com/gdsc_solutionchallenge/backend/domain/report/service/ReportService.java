@@ -19,37 +19,56 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RequiredArgsConstructor
 @Service
 public class ReportService {
-    public final SmishingRepository smishingRepository;
-    public final VishingRepository vishingRepository;
-    public final VishingKeywordRepository vishingKeywordRepository;
+    private final SmishingRepository smishingRepository;
+    private final VishingRepository vishingRepository;
     private final UserRepository userRepository;
 
-    public List<ReportSmsResDto> smishigReport(Long userId) throws Exception {
+    /**
+     * Generates a phishing report for SMS based on user ID.
+     *
+     * @param userId User ID for phishing report.
+     * @return List of ReportSmsResDto containing SMS phishing report details.
+     * @throws Exception if the user is not found.
+     */
+    public List<ReportSmsResDto> smishingReport(Long userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         List<Smishing> smishings = smishingRepository.getAllScriptByUserId(userId);
         List<ReportSmsResDto> reportSmsResDtos = smishings.stream()
-                .map(smishing -> new ReportSmsResDto(smishing))
+                .map(ReportSmsResDto::new)
                 .collect(Collectors.toList());
         return reportSmsResDtos;
     }
 
+    /**
+     * Generates a phishing report for vishing (phone calls) based on user ID.
+     *
+     * @param userId User ID for phishing report.
+     * @return List of ReportVisResDto containing vishing report details.
+     * @throws Exception if the user is not found.
+     */
     public List<ReportVisResDto> vishingReport(Long userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
 
         List<Vishing> vishings = vishingRepository.getAllScriptByUserId(userId);
         List<ReportVisResDto> reportVisResDtos = vishings.stream()
-                .map(vishing -> new ReportVisResDto(vishing))
+                .map(ReportVisResDto::new)
                 .collect(Collectors.toList());
         return reportVisResDtos;
     }
 
+    /**
+     * Retrieves the phishing report state based on user ID.
+     *
+     * @param userId User ID for phishing report.
+     * @return String indicating the phishing report state (Safe, Moderate, or Risky).
+     * @throws Exception if the user is not found.
+     */
     public String reportState(Long userId) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND.value(), "User not found"));
@@ -66,11 +85,5 @@ public class ReportService {
         } else {
             return "Risky";
         }
-    }
-
-
-
-    private String removeSpaces(String input) {
-        return input.replaceAll("\\s", "");
     }
 }

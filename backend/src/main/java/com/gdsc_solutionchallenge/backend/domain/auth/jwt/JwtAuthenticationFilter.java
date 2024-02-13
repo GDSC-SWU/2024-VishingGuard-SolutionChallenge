@@ -16,22 +16,35 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends GenericFilterBean {
     private final JwtTokenProvider jwtTokenProvider;
 
-
+    /**
+     * Perform the JWT authentication filter logic.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @param chain    The filter chain.
+     * @throws IOException      if an I/O error occurs.
+     * @throws ServletException if a servlet-specific error occurs.
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // 1. Request Header에서 JWT 토큰 추출
+        // 1. Extract JWT token from the Request Header
         String token = resolveToken((HttpServletRequest) request);
 
-        // 2. validateToken으로 토큰 유효성 검사
+        // 2. Validate the token using validateToken
         if (token != null && jwtTokenProvider.validateToken(token)) {
-            // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext에 저장
+            // If the token is valid, retrieve the Authentication object from the token and store it in the SecurityContext
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);
     }
 
-    // Request Header에서 토큰 정보 추출
+    /**
+     * Resolve token information from the Request Header.
+     *
+     * @param request The HttpServletRequest from which to extract the token.
+     * @return The extracted token or null if not found.
+     */
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {

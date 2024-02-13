@@ -13,13 +13,10 @@ import lombok.Setter;
 public class Route {
     @DocumentId
     private String id;
-
     @NotNull
     private String institution;
-
     @NotNull
     private double x;
-
     @NotNull
     private double y;
 }

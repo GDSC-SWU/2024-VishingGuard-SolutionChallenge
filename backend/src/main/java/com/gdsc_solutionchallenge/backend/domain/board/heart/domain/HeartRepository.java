@@ -27,14 +27,11 @@ public class HeartRepository {
     public void delete(Long userId, String postId) throws Exception {
         CollectionReference hearts = firestore.collection("heart");
 
-        // userId와 postId에 해당하는 문서를 삭제하는 쿼리 생성
         Query query = hearts.whereEqualTo("user_id", userId).whereEqualTo("post_id", postId);
 
-        // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
-        // 결과에서 문서 가져오기
         if (!querySnapshot.isEmpty()) {
             DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
             documentSnapshot.getReference().delete();
@@ -47,11 +44,9 @@ public class HeartRepository {
         CollectionReference hearts = firestore.collection("heart");
         Query query = hearts.whereEqualTo("user_id", userId).whereEqualTo("post_id", postId);
 
-        // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
-        // 결과에서 문서 가져오기
         return !querySnapshot.isEmpty();
     }
 
@@ -64,7 +59,6 @@ public class HeartRepository {
         if (documentSnapshot.exists()) {
             return documentSnapshot.toObject(Post.class);
         } else {
-            // 해당 ID에 매칭되는 문서가 없을 경우에 대한 처리
             return null;
         }
     }
@@ -72,10 +66,8 @@ public class HeartRepository {
     public List<Heart> getAllHeartByPostId(String postId) throws Exception{
         CollectionReference hearts = firestore.collection("heart");
 
-        // whereEqualTo를 사용하여 쿼리 생성
         Query query = hearts.whereEqualTo("post_id", postId);
 
-        // 쿼리를 실행하여 결과 가져오기
         ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
         QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
 
@@ -86,15 +78,4 @@ public class HeartRepository {
         return result;
     }
 
-    public List<Post> getAll() throws Exception{
-        CollectionReference posts = firestore.collection("post");
-        ApiFuture<QuerySnapshot> querySnapshot = posts.get();
-
-        List<Post> result = new ArrayList<>();
-        for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            result.add(document.toObject(Post.class));
-        }
-
-        return result;
-    }
 }
