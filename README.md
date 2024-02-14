@@ -24,7 +24,7 @@ Preventing voice phishing contributes to enhancing the social safety of local co
 ## 🚨 Tech Stack
 서버: 스프링부트, 파이어베이스, mySQL, google cloud platform - compute engine, cloud sql, fss open api   
 프론트: 안드로이드 스튜디오, 구글맵, (GCP Storage)   
-AI:    
+AI: google cloud platform - compute engine, speech-to-text api, pycharm, vscode, docker , fastapi
 ux/ui: 피그마    
 ## 🚨 Demo Video
 ## 🚨 How To Use
