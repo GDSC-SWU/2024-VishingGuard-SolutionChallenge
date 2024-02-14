@@ -1,37 +1,39 @@
-package com.example.vishingguard.home.procedure
+package com.example.vishingguard.home.report
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import com.example.vishingguard.MainActivity
 import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
-import com.example.vishingguard.databinding.FragmentProcedureBinding
-import com.example.vishingguard.home.procedure.data.ProcedureAdapter
-import com.example.vishingguard.home.procedure.data.ProcedureViewModel
+import com.example.vishingguard.databinding.FragmentReportBinding
+import com.example.vishingguard.home.report.data.ReportAdapter
+import com.example.vishingguard.home.report.data.ReportViewModel
 
 @Suppress("DEPRECATION")
-class ProcedureFragment : BindingFragment<FragmentProcedureBinding>(R.layout.fragment_procedure) {
+class ReportFragment : BindingFragment<FragmentReportBinding>(R.layout.fragment_report) {
 
-    private val viewModel by viewModels<ProcedureViewModel>()
+    private val viewModel by viewModels<ReportViewModel>()
 
     override fun initView() {
+        // Request report data from the view model
+        viewModel.getReport()
 
-        viewModel.getProcedure()
-
+        // Handle the response from ViewModel
         handleCenterResponse()
 
+        // Navigate to the main activity
         binding.btnBack.setOnClickListener {
             navigateToMainActivity()
         }
     }
 
     private fun handleCenterResponse() {
-        // Observe ReportCenter data
-        viewModel.getProcedure.observe(viewLifecycleOwner) { response ->
+        // Observe Report data
+        viewModel.getReport.observe(viewLifecycleOwner) { response ->
             if (response.data.isNotEmpty()) {
                 val data = response.data
-                val adapter = ProcedureAdapter(data)
-                binding.rvProcedure.adapter = adapter
+                val adapter = ReportAdapter(data)
+                binding.rvReportCenter.adapter = adapter
             }
         }
     }
