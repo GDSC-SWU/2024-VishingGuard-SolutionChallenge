@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
+from fastapi.responses import JSONResponse
+
 
 app = FastAPI()
 
