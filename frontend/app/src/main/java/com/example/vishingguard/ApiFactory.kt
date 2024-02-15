@@ -35,4 +35,5 @@ object ServicePool {
     // Home
     val getProcedure = ApiFactory.retrofit.create(HomeApiService::class.java)
     val getReport = ApiFactory.retrofit.create(HomeApiService::class.java)
+    val getPrevention = ApiFactory.retrofit.create(HomeApiService::class.java)
 }
