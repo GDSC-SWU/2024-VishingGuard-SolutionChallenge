@@ -33,4 +33,9 @@ interface HomeApiService {
         @Header("Authorization") accessToken: String,
         @Body spamCheckRequest: SpamCheckRequest
     ): Call<SpamCheckResponse>
+
+    @POST("/api/v1/home/")
+    fun postHome(
+        @Header("Authorization") accessToken: String,
+    ): Call<HomeResponse>
 }

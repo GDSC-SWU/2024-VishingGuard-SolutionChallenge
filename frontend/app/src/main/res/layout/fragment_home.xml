@@ -16,7 +16,6 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="-16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginTop="55dp"
                     android:text="@string/title_pishing_report"
                     android:textAppearance="@style/TextAppearance.Vishing.SubTitle"
                     android:textColor="@color/white"
@@ -114,7 +113,7 @@
                     android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
                 <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
                     android:id="@+id/dots_indicator"
@@ -130,86 +129,90 @@
                     app:dotsStrokeWidth="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/viewPager_banner"
-                    app:stiffness="300" />
+                    app:stiffness="300"/>
 
                 <ImageView
                     android:id="@+id/btn_procedure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="43dp"
-                    android:src="@drawable/ic_procedure_home"
+                    android:src="@drawable/img_procedure_home"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/dots_indicator" />
+                    app:layout_constraintTop_toBottomOf="@+id/dots_indicator"/>
 
                 <TextView
                     android:id="@+id/tv_procedure"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="@string/tv_procedure_home"
+                    android:gravity="center"
+                    android:text="@string/title_procedure_home"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
                     app:layout_constraintEnd_toEndOf="@+id/btn_procedure"
                     app:layout_constraintStart_toStartOf="@+id/btn_procedure"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_procedure" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_procedure"/>
 
                 <ImageView
                     android:id="@+id/btn_report"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_report_home"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_preventive"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/img_report_home"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_prevention"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@+id/btn_procedure"
-                    app:layout_constraintTop_toTopOf="@+id/btn_procedure" />
+                    app:layout_constraintTop_toTopOf="@+id/btn_procedure"/>
 
                 <TextView
                     android:id="@+id/tv_report"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="@string/tv_report_home"
+                    android:text="@string/title_report_home"
+                    android:gravity="center"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
                     app:layout_constraintEnd_toEndOf="@+id/btn_report"
                     app:layout_constraintStart_toStartOf="@+id/btn_report"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_report" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_report"/>
 
                 <ImageView
-                    android:id="@+id/btn_preventive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_prevention_home"
+                    android:id="@+id/btn_prevention"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/img_prevention_home"
                     app:layout_constraintEnd_toStartOf="@+id/btn_search"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@+id/btn_report"
                     app:layout_constraintTop_toTopOf="@+id/btn_report" />
 
                 <TextView
-                    android:id="@+id/tv_preventive"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_prevention"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="@string/tv_prevention_home"
+                    android:gravity="center"
+                    android:text="@string/title_prevention_home"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_preventive"
-                    app:layout_constraintStart_toStartOf="@+id/btn_preventive"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_preventive" />
+                    app:layout_constraintEnd_toEndOf="@+id/btn_prevention"
+                    app:layout_constraintStart_toStartOf="@+id/btn_prevention"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_prevention" />
 
                 <ImageView
                     android:id="@+id/btn_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_search_home"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/img_search_home"
                     app:layout_constraintEnd_toEndOf="@+id/imageView2"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toTopOf="@+id/btn_preventive" />
+                    app:layout_constraintTop_toTopOf="@+id/btn_prevention" />
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="@string/tv_search_home"
+                    android:gravity="center"
+                    android:text="@string/title_search_home"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
                     app:layout_constraintEnd_toEndOf="@+id/btn_search"
                     app:layout_constraintStart_toStartOf="@+id/btn_search"
@@ -227,18 +230,31 @@
                     app:layout_constraintStart_toStartOf="@+id/btn_procedure"
                     app:layout_constraintTop_toBottomOf="@+id/tv_procedure" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:layout_marginHorizontal="22dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_posts"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
                     android:layout_marginTop="17dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_post"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_post">
-                </androidx.cardview.widget.CardView>
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/bg_community"
+                    android:orientation="vertical"
+                    android:paddingVertical="18dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_post"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_post"/>
+
+                <View
+                    android:id="@+id/view_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_posts"
+                    app:layout_constraintEnd_toEndOf="@+id/rv_posts"
+                    app:layout_constraintStart_toStartOf="@+id/rv_posts"
+                    app:layout_constraintTop_toTopOf="@+id/rv_posts" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

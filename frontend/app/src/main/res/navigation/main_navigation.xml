@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.vishingguard.HomeFragment"
+        android:name="com.example.vishingguard.home.HomeFragment"
         android:label="HomeFragment" />
 
     <fragment
