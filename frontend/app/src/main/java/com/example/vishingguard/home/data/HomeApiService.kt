@@ -1,5 +1,6 @@
 package com.example.vishingguard.home.data
 
+import com.example.vishingguard.home.prevention.data.PreventionResponse
 import com.example.vishingguard.home.procedure.data.ProcedureResponse
 import com.example.vishingguard.home.report.data.ReportResponse
 import retrofit2.Call
@@ -17,4 +18,9 @@ interface HomeApiService {
     fun getReport(
         @Header("Authorization") authorization: String
     ): Call<ReportResponse>
+
+    @GET("/api/v1/info/prevention")
+    fun getPrevention(
+        @Header("Authorization") authorization: String
+    ): Call<PreventionResponse>
 }
