@@ -1,10 +1,18 @@
 package com.example.vishingguard.home
 
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
 import com.example.vishingguard.databinding.FragmentHomeBinding
 import com.example.vishingguard.home.data.BannerAdapter
+import com.example.vishingguard.home.prevention.PreventionFragment
+import com.example.vishingguard.home.procedure.ProcedureFragment
+import com.example.vishingguard.home.report.ReportFragment
+import com.example.vishingguard.home.spam.SpamCheckFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -22,5 +30,46 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         // Set up dots indicator for the banner
         binding.dotsIndicator.setViewPager2(binding.viewPagerBanner)
+
+        // Move to the phishing report screen
+        binding.btnCheck.setOnClickListener {
+            navigateToMyPage()
+        }
+
+        // Move to the procedure screen
+        binding.btnProcedure.setOnClickListener {
+            replaceFragment(ProcedureFragment())
+        }
+
+        // Move to the report screen
+        binding.btnReport.setOnClickListener {
+            replaceFragment(ReportFragment())
+        }
+
+        // Move to the prevention screen
+        binding.btnPrevention.setOnClickListener {
+            replaceFragment(PreventionFragment())
+        }
+
+        // Move to the search screen
+        binding.btnSearch.setOnClickListener {
+            replaceFragment(SpamCheckFragment())
+        }
+    }
+
+    // Navigate to the phishing report screen
+    private fun navigateToMyPage() {
+        val navController = requireActivity().findNavController(R.id.container_main)
+        navController.navigate(R.id.navigation_pishing)
+    }
+
+    // Replace fragments
+    fun replaceFragment(fragment: Fragment){
+        requireActivity().findViewById<BottomNavigationView>(R.id.bot_nav_main).visibility = View.GONE
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container_main, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
