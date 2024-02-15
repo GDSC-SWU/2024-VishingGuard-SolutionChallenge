@@ -19,7 +19,12 @@ class HomeAdapter(private val postList: List<Home>) : RecyclerView.Adapter<HomeA
     }
 
     override fun getItemCount(): Int {
-        return postList.size
+        // Limit HomeAdapter items to 10
+        return if (postList.size > 10) {
+            10
+        } else {
+            postList.size
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
