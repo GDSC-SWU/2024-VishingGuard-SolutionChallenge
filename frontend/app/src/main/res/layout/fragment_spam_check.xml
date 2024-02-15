@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fragment_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:backgroundTint="@android:color/transparent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/tv_title_search"
+                android:textAppearance="@style/TextAppearance.Vishing.Title"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="125dp"
+            android:layout_height="122dp"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/img_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+        <View
+            android:id="@+id/bg_search"
+            android:layout_width="0dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.355"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_search"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_search"
+            app:layout_constraintEnd_toEndOf="@+id/bg_search"
+            app:layout_constraintTop_toTopOf="@+id/bg_search"/>
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:maxLength="11"
+            android:hint="@string/hint_search"
+            android:textColor="@color/basic_text"
+            android:textColorHint="@color/gray"
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_search"
+            app:layout_constraintStart_toStartOf="@+id/bg_search"
+            app:layout_constraintTop_toTopOf="@+id/bg_search" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
