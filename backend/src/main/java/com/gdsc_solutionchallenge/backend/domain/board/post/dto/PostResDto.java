@@ -31,7 +31,7 @@ public class PostResDto {
     private boolean isMyPost;
 
     @Builder
-    public PostResDto(Post post, boolean isMyPost ,int comment_count,int heart_count) throws Exception {
+    public PostResDto(Post post, boolean isMyPost/* ,int comment_count,int heart_count*/) throws Exception {
         this.postId=post.getId();
         this.content=post.getContent();
         this.title=post.getTitle();
@@ -39,17 +39,14 @@ public class PostResDto {
         this.userId=post.getUser_id();
         this.updated_at = formatTimestamp(post.getUpdated_at());
         this.created_at = formatTimestamp(post.getCreated_at());
-        // set comment count
-        this.comment_count = comment_count;
-
-        // set heart count
-        this.heart_count = heart_count;
+        this.comment_count = post.getComment_count();
+        this.heart_count = post.getHeart_count();
         this.isMyPost=isMyPost;
     }
 
     private String formatTimestamp(Date date) {
         if (date != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
             return sdf.format(date);
         }
         return null;

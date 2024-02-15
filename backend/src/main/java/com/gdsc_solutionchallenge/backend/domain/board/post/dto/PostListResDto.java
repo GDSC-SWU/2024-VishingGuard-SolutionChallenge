@@ -23,32 +23,36 @@ public class PostListResDto {
     private String username; // Author's name
     private String updated_at;
     private String created_at;
-    private String contentSnippet;
+    private String content;
     private int comment_count;
     private int heart_count;
 
     @Builder
-    public PostListResDto(Post post, CommentRepository commentRepository, HeartRepository heartRepository) throws Exception {
+    public PostListResDto(Post post
+            /*, CommentRepository commentRepository, HeartRepository
+            heartRepository*/) throws Exception {
         this.postId = post.getId();
-        this.title = getSnippet(post.getTitle(), 39);
+        this.title = post.getTitle();
         this.username = post.getUser().getUsername();
         this.updated_at = formatTimestamp(post.getUpdated_at());
         this.created_at = formatTimestamp(post.getCreated_at());
-        this.contentSnippet = getSnippet(post.getContent(), 73);
+        this.content = post.getContent();
 
         // Set the comment count and heart count
-        this.comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
-        this.heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
+        //this.comment_count = commentRepository.getAllCommentByPostId(post.getId()).size();
+        //this.heart_count = heartRepository.getAllHeartByPostId(post.getId()).size();
+        this.comment_count=post.getComment_count();
+        this.heart_count=post.getHeart_count();
     }
 
     // Get a snippet of the content with a maximum number of characters
-    private String getSnippet(String content, int maxChars) {
-        if (content.length() <= maxChars) {
-            return content;
-        } else {
-            return content.substring(0, maxChars);
-        }
-    }
+//    private String getSnippet(String content, int maxChars) {
+//        if (content.length() <= maxChars) {
+//            return content;
+//        } else {
+//            return content.substring(0, maxChars);
+//        }
+//    }
 
     // Format the timestamp to a readable date and time string
     private String formatTimestamp(Date date) {
@@ -60,15 +64,15 @@ public class PostListResDto {
     }
 
     // Convert a list of Post entities to a list of PostListResDto
-    public static List<PostListResDto> convertToDtoList(List<Post> posts, CommentRepository commentRepository, HeartRepository heartRepository) {
-        return posts.stream()
-                .map(post -> {
-                    try {
-                        return new PostListResDto(post, commentRepository, heartRepository);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toList());
-    }
+//    public static List<PostListResDto> convertToDtoList(List<Post> posts, CommentRepository commentRepository, HeartRepository heartRepository) {
+//        return posts.stream()
+//                .map(post -> {
+//                    try {
+//                        return new PostListResDto(post, commentRepository, heartRepository);
+//                    } catch (Exception e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .collect(Collectors.toList());
+//    }
 }

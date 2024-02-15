@@ -36,6 +36,7 @@ public class HeartService {
         // If the user has liked the post, remove the like; otherwise, add the like
         if (isHeart) {
             heartRepository.delete(user.getId(), post.getId());
+            postRepository.downHeartCount(postId);
             return new HeartResDto(user, post, false); // Heart removed
         } else {
             Heart heart = Heart.builder()
@@ -43,6 +44,7 @@ public class HeartService {
                     .post_id(post.getId())
                     .build();
             heartRepository.save(heart);
+            postRepository.upHeartCount(postId);
             return new HeartResDto(user, post, true); // Heart added
         }
     }
