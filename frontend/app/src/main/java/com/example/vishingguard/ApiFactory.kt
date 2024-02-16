@@ -1,5 +1,6 @@
 package com.example.vishingguard
 
+import com.example.vishingguard.community.CommunityApiService
 import com.example.vishingguard.home.data.HomeApiService
 import com.example.vishingguard.login.data.LoginApiService
 import com.example.vishingguard.map.data.RouteApiService
@@ -39,6 +40,9 @@ object ServicePool {
     val getReport = ApiFactory.retrofit.create(HomeApiService::class.java)
     val getPrevention = ApiFactory.retrofit.create(HomeApiService::class.java)
     val postSpamCheck = ApiFactory.retrofit.create(HomeApiService::class.java)
+
+    // Community
+    val getPosts = ApiFactory.retrofit.create(CommunityApiService::class.java)
 
     // Map
     val postRoute = ApiFactory.retrofit.create(RouteApiService::class.java)
