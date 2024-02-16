@@ -43,6 +43,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.Vishing.Post.Content">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textColor">@color/SubBlack</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="TextAppearance.Vishing.Content.Bold">
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textColor">@color/MainBlack</item>
