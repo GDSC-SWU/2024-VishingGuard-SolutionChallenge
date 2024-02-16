@@ -50,17 +50,17 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // map
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-
     // retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+
+
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
 
@@ -79,4 +79,8 @@ dependencies {
 
     // Indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
+
+    // Google Map
+    implementation ("com.google.android.gms:play-services-location:17.0.0")
+    implementation ("com.google.android.gms:play-services-maps:17.0.0")
 }
