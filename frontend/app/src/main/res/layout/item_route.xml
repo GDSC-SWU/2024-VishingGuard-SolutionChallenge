@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="22dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginRight="11dp">
+
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/ic_route_arrow"
+            app:layout_constraintBottom_toTopOf="@+id/img_view"
+            app:layout_constraintEnd_toEndOf="@+id/img_view"
+            app:layout_constraintStart_toStartOf="@+id/img_view"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
+            android:textColor="@color/SubGray"
+            app:layout_constraintBottom_toBottomOf="@+id/img_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_view"/>
+
+        <ImageView
+            android:id="@+id/img_view"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_profile"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_place"
+            app:layout_constraintStart_toEndOf="@+id/tv_time"/>
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
+            app:layout_constraintBottom_toBottomOf="@+id/img_view"
+            app:layout_constraintStart_toEndOf="@+id/img_view"
+            app:layout_constraintTop_toTopOf="@+id/img_view"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
