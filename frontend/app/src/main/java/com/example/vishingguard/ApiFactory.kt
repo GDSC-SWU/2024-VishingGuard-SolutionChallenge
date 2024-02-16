@@ -2,6 +2,7 @@ package com.example.vishingguard
 
 import com.example.vishingguard.home.data.HomeApiService
 import com.example.vishingguard.login.data.LoginApiService
+import com.example.vishingguard.map.data.RouteApiService
 import com.example.vishingguard.pishing.data.ReportApiService
 import com.example.vishingguard.smishing.data.SmsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -38,4 +39,7 @@ object ServicePool {
     val getReport = ApiFactory.retrofit.create(HomeApiService::class.java)
     val getPrevention = ApiFactory.retrofit.create(HomeApiService::class.java)
     val postSpamCheck = ApiFactory.retrofit.create(HomeApiService::class.java)
+
+    // Map
+    val postRoute = ApiFactory.retrofit.create(RouteApiService::class.java)
 }
