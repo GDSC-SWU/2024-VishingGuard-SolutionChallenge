@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
+import com.example.vishingguard.community.CommunityFragment
 import com.example.vishingguard.databinding.FragmentHomeBinding
 import com.example.vishingguard.home.data.BannerAdapter
 import com.example.vishingguard.home.data.HomeAdapter
@@ -65,6 +66,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         // Move to the search screen
         binding.btnSearch.setOnClickListener {
             replaceFragment(SpamCheckFragment())
+        }
+
+        binding.viewRv.setOnClickListener {
+            replaceFragment(CommunityFragment())
         }
     }
 
