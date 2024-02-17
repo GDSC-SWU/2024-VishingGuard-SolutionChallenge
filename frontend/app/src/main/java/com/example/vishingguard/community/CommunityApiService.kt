@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -39,4 +40,12 @@ interface CommunityApiService {
         @Path("userId") userId: Int,
         @Path("postId") postId: String
     ): Call<DeleteResponse>
+
+    @PATCH("/api/v1/posts/{userId}/{postId}/update")
+    fun updatePost(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+        @Body params: CreateRequest
+    ): Call<CreateResponse>
 }
