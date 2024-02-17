@@ -44,6 +44,7 @@ object ServicePool {
     // Community
     val getPosts = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val getRead = ApiFactory.retrofit.create(CommunityApiService::class.java)
+    val postCreate = ApiFactory.retrofit.create(CommunityApiService::class.java)
 
     // Map
     val postRoute = ApiFactory.retrofit.create(RouteApiService::class.java)
