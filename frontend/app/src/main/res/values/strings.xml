@@ -15,7 +15,7 @@
     <string name="tv_signUp_sub">Please enter your name, email, and password</string>
 
     <!--sign in text-->
-    <string name="tv_login_title">Please log in with your registered account!</string>
+    <string name="tv_login_title">Login with your registered account!</string>
     <string name="tv_login_sub">Experience the convenience of automatic login \nto simplify the login process!</string>
     <string name="tv_login_email">Please enter your email and password!</string>
     <string name="btn_sign_in">Sign in</string>
@@ -45,6 +45,12 @@
 
     <!--community text-->
     <string name="tv_community_title">Community</string>
+    <string name="hint_search_community">Please enter your search term</string>
+    <string name="tv_write_title">Write a Post</string>
+    <string name="hint_write_title">Title your post</string>
+    <string name="hint_write_content">Please avoid offensive content</string>
+    <string name="tv_edit">Edit</string>
+    <string name="tv_delete">Delete</string>
 
     <!--map text-->
     <string name="tv_map_safe">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
@@ -52,6 +58,8 @@
     <string name="tv_map_risky">"It looks like you've been to the bank a lot lately. \nAre you caught up in voice phishing?"</string>
 
     <!--pishing text-->
+    <string name="tv_warning">Danger! Please hang up the phone! \nSeems like a phone scam!</string>
+
     <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
     <string name="tv_record">Main Phishing Records</string>
     <string name="tv_call">Call</string>
