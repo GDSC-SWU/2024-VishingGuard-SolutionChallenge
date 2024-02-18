@@ -1,0 +1,49 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white">
+
+    <ImageView
+        android:id="@+id/img_update"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/ic_update"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/tv_edit"
+        android:textAppearance="@style/TextAppearance.Vishing.Content3"
+        app:layout_constraintBottom_toBottomOf="@+id/img_update"
+        app:layout_constraintStart_toEndOf="@+id/img_update"
+        app:layout_constraintTop_toTopOf="@+id/img_update"/>
+
+    <ImageView
+        android:id="@+id/img_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="36dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_update"
+        app:layout_constraintTop_toBottomOf="@+id/img_update"/>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/tv_delete"
+        android:textAppearance="@style/TextAppearance.Vishing.Content3"
+        app:layout_constraintBottom_toBottomOf="@+id/img_delete"
+        app:layout_constraintStart_toEndOf="@+id/img_delete"
+        app:layout_constraintTop_toTopOf="@+id/img_delete"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
