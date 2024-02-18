@@ -66,4 +66,13 @@ interface CommunityApiService {
         @Path("postId") postId: String,
         @Body params: CommentRequest
     ): Call<CommentResponse>
+
+    @PATCH("/api/v1/comments/{userId}/{postId}/{commentId}/update")
+    fun patchComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+        @Path("commentId") commentId: String,
+        @Body params: CommentRequest
+    ): Call<CommentResponse>
 }
