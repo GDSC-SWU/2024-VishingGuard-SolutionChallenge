@@ -12,14 +12,14 @@ public class HomeResDto {
 
     @Builder
     public HomeResDto(String title) throws Exception {
-        this.title = getTitleSnippet(title);
+        this.title = title;
     }
 
-    private String getTitleSnippet(String title) {
-        if (title.length() <= 38) {
-            return title;
-        } else {
-            return title.substring(0, 38);
-        }
-    }
+//    private String getTitleSnippet(String title) {
+//        if (title.length() <= 38) {
+//            return title;
+//        } else {
+//            return title.substring(0, 38);
+//        }
+//    }
 }

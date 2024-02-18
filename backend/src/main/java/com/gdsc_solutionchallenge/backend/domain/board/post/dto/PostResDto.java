@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,8 +48,10 @@ public class PostResDto {
 
     private String formatTimestamp(Date date) {
         if (date != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
-            return sdf.format(date);
+            Instant instant = date.toInstant();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm")
+                    .withZone(ZoneId.of("Asia/Seoul")); // 시간대 정보 추가
+            return formatter.format(instant);
         }
         return null;
     }
