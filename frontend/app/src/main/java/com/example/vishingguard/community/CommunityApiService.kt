@@ -1,5 +1,9 @@
 package com.example.vishingguard.community
 
+import com.example.vishingguard.community.comment.AllCommentResponse
+import com.example.vishingguard.community.comment.create.CommentResponse
+import com.example.vishingguard.community.comment.create.CommentRequest
+import com.example.vishingguard.community.comment.create.DelCommentResponse
 import com.example.vishingguard.community.create.CreateRequest
 import com.example.vishingguard.community.create.CreateResponse
 import com.example.vishingguard.community.delete.DeleteResponse
@@ -48,4 +52,36 @@ interface CommunityApiService {
         @Path("postId") postId: String,
         @Body params: CreateRequest
     ): Call<CreateResponse>
+
+    @GET("/api/v1/comments/{userId}/{postId}/read")
+    fun getComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String
+    ): Call<AllCommentResponse>
+
+    @POST("/api/v1/comments/{userId}/{postId}/create")
+    fun postComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+        @Body params: CommentRequest
+    ): Call<CommentResponse>
+
+    @PATCH("/api/v1/comments/{userId}/{postId}/{commentId}/update")
+    fun patchComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+        @Path("commentId") commentId: String,
+        @Body params: CommentRequest
+    ): Call<CommentResponse>
+
+    @DELETE("/api/v1/comments/{userId}/{postId}/{commentId}/delete")
+    fun deleteComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+        @Path("commentId") commentId: String
+    ): Call<DelCommentResponse>
 }

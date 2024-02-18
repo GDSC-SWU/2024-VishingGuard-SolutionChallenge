@@ -51,6 +51,7 @@
     <string name="hint_write_content">Please avoid offensive content</string>
     <string name="tv_edit">Edit</string>
     <string name="tv_delete">Delete</string>
+    <string name="hint_comment">Please input your comment.</string>
 
     <!--map text-->
     <string name="tv_map_safe">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
