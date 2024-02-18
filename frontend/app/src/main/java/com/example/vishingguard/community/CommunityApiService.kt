@@ -1,5 +1,6 @@
 package com.example.vishingguard.community
 
+import com.example.vishingguard.community.comment.AllCommentResponse
 import com.example.vishingguard.community.create.CreateRequest
 import com.example.vishingguard.community.create.CreateResponse
 import com.example.vishingguard.community.delete.DeleteResponse
@@ -48,4 +49,11 @@ interface CommunityApiService {
         @Path("postId") postId: String,
         @Body params: CreateRequest
     ): Call<CreateResponse>
+
+    @GET("/api/v1/comments/{userId}/{postId}/read")
+    fun getComment(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String
+    ): Call<AllCommentResponse>
 }
