@@ -52,6 +52,7 @@ object ServicePool {
     val getComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val postComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val patchComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
+    val deleteComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
 
     // Map
     val postRoute = ApiFactory.retrofit.create(RouteApiService::class.java)
