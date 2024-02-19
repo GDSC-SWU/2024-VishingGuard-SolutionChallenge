@@ -23,4 +23,10 @@ interface MyPageApiService {
         @Path("userId") userId: Int,
         @Body params: WithdrawUserRequest
     ): Call<UserResponse>
+
+    @POST("/api/v1/myPage/{userId}/logout")
+    fun logoutUser(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int
+    ): Call<UserResponse>
 }
