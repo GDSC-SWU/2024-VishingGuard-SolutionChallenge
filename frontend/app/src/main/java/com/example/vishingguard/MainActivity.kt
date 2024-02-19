@@ -2,7 +2,6 @@ package com.example.vishingguard
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -10,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vishingguard.base.BindingActivity
 import com.example.vishingguard.databinding.ActivityMainBinding
-import com.example.vishingguard.smishing.data.SmsRequest
-import com.example.vishingguard.smishing.data.SmsViewModel
+import com.example.vishingguard.pishing.smishing.data.SmsRequest
+import com.example.vishingguard.pishing.smishing.data.SmsViewModel
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
@@ -40,8 +39,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     // Request permission to receive SMS
     private fun requestPermission() {
-        if (Build.VERSION.SDK_INT >= 23 &&
-            ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECEIVE_SMS)
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECEIVE_SMS)
             != PackageManager.PERMISSION_GRANTED
         ) {
             // Request permission if not granted
@@ -62,12 +60,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             // Extract SMS content and sender's phone number
             val smishingScript = intent.getStringExtra("content").toString()
             val phone = intent.getStringExtra("sender").toString()
-            val date = intent.getStringExtra("date").toString()
-            val time = intent.getStringExtra("time").toString()
 
             // Send SMS data to ViewModel for processing
             val smsRequest = SmsRequest(
-                smishingScript = smishingScript, phone = phone, date = date, time = time)
+                smishingScript = smishingScript, phone = phone)
             viewModel.postSms(smsRequest)
         }
     }
