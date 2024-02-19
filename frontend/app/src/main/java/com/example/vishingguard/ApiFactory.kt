@@ -4,6 +4,7 @@ import com.example.vishingguard.community.CommunityApiService
 import com.example.vishingguard.home.data.HomeApiService
 import com.example.vishingguard.login.data.LoginApiService
 import com.example.vishingguard.map.data.RouteApiService
+import com.example.vishingguard.mypage.MyPageApiService
 import com.example.vishingguard.pishing.data.ReportApiService
 import com.example.vishingguard.smishing.data.SmsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -58,4 +59,7 @@ object ServicePool {
 
     // Map
     val postRoute = ApiFactory.retrofit.create(RouteApiService::class.java)
+
+    // User
+    val updateUser = ApiFactory.retrofit.create(MyPageApiService::class.java)
 }
