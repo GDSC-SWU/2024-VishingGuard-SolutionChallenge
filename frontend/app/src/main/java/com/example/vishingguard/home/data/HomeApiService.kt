@@ -5,11 +5,13 @@ import com.example.vishingguard.home.procedure.data.ProcedureResponse
 import com.example.vishingguard.home.report.data.ReportResponse
 import com.example.vishingguard.home.spam.data.SpamCheckRequest
 import com.example.vishingguard.home.spam.data.SpamCheckResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface HomeApiService {
 
@@ -38,4 +40,10 @@ interface HomeApiService {
     fun postHome(
         @Header("Authorization") accessToken: String,
     ): Call<HomeResponse>
+
+    @GET("/api/v1/financial/download/{number}")
+    fun getFss(
+        @Header("Authorization") authorization: String,
+        @Path("number") number: Int
+    ): Call<ResponseBody>
 }
