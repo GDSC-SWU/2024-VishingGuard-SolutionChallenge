@@ -16,10 +16,12 @@ object ApiFactory {
     private const val BASE_URL =
         "http://35.216.77.51:8080"
 
+    val json = Json { ignoreUnknownKeys = true }
+
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 }
