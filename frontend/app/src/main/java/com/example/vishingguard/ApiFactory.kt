@@ -6,7 +6,7 @@ import com.example.vishingguard.login.data.LoginApiService
 import com.example.vishingguard.map.data.RouteApiService
 import com.example.vishingguard.mypage.MyPageApiService
 import com.example.vishingguard.pishing.data.ReportApiService
-import com.example.vishingguard.smishing.data.SmsApiService
+import com.example.vishingguard.pishing.smishing.data.SmsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

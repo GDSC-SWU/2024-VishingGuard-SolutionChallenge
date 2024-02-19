@@ -48,10 +48,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".vishing.VishingActivity"
-            android:exported="true">
-        </activity>
 
         <receiver
             android:name=".vishing.CallReceiver"
@@ -67,7 +63,7 @@
             android:value="AIzaSyAz_piev8tAgdcMtlFhaDGwyZ8MqtRwDyI" />
 
         <receiver
-            android:name=".smishing.SmsReceiver"
+            android:name=".pishing.smishing.SmsReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
