@@ -1,5 +1,6 @@
 package com.example.vishingguard.mypage
 
+import com.example.vishingguard.mypage.data.WithdrawUserRequest
 import com.example.vishingguard.mypage.data.UpdateUserRequest
 import com.example.vishingguard.mypage.data.UserResponse
 import retrofit2.Call
@@ -14,5 +15,12 @@ interface MyPageApiService {
         @Header("Authorization") authorization: String,
         @Path("userId") userId: Int,
         @Body params: UpdateUserRequest
+    ): Call<UserResponse>
+
+    @POST("/api/v1/myPage/{userId}/withdraw")
+    fun withdrawUser(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Body params: WithdrawUserRequest
     ): Call<UserResponse>
 }
