@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="17dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:background="@drawable/bg_dialog">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_logout"
+            android:textAppearance="@style/TextAppearance.Vishing.Post"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/content_logout"
+            android:textAppearance="@style/TextAppearance.Vishing.Post.Content"
+            app:layout_constraintStart_toStartOf="@+id/dialog_title"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_no"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_rectangle_blue"
+            android:backgroundTint="@color/light_gray"
+            android:text="@string/btn_no"
+            android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@+id/dialog_message"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_message" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_yes"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/ic_rectangle_blue"
+            android:text="@string/btn_yes"
+            android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_no"
+            app:layout_constraintStart_toEndOf="@+id/btn_no"
+            app:layout_constraintTop_toTopOf="@+id/btn_no"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
