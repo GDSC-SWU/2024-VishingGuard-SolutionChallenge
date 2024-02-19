@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/bg_send"
-                    android:hint="@string/hint_comment"
+                    android:hint="@string/hint_write_cmment"
                     android:textSize="17sp"
                     android:textAppearance="@style/TextAppearance.Vishing.Content2"
                     android:textColor="@color/BoardContent"
