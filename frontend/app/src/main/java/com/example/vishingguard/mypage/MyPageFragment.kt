@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.example.vishingguard.R
 import com.example.vishingguard.base.BindingFragment
 import com.example.vishingguard.databinding.FragmentMyPageBinding
+import com.example.vishingguard.mypage.data.LogoutUserDialog
 
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
@@ -11,6 +12,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         // Update user information
         binding.btnUpdate.setOnClickListener {
             replaceFragment(UpdateFragment())
+        }
+
+        // Logout
+        binding.btnLogout.setOnClickListener{
+            val logoutUserDialog = LogoutUserDialog(requireContext())
+            logoutUserDialog.show()
         }
     }
 
