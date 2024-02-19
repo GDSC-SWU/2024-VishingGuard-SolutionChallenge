@@ -13,7 +13,6 @@ data class VishingResponse(
 @Serializable
 data class VishingReport(
     @SerialName("phone") val phone: String,
-    @SerialName("date") val date: String,
-    @SerialName("time") val time: String,
+    @SerialName("created_at") val created_at: String,
     @SerialName("keywordComment") val keywordComment: String
 )
