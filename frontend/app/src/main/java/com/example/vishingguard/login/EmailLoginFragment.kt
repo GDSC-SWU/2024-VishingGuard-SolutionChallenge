@@ -20,18 +20,18 @@ class EmailLoginFragment : BindingFragment<FragmentEmailLoginBinding>(R.layout.f
     }
 
     override fun initView() {
-        // 로그인
+        // Login button click listener
         binding.btnLogin.setOnClickListener {
             postLogin()
         }
 
-        // 뒤로가기
+        // Back button click listener
         binding.btnBack.setOnClickListener {
             navigateBack()
         }
     }
 
-    // 서버 연결
+    // Connect to server for login
     private fun postLogin() {
         val email = binding.inputEmail.editText?.text.toString()
         val pw = binding.inputPw.editText?.text.toString()
@@ -43,16 +43,17 @@ class EmailLoginFragment : BindingFragment<FragmentEmailLoginBinding>(R.layout.f
     }
 
     private fun handleLoginResponse() {
-        // 로그인 성공
+        // If login is successful
         if (viewModel.postLogin.value?.status == STATUS_SUCCESS) {
             binding.inputPw.error = null
-            navigateToMainActivity() // 화면 이동
+            navigateToMainActivity() // Navigate to main activity
+
             Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
-            Log.d("success", "로그인 성공 : ${viewModel.postLogin.value}")
         }
-        // 로그인 실패
+
+        // If login fails
         else {
-            // 에러 메시지 설정
+            // Set error message
             val failureMessage = viewModel.failureMessage.value.toString()
             val userNotFoundMessage = extractErrorMessage(failureMessage)
             binding.inputPw.error = userNotFoundMessage
@@ -60,19 +61,19 @@ class EmailLoginFragment : BindingFragment<FragmentEmailLoginBinding>(R.layout.f
         }
     }
 
-    // 에러 문구 중 message 내용 추출
+    // Extract message content from error message
     private fun extractErrorMessage(response: String): String {
         val pattern = Regex("""\"message\":\"(.*?)\"""")
         val matchResult = pattern.find(response)
         return matchResult?.groupValues?.get(1) ?: ""
     }
 
-    // 뒤로가기
+    // Navigate back
     private fun navigateBack() {
         requireActivity().supportFragmentManager.popBackStack()
     }
 
-    // 화면 이동
+    // Navigate to main activity
     private fun navigateToMainActivity() {
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
