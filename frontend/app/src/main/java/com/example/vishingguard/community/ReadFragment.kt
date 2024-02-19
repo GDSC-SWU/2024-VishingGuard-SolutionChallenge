@@ -40,6 +40,14 @@ class ReadFragment : BindingFragment<FragmentReadBinding>(R.layout.fragment_read
             dialogFragment.show(childFragmentManager, "PostDialog")
         }
 
+        binding.btnHeart.setOnClickListener {
+            binding.btnHeart.isSelected = !binding.btnHeart.isSelected
+            val currentHeartCount = binding.tvHeart.text.toString().toInt()
+            val newHeartCount = if (binding.btnHeart.isSelected) currentHeartCount + 1 else currentHeartCount - 1
+            binding.tvHeart.text = newHeartCount.toString()
+            readViewModel.likePost()
+        }
+
         binding.btnBack.setOnClickListener {
             navigateBack()
         }

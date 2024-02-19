@@ -40,6 +40,7 @@ object ServicePool {
     val getReport = ApiFactory.retrofit.create(HomeApiService::class.java)
     val getPrevention = ApiFactory.retrofit.create(HomeApiService::class.java)
     val postSpamCheck = ApiFactory.retrofit.create(HomeApiService::class.java)
+    val getFss = ApiFactory.retrofit.create(HomeApiService::class.java)
 
     // Community
     val getPosts = ApiFactory.retrofit.create(CommunityApiService::class.java)
@@ -47,6 +48,7 @@ object ServicePool {
     val postCreate = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val deletePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val updatePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
+    val likePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
 
     // Comment
     val getComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
