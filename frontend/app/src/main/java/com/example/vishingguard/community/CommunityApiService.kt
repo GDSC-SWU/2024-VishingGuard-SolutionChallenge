@@ -8,6 +8,7 @@ import com.example.vishingguard.community.create.CreateRequest
 import com.example.vishingguard.community.create.CreateResponse
 import com.example.vishingguard.community.delete.DeleteResponse
 import com.example.vishingguard.community.posts.PostsResponse
+import com.example.vishingguard.community.read.LikeResponse
 import com.example.vishingguard.community.read.ReadResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -84,4 +85,11 @@ interface CommunityApiService {
         @Path("postId") postId: String,
         @Path("commentId") commentId: String
     ): Call<DelCommentResponse>
+
+    @POST("/api/v1/heart/{userId}/{postId}/create")
+    fun likePost(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: Int,
+        @Path("postId") postId: String,
+    ): Call<LikeResponse>
 }
