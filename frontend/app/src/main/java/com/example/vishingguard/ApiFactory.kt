@@ -62,4 +62,5 @@ object ServicePool {
 
     // User
     val updateUser = ApiFactory.retrofit.create(MyPageApiService::class.java)
+    val withdrawUser = ApiFactory.retrofit.create(MyPageApiService::class.java)
 }
