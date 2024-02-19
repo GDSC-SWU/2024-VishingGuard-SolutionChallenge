@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,9 +44,9 @@
                     android:id="@+id/img_step_safe"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="44dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginTop="21dp"
-                    android:layout_marginEnd="44dp"
+                    android:layout_marginEnd="35dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
                     android:layout_marginEnd="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_step_safe" />
+                    app:layout_constraintTop_toBottomOf="@+id/img_step_safe"/>
 
                 <View
                     android:id="@+id/view"
@@ -71,7 +71,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_frame_safe" />
+                    app:layout_constraintTop_toBottomOf="@+id/img_frame_safe"/>
 
                 <TextView
                     android:id="@+id/tv_title_result"
@@ -82,7 +82,7 @@
                     android:textAppearance="@style/TextAppearance.Vishing.Post"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toTopOf="@+id/img_frame_safe" />
+                    app:layout_constraintTop_toTopOf="@+id/img_frame_safe"/>
 
                 <TextView
                     android:id="@+id/tv_result"
@@ -95,28 +95,28 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tv_title_result"
                     app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toEndOf="@+id/tv_title_result"
-                    app:layout_constraintTop_toTopOf="@+id/tv_title_result" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_title_result"/>
 
                 <TextView
                     android:id="@+id/tv_result_content"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginStart="32dp"
                     android:layout_marginTop="29dp"
-                    android:layout_marginEnd="32dp"
+                    android:gravity="center"
                     android:textAppearance="@style/TextAppearance.Vishing.Content2"
                     app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_result" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_result"/>
 
                 <TextView
                     android:id="@+id/tv_standard"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:textColor="@color/gray"
                     android:textSize="8sp"
+                    android:text="@string/tv_standard_pishing"
                     android:textAppearance="@style/TextAppearance.Vishing.Content"
                     app:layout_constraintEnd_toEndOf="@+id/tv_result_content"
                     app:layout_constraintStart_toStartOf="@+id/tv_result_content"
@@ -124,9 +124,18 @@
                     tools:ignore="DuplicateIds"/>
 
                 <ImageView
-                    android:id="@+id/img_result"
+                    android:id="@+id/bg_result"
                     android:layout_width="206dp"
                     android:layout_height="102dp"
+                    android:layout_marginBottom="-2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_frame_safe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_result"
+                    android:layout_width="120dp"
+                    android:layout_height="100dp"
                     android:layout_marginBottom="13dp"
                     app:layout_constraintBottom_toBottomOf="@+id/img_frame_safe"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -136,11 +145,12 @@
                     android:id="@+id/tv_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/tv_record"
                     android:textAppearance="@style/TextAppearance.Vishing.Title"
-                    app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toBottomOf="@+id/view" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view"/>
 
                 <TextView
                     android:id="@+id/tv_call"
@@ -173,7 +183,7 @@
                     android:background="@drawable/ic_dot_rectangle"
                     app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_call" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_call"/>
 
                 <ImageView
                     android:visibility="gone"
@@ -184,7 +194,7 @@
                     android:src="@drawable/ic_no_phone"
                     app:layout_constraintEnd_toEndOf="@+id/bg_call"
                     app:layout_constraintStart_toStartOf="@+id/bg_call"
-                    app:layout_constraintTop_toTopOf="@+id/bg_call" />
+                    app:layout_constraintTop_toTopOf="@+id/bg_call"/>
 
                 <TextView
                     android:visibility="gone"
@@ -222,7 +232,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/img_frame_safe"
                     app:layout_constraintStart_toStartOf="@+id/img_frame_safe"
                     app:layout_constraintTop_toBottomOf="@+id/tv_message"
-                    tools:listitem="@layout/item_smishing" />
+                    tools:listitem="@layout/item_smishing"/>
 
                 <ImageView
                     android:visibility="gone"
@@ -246,7 +256,7 @@
                     android:src="@drawable/ic_no_message"
                     app:layout_constraintEnd_toEndOf="@+id/bg_message"
                     app:layout_constraintStart_toStartOf="@+id/bg_message"
-                    app:layout_constraintTop_toTopOf="@+id/bg_message" />
+                    app:layout_constraintTop_toTopOf="@+id/bg_message"/>
 
                 <TextView
                     android:visibility="gone"
