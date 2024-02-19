@@ -47,6 +47,7 @@ object ServicePool {
     val postCreate = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val deletePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
     val updatePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
+    val likePost = ApiFactory.retrofit.create(CommunityApiService::class.java)
 
     // Comment
     val getComment = ApiFactory.retrofit.create(CommunityApiService::class.java)
