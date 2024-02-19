@@ -35,6 +35,7 @@
 
     <string name="tv_procedure">Dealing with Voice Phishing</string>
     <string name="tv_prevention">10 Tips to Avoid Voice Phishing</string>
+    <string name="tv_down">Voice Phishing Related File has been Downloaded.</string>
 
     <!--search text-->
     <string name="tv_title_search">Phishing Search</string>
@@ -49,9 +50,9 @@
     <string name="tv_write_title">Write a Post</string>
     <string name="hint_write_title">Title your post</string>
     <string name="hint_write_content">Please avoid offensive content</string>
+    <string name="hint_write_cmment">Please enter your comment</string>
     <string name="tv_edit">Edit</string>
     <string name="tv_delete">Delete</string>
-    <string name="hint_comment">Please input your comment.</string>
 
     <!--map text-->
     <string name="tv_map_safe">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
@@ -96,4 +97,12 @@
     <string name="hint_pw">Please enter your password.</string>
     <string name="hint_new_pw">Please enter a new password.</string>
     <string name="hint_check_pw">Please re-enter your password.</string>
+
+    <string name="title_logout">Sign Out</string>
+    <string name="content_logout">Would you like to sign out?</string>
+    <string name="title_withdraw">Unsubscribe?</string>
+    <string name="content_withdraw">Withdraw membership?</string>
+
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
 </resources>
