@@ -24,6 +24,11 @@ class MyPageViewModel : ViewModel() {
     val withdrawUser: LiveData<UserResponse> = _withdrawUser //read
     private val withdrawUserService = ServicePool.withdrawUser
 
+    // LogoutUser LiveData
+    private val _logoutUser: MutableLiveData<UserResponse> = MutableLiveData()  //read, write
+    val logoutUser: LiveData<UserResponse> = _logoutUser //read
+    private val logoutUserService = ServicePool.logoutUser
+
     // Server interaction
     fun updateUser(updateUserRequest: UpdateUserRequest) {
         if (accessToken != null && userId != null) {
@@ -56,6 +61,24 @@ class MyPageViewModel : ViewModel() {
                 }
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                     t.message?.let { Log.d("error withdrawUser", it) } ?: "Failed server communication (no response)"
+                }
+            })
+        }
+    }
+
+    fun logoutUser() {
+        if (accessToken != null && userId != null) {
+            logoutUserService.logoutUser(accessToken, userId).enqueue(object : retrofit2.Callback<UserResponse> {
+                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                    if (response.isSuccessful) {
+                        _logoutUser.value = response.body()
+                        Log.d("success logoutUser", _logoutUser.value.toString())
+                    } else {
+                        Log.d("error logoutUser", "Failed response")
+                    }
+                }
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    t.message?.let { Log.d("error logoutUser", it) } ?: "Failed server communication (no response)"
                 }
             })
         }
