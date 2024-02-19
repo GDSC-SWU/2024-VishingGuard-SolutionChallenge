@@ -72,31 +72,33 @@ class PishingFragment : BindingFragment<FragmentPishingBinding>(R.layout.fragmen
             "Risky" -> {
                 setResultUI(
                     R.string.tv_title_risky, R.string.tv_result_risky, R.string.tv_content_risky,
-                    R.drawable.ic_step_risky, R.drawable.ic_frame_risky, R.drawable.img_result_risky
+                    R.drawable.ic_step_risky, R.drawable.ic_frame_risky, R.drawable.bg_result_risky, R.drawable.img_result_risky
                 )
             }
             "Moderate" -> {
                 setResultUI(
                     R.string.tv_title_moderate, R.string.tv_result_moderate, R.string.tv_content_moderate,
-                    R.drawable.ic_step_moderate, R.drawable.ic_frame_moderate, R.drawable.img_result_moderate
+                    R.drawable.ic_step_moderate, R.drawable.ic_frame_moderate, R.drawable.bg_result_moderate, R.drawable.img_result_moderate
                 )
             }
             "Safe" -> {
                 setResultUI(
                     R.string.tv_title_safe, R.string.tv_result_safe, R.string.tv_content_safe,
-                    R.drawable.ic_step_safe, R.drawable.ic_frame_safe,R.drawable.img_result_safe
+                    R.drawable.ic_step_safe, R.drawable.ic_frame_safe, R.drawable.bg_result_safe, R.drawable.img_result_safe
                 )
             }
         }
     }
 
     // Set phishing result UI components
-    private fun setResultUI(titleResId: Int, resultResId: Int, contentResId: Int, stepResId: Int, frameResId: Int, resultImageResId: Int) {
+    private fun setResultUI(titleResId: Int, resultResId: Int, contentResId: Int, stepResId: Int, frameResId: Int, resultBgResId: Int, resultImageResId: Int) {
+        binding.tvStandard.visibility = View.VISIBLE
         binding.tvTitleResult.text = context?.getString(titleResId)
         binding.tvResult.text = context?.getString(resultResId)
         binding.tvResultContent.text = context?.getString(contentResId)
         binding.imgStepSafe.setBackgroundResource(stepResId)
         binding.imgFrameSafe.setBackgroundResource(frameResId)
-        binding.imgResult.setBackgroundResource(resultImageResId)
+        binding.bgResult.setImageResource(resultBgResId)
+        binding.imgResult.setImageResource(resultImageResId)
     }
 }
