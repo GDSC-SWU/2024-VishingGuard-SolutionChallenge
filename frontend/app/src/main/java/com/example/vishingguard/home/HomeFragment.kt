@@ -95,7 +95,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     // Function to fetch FSS file based on the provided number
     private fun getFssFile(number : Int){
-        viewModel.getFss(number)
+        viewModel.getFss(requireContext(),number)
         Toast.makeText(requireContext(), R.string.tv_down, Toast.LENGTH_SHORT).show()
         Log.d("getFss", "getFss : ${number}" )
     }
