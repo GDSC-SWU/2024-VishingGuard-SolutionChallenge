@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
 
         <ImageButton
-            android:id="@+id/img_heart"
+            android:id="@+id/btn_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -83,19 +83,19 @@
             android:layout_marginStart="10dp"
             android:text="0"
             android:textAppearance="@style/TextAppearance.Vishing.Post.Content"
-            app:layout_constraintBottom_toBottomOf="@+id/img_heart"
-            app:layout_constraintStart_toEndOf="@+id/img_heart"
-            app:layout_constraintTop_toTopOf="@+id/img_heart"/>
+            app:layout_constraintBottom_toBottomOf="@+id/btn_heart"
+            app:layout_constraintStart_toEndOf="@+id/btn_heart"
+            app:layout_constraintTop_toTopOf="@+id/btn_heart"/>
 
         <ImageView
-            android:id="@+id/img_comment"
+            android:id="@+id/btn_comment"
             android:layout_width="13dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_comment"
-            app:layout_constraintBottom_toBottomOf="@+id/img_heart"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_heart"
             app:layout_constraintStart_toEndOf="@+id/tv_heart"
-            app:layout_constraintTop_toTopOf="@+id/img_heart"/>
+            app:layout_constraintTop_toTopOf="@+id/btn_heart"/>
 
         <TextView
             android:id="@+id/tv_comment"
@@ -104,9 +104,9 @@
             android:layout_marginStart="10dp"
             android:text="0"
             android:textAppearance="@style/TextAppearance.Vishing.Post.Content"
-            app:layout_constraintBottom_toBottomOf="@+id/img_comment"
-            app:layout_constraintStart_toEndOf="@+id/img_comment"
-            app:layout_constraintTop_toTopOf="@+id/img_comment"/>
+            app:layout_constraintBottom_toBottomOf="@+id/btn_comment"
+            app:layout_constraintStart_toEndOf="@+id/btn_comment"
+            app:layout_constraintTop_toTopOf="@+id/btn_comment"/>
 
         <View
             android:id="@+id/view"
@@ -117,6 +117,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_heart" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_heart"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

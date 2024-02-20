@@ -1,4 +1,4 @@
-package com.example.vishingguard.smishing.data
+package com.example.vishingguard.pishing.smishing.data
 
 import retrofit2.Call
 import retrofit2.http.Body

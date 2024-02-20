@@ -17,7 +17,7 @@ class SmishingReportAdapter(private val smishingReports: List<SmishingReport>) :
         val currentItem = smishingReports[position]
         holder.smishingBinding.tvSmishingScript.text = currentItem.smishingScript
         holder.smishingBinding.tvPhone.text = currentItem.phone
-        holder.smishingBinding.tvTime.text = currentItem.date +" "+ currentItem.time
+        holder.smishingBinding.tvTime.text = currentItem.created_at
         holder.smishingBinding.tvComment.text = currentItem.keywordComment
     }
 

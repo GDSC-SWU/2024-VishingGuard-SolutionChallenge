@@ -14,7 +14,6 @@ data class SmishingResponse(
 data class SmishingReport(
     @SerialName("smishingScript") val smishingScript: String,
     @SerialName("phone") val phone: String,
-    @SerialName("date") val date: String,
-    @SerialName("time") val time: String,
+    @SerialName("created_at") val created_at: String,
     @SerialName("keywordComment") val keywordComment: String
 )

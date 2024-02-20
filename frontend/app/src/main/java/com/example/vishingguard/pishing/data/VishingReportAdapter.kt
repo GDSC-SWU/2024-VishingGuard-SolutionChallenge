@@ -17,7 +17,7 @@ class VishingReportAdapter(private val vishingReports: List<VishingReport>) : Re
         val currentItem = vishingReports[position]
 
         holder.vishingBinding.tvPhone.text = currentItem.phone
-        holder.vishingBinding.tvTime.text = currentItem.date +" "+ currentItem.time
+        holder.vishingBinding.tvTime.text = currentItem.created_at
         holder.vishingBinding.tvComment.text = currentItem.keywordComment
     }
 

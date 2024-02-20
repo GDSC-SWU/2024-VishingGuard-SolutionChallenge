@@ -6,7 +6,7 @@ import com.example.vishingguard.login.data.LoginApiService
 import com.example.vishingguard.map.data.RouteApiService
 import com.example.vishingguard.mypage.MyPageApiService
 import com.example.vishingguard.pishing.data.ReportApiService
-import com.example.vishingguard.smishing.data.SmsApiService
+import com.example.vishingguard.pishing.smishing.data.SmsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -16,10 +16,12 @@ object ApiFactory {
     private const val BASE_URL =
         "http://35.216.77.51:8080"
 
+    val json = Json { ignoreUnknownKeys = true }
+
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 }

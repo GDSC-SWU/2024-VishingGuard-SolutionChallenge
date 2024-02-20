@@ -114,6 +114,7 @@
                 android:text="@string/btn_done"
                 android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
                 android:textColor="@color/blue"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/img_result_search"
                 app:layout_constraintStart_toStartOf="@+id/img_result_search"

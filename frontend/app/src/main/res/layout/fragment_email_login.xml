@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="@color/fragment_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -110,8 +110,10 @@
             android:layout_marginTop="23dp"
             android:background="@drawable/ic_rectangle_blue"
             android:text="@string/btn_sign_in"
+            android:elevation="0dp"
             android:textAppearance="@style/TextAppearance.Vishing.Content.Bold"
             android:textColor="@color/blue"
+            style="@style/Widget.AppCompat.Button.Borderless"
             app:layout_constraintEnd_toEndOf="@+id/input_pw"
             app:layout_constraintStart_toStartOf="@+id/input_pw"
             app:layout_constraintTop_toBottomOf="@+id/input_pw" />

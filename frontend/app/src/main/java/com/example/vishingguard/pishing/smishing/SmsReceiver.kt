@@ -1,14 +1,11 @@
-package com.example.vishingguard.smishing
+package com.example.vishingguard.pishing.smishing
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.telephony.SmsMessage
 import com.example.vishingguard.MainActivity
-import java.util.Locale
 
 @Suppress("DEPRECATION")
 class SmsReceiver : BroadcastReceiver() {
@@ -25,16 +22,9 @@ class SmsReceiver : BroadcastReceiver() {
                 val sender = messages[0]?.originatingAddress
                 val content = messages[0]?.messageBody.toString()
 
-                // Get current date and time
-                val currentDateTime = Calendar.getInstance().time
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-                val date = dateFormat.format(currentDateTime)
-                val time = timeFormat.format(currentDateTime)
-
-                if (sender != null && date != null) {
+                if (sender != null) {
                     // pass data to the activity
-                    context?.let { sendToActivity(it, sender, content, date, time) }
+                    context?.let { sendToActivity(it, sender, content) }
                 }
             }
         }
@@ -51,7 +41,7 @@ class SmsReceiver : BroadcastReceiver() {
     }
 
     // Send message content to the activity
-    private fun sendToActivity(context: Context, sender: String, content: String, date: String, time: String) {
+    private fun sendToActivity(context: Context, sender: String, content: String) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(
             Intent.FLAG_ACTIVITY_NEW_TASK
@@ -60,8 +50,6 @@ class SmsReceiver : BroadcastReceiver() {
         )
         intent.putExtra("sender", sender)
         intent.putExtra("content", content)
-        intent.putExtra("date", date)
-        intent.putExtra("time", time)
         context.startActivity(intent)
     }
 }
