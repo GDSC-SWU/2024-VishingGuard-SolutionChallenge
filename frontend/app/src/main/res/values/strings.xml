@@ -61,6 +61,8 @@
 
     <!--pishing text-->
     <string name="tv_warning">Danger! Please hang up the phone! \nSeems like a phone scam!</string>
+    <string name="tv_warning_title">Danger!</string>
+    <string name="tv_warning_content">This seems like a smishing text</string>
 
     <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
     <string name="tv_record">Main Phishing Records</string>
