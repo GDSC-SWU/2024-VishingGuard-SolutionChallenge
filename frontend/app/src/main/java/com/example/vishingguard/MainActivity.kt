@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vishingguard.base.BindingActivity
 import com.example.vishingguard.databinding.ActivityMainBinding
+import com.example.vishingguard.pishing.smishing.data.SmsDialog
 import com.example.vishingguard.pishing.smishing.data.SmsRequest
 import com.example.vishingguard.pishing.smishing.data.SmsViewModel
 
@@ -65,6 +66,18 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             val smsRequest = SmsRequest(
                 smishingScript = smishingScript, phone = phone)
             viewModel.postSms(smsRequest)
+
+            handleReportResponse()
+        }
+    }
+
+    private fun handleReportResponse() {
+        // Observe Vishing data
+        viewModel.postSms.observe(this) { response ->
+            if (response.data) {
+                val dialog = SmsDialog(this)
+                dialog.show()
+            }
         }
     }
 }
