@@ -38,13 +38,19 @@ public class Post {
 
     @ServerTimestamp
     private Timestamp updated_at;
+    @NotNull
+    private int comment_count;
+    @NotNull
+    private int heart_count;
 
     @Builder
-    public Post(User user, Long user_id, String title, String content) {
+    public Post(User user, Long user_id, String title, String content, int comment_count, int heart_count) {
         this.user = user;
         this.user_id = user_id;
         this.title = title;
         this.content = content;
+        this.comment_count=comment_count;
+        this.heart_count=heart_count;
     }
 
     public void update(String title, String content){

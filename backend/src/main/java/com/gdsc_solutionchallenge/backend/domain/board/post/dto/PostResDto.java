@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +33,7 @@ public class PostResDto {
     private boolean isMyPost;
 
     @Builder
-    public PostResDto(Post post, boolean isMyPost ,int comment_count,int heart_count) throws Exception {
+    public PostResDto(Post post, boolean isMyPost/* ,int comment_count,int heart_count*/) throws Exception {
         this.postId=post.getId();
         this.content=post.getContent();
         this.title=post.getTitle();
@@ -39,18 +41,17 @@ public class PostResDto {
         this.userId=post.getUser_id();
         this.updated_at = formatTimestamp(post.getUpdated_at());
         this.created_at = formatTimestamp(post.getCreated_at());
-        // set comment count
-        this.comment_count = comment_count;
-
-        // set heart count
-        this.heart_count = heart_count;
+        this.comment_count = post.getComment_count();
+        this.heart_count = post.getHeart_count();
         this.isMyPost=isMyPost;
     }
 
     private String formatTimestamp(Date date) {
         if (date != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return sdf.format(date);
+            Instant instant = date.toInstant();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm")
+                    .withZone(ZoneId.of("Asia/Seoul")); // 시간대 정보 추가
+            return formatter.format(instant);
         }
         return null;
     }

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Getter
@@ -24,9 +27,12 @@ public class ReportSmsResDto {
     }
     private String formatTimestamp(Date date) {
         if (date != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return sdf.format(date);
+            Instant instant = date.toInstant();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                    .withZone(ZoneId.of("Asia/Seoul")); // 시간대 정보 추가
+            return formatter.format(instant);
         }
         return null;
     }
+
 }

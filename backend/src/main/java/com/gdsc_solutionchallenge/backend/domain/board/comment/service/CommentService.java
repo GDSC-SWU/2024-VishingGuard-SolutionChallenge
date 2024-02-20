@@ -42,6 +42,9 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
+        //post.setComment_count(post.getComment_count()+1);
+        postRepository.upCommentCount(postId);
+
         return new CommentResDto(comment, post);
     }
 
@@ -106,6 +109,8 @@ public class CommentService {
             throw new BaseException(HttpStatus.FORBIDDEN.value(), "No permission to delete");
         }
 
+        //post.setComment_count(post.getComment_count()-1);
+        postRepository.downCommentCount(postId);
         return commentRepository.delete(commentId);
     }
 }

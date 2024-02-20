@@ -6,7 +6,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Repository
@@ -63,19 +65,6 @@ public class HeartRepository {
         }
     }
 
-    public List<Heart> getAllHeartByPostId(String postId) throws Exception{
-        CollectionReference hearts = firestore.collection("heart");
 
-        Query query = hearts.whereEqualTo("post_id", postId);
-
-        ApiFuture<QuerySnapshot> querySnapshotApiFuture = query.get();
-        QuerySnapshot querySnapshot = querySnapshotApiFuture.get();
-
-        List<Heart> result = new ArrayList<>();
-        for (QueryDocumentSnapshot document : querySnapshot.getDocuments()) {
-            result.add(document.toObject(Heart.class));
-        }
-        return result;
-    }
 
 }

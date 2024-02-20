@@ -94,4 +94,48 @@ public class PostRepository {
 
         return titles;
     }
+
+    // Increment comment_count by 1
+    public void upCommentCount(String postId) throws Exception {
+        updateCommentCount(postId, 1);
+    }
+
+    // Decrement comment_count by 1
+    public void downCommentCount(String postId) throws Exception {
+        updateCommentCount(postId, -1);
+    }
+
+    private void updateCommentCount(String postId, int delta) throws Exception {
+        CollectionReference posts = firestore.collection("post");
+        DocumentReference documentReference = firestore.collection("post").document(postId);
+
+        // Atomically increment or decrement comment_count by delta
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("comment_count", FieldValue.increment(delta));
+
+        ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
+        writeResultApiFuture.get();  // Wait for the result
+    }
+
+    // Increment heart_count by 1
+    public void upHeartCount(String postId) throws Exception {
+        updateHeartCount(postId, 1);
+    }
+
+    // Decrement heart_count by 1
+    public void downHeartCount(String postId) throws Exception {
+        updateHeartCount(postId, -1);
+    }
+
+    private void updateHeartCount(String postId, int delta) throws Exception {
+        CollectionReference posts = firestore.collection("post");
+        DocumentReference documentReference = firestore.collection("post").document(postId);
+
+        // Atomically increment or decrement comment_count by delta
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("heart_count", FieldValue.increment(delta));
+
+        ApiFuture<WriteResult> writeResultApiFuture = documentReference.update(updates);
+        writeResultApiFuture.get();  // Wait for the result
+    }
 }
