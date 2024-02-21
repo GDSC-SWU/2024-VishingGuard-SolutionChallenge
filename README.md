@@ -29,10 +29,12 @@ Additionally, we aim to establish and operate more cohesive communities that pre
 We want to be a service that contributes to a society that becomes a safe settlement that embraces the socially disadvantaged.   
 
 ## 🚨 Tech Stack
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/4fa563e7-c86a-489c-9da7-7a4ed05222cf">  
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/e8498508-e42a-4562-93e9-1bfff1c766ae">  
 
 ## 🚨 Demo Video
 ## 🚨 How To Use
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/b92967e0-ca44-4e33-b0db-fd6519cb540d">
+
 ## 🚨 Team Member
 | Name | [Nayeong Kim](https://github.com/nanna29) | [Youjin Park](https://github.com/youjin09222) | [Chaeyeon Kim](https://github.com/chaeyeoniklmw) | [Yourim Ha](https://github.com/YulimHa) |
 | --- | --- | --- |--- | --- |
