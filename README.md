@@ -1,4 +1,6 @@
-# 2024-VishingGuard-SolutionChallenge
+# 2024 SolutionChallenge - VGuard : VishingGuard 🚨
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb">
+
 ## 🚨 Service Introduction
 ### Why do people fall victim to voice phishing? 🤔
 The most emotionally compelling factor for humans is 'anxiety.'   
@@ -9,6 +11,8 @@ We have recognized the need to protect individuals' valuable assets. Hence, we i
 In addition, voice phishing crimes can occur to everyone, including the socially disadvantaged.   
 To counter the increasingly sophisticated evolution of voice phishing techniques, we aim to provide a voice phishing crime prevention service.
 ## 🚨 Our Goals
+<img src = "https://github.com/GDSC-SWU/2024-FE-SolutionChallenge/assets/87843494/247ce071-3451-4055-b706-d7e3c5d6a773">
+
 ### Reduced Inequalities
 🎯 **Digital Underprivileged Groups**   
 Individuals with low digital literacy or limited access to information, such as the elderly and low-income populations, are more susceptible to voice phishing crimes.  
