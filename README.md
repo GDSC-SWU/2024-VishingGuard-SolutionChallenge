@@ -32,7 +32,7 @@ We want to be a service that contributes to a society that becomes a safe settle
 ## 🚨 Tech Stack
 
 <div align="center">
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/cbad062f-9550-442e-bc7a-8ae85d28376e" width="650">  
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/cbad062f-9550-442e-bc7a-8ae85d28376e" width="800">  
 </div>
 
 ## 🚨 Demo Video
