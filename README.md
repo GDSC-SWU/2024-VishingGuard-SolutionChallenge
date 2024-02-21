@@ -33,7 +33,7 @@ We want to be a service that contributes to a society that becomes a safe settle
 
 ## 🚨 Demo Video
 ## 🚨 How To Use
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/b92967e0-ca44-4e33-b0db-fd6519cb540d">
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/012e9290-35d2-43dc-9f96-dd691e5f0eec">
 
 ## 🚨 Team Member
 | Name | [Nayeong Kim](https://github.com/nanna29) | [Youjin Park](https://github.com/youjin09222) | [Chaeyeon Kim](https://github.com/chaeyeoniklmw) | [Yourim Ha](https://github.com/YulimHa) |
