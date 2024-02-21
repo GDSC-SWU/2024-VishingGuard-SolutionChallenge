@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">VishingGuard</string>
+
+    <!--bottom navigation text-->
+    <string name="title_home">Home</string>
+    <string name="title_map">Route</string>
+    <string name="title_pishing">Phishing Risk</string>
+    <string name="title_mypage">My Page</string>
+    <string name="title_pishing_report">Phishing Risk Report</string>
+
+    <!--sign up text-->
+    <string name="tv_start_title">Safe living with VishingGuard!</string>
+    <string name="tv_start_sub">"Welcome!\nFeel free to sign up using your preferred method \nand enjoy a secure lifestyle while staying clear \nof voice phishing risks :)"</string>
+    <string name="tv_signUp_title">Sign-up is almost complete!</string>
+    <string name="tv_signUp_sub">Please enter your name, email, and password</string>
+
+    <!--sign in text-->
+    <string name="tv_login_title">Login with your registered account!</string>
+    <string name="tv_login_sub">Experience the convenience of automatic login \nto simplify the login process!</string>
+    <string name="tv_login_email">Please enter your email and password!</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="btn_sign_in_google">Sign in with Google</string>
+    <string name="btn_sign_in_email">Sign in with Email</string>
+    <string name="btn_sign_up_google">Sign up with Google</string>
+    <string name="btn_sign_up_email">Sign up with Email</string>
+    <string name="tv_account">Already have an account?</string>
+
+    <!--home text-->
+    <string name="title_procedure_home">Reporting Procedure</string>
+    <string name="title_report_home">Reporting Center</string>
+    <string name="title_prevention_home">Preventive Measures</string>
+    <string name="title_search_home">Spam Check</string>
+    <string name="tv_pishing_home">Check for any phishing risks discovered this week.</string>
+    <string name="btn_check_home">Check</string>
+
+    <string name="tv_procedure">Dealing with Voice Phishing</string>
+    <string name="tv_prevention">10 Tips to Avoid Voice Phishing</string>
+    <string name="tv_down">Voice Phishing Related File has been Downloaded.</string>
+
+    <!--search text-->
+    <string name="tv_title_search">Phishing Search</string>
+    <string name="hint_search">Enter suspicious number</string>
+    <string name="tv_result_search">The number is</string>
+    <string name="tv_search_count">This number has been searched</string>
+    <string name="safe">Safe</string>
+
+    <!--community text-->
+    <string name="tv_community_title">Community</string>
+    <string name="hint_search_community">Please enter your search term</string>
+    <string name="tv_write_title">Write a Post</string>
+    <string name="hint_write_title">Title your post</string>
+    <string name="hint_write_content">Please avoid offensive content</string>
+    <string name="hint_write_cmment">Please enter your comment</string>
+    <string name="tv_edit">Edit</string>
+    <string name="tv_delete">Delete</string>
+
+    <!--map text-->
+    <string name="tv_map_safe">"No phishing risk routes found! \nWe're living safely from voice phishing!"</string>
+    <string name="tv_no_route_map">No phishing risk routes found.</string>
+    <string name="tv_map_risky">"It looks like you've been to the bank a lot lately. \nAre you caught up in voice phishing?"</string>
+
+    <!--pishing text-->
+    <string name="tv_warning">Danger! Please hang up the phone! \nSeems like a phone scam!</string>
+    <string name="tv_warning_title">Danger!</string>
+    <string name="tv_warning_content">This seems like a smishing text</string>
+
+    // Notification
+    <string name="title_notification">Voice Phishing Check</string>
+    <string name="content_notification">"Hang up and verify if it's voice phishing"</string>
+    <string name="title_warning_call">Hold on!</string>
+    <string name="content_warning_call">To prevent voice phishing, \nplease record the call.</string>
+
+    <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
+    <string name="tv_record">Main Phishing Records</string>
+    <string name="tv_call">Call</string>
+    <string name="tv_result_call">No phishing call records.</string>
+    <string name="tv_message">Message</string>
+    <string name="tv_result_massage">No phishing message records.</string>
+
+    <string name="tv_title_safe">Safe</string>
+    <string name="tv_result_safe">The phishing risk report for this week shows that everything is safe :)</string>
+    <string name="tv_content_safe">"We're handling voice phishing well! 👍🏻"</string>
+
+    <string name="tv_title_moderate">Moderate</string>
+    <string name="tv_result_moderate">"This week's phishing risk report indicates moderate risk."</string>
+    <string name="tv_content_moderate">"Please pay attention to voice phishing ✊🏻"</string>
+
+    <string name="tv_title_risky">Risky</string>
+    <string name="tv_result_risky">"This week's phishing risk report results are risky :("</string>
+    <string name="tv_content_risky">"More vigilance on voice phishing 🙏🏻"</string>
+
+    <!--my page text-->
+    <string name="tv_update_mypage">Update Information</string>
+    <string name="tv_withdrawal_mypage">Unsubscribe</string>
+    <string name="tv_logout_mypage">Log out</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_done">Done</string>
+    <string name="tv_name">Name</string>
+    <string name="hint_name">Please enter your name.</string>
+    <string name="hint_new_name">Please enter a name within 5 characters.</string>
+    <string name="tv_email">Email</string>
+    <string name="hint_email">Please enter your email.</string>
+    <string name="tv_continue">Continue</string>
+    <string name="tv_pw">Password</string>
+    <string name="hint_pw">Please enter your password.</string>
+    <string name="hint_new_pw">Please enter a new password.</string>
+    <string name="hint_check_pw">Please re-enter your password.</string>
+
+    <string name="title_logout">Sign Out</string>
+    <string name="content_logout">Would you like to sign out?</string>
+    <string name="title_withdraw">Unsubscribe?</string>
+    <string name="content_withdraw">Withdraw membership?</string>
+
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+</resources>

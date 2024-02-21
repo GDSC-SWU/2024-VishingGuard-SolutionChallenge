@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fragment_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/title_map"
+                android:textAppearance="@style/TextAppearance.Vishing.Title"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/bg_result"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/ic_rectangle_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <ImageView
+            android:id="@+id/img_result"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/img_map_safe"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toTopOf="@+id/bg_result" />
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="22dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/tv_map_safe"
+            android:textAppearance="@style/TextAppearance.Vishing.Content"
+            app:layout_constraintBottom_toBottomOf="@+id/img_result"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toEndOf="@+id/img_result"
+            app:layout_constraintTop_toTopOf="@+id/img_result" />
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toBottomOf="@+id/bg_result">
+
+            <fragment
+                android:id="@+id/fragment_map"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_route"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:background="@color/fragment_background"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/map_container"
+            app:layout_constraintStart_toStartOf="@+id/map_container"
+            app:layout_constraintTop_toBottomOf="@+id/map_container"
+            tools:listitem="@layout/item_route"/>
+
+        <ImageView
+            android:id="@+id/backGround_road"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="33dp"
+            android:background="@drawable/ic_dot_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/bg_result"
+            app:layout_constraintStart_toStartOf="@+id/bg_result"
+            app:layout_constraintTop_toBottomOf="@+id/bg_result" />
+
+        <ImageView
+            android:id="@+id/img_no_road"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_no_road"
+            app:layout_constraintBottom_toBottomOf="@+id/backGround_road"
+            app:layout_constraintEnd_toEndOf="@+id/backGround_road"
+            app:layout_constraintStart_toStartOf="@+id/backGround_road"
+            app:layout_constraintTop_toTopOf="@+id/backGround_road"
+            app:layout_constraintVertical_bias="0.40" />
+
+        <TextView
+            android:id="@+id/tv_no_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text="@string/tv_no_route_map"
+            android:textAppearance="@style/TextAppearance.Vishing.Content2"
+            app:layout_constraintEnd_toEndOf="@+id/backGround_road"
+            app:layout_constraintStart_toStartOf="@+id/backGround_road"
+            app:layout_constraintTop_toBottomOf="@+id/img_no_road"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
