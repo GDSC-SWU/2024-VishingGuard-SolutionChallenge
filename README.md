@@ -30,13 +30,13 @@ Additionally, we aim to establish and operate more cohesive communities that pre
 We want to be a service that contributes to a society that becomes a safe settlement that embraces the socially disadvantaged.   
 
 ## 🚨 Tech Stack
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/e8498508-e42a-4562-93e9-1bfff1c766ae">  
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/cbad062f-9550-442e-bc7a-8ae85d28376e">  
+
 
 ## 🚨 Demo Video
 ## 🚨 How To Use
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/012e9290-35d2-43dc-9f96-dd691e5f0eec">
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/005743e7-dc0c-40f2-991d-e883f936987f">
-
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/4b8f4f1e-100e-4040-a11b-65cb7da7a48b">
 
 
 
