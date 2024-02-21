@@ -1,3 +1,6 @@
--data processing: voice pishing file(STT API) + crawling file, 국립국어원 모두의 말뭉치 #300개 random select
--데이터 전처리
--KoBERT 모델 설계 & 학습 & 정확도 
+voice pishing file(STT API) + crawling file[yes_vp], 국립국어원 모두의 말뭉치[no_vp], 300개 random select : data_collecting
+data preprocessing : data preprocessing, re_preprocessing_data
+model : huggingface hub save "chaeyeon1/vp_kobert_model"
+model_test: confusion_matrix.py, Huperparameter tunning.py
+FastAPI: env,Scripts, main.py,Dockerfile, docker-compose.yaml
+cloud platform and hosting services (Google Cloud Platform): IP deploy
