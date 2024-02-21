@@ -36,13 +36,13 @@ We want to be a service that contributes to a society that becomes a safe settle
 
 ## 🚨 Demo Video
 
-<a href="https://www.youtube.com/watch?v=J3kUYFFdVc0"><img alt="VGuard_Demo" src="https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb" width="800">
+<a href="https://www.youtube.com/watch?v=J3kUYFFdVc0"><img alt="VGuard_Demo" src="https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb" width="700">
 
 ## 🚨 How To Use
 
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/82a5607a-d5c9-4a15-88f3-f94f37958af4" width="800" >
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/813691a7-08f3-4c9c-964f-6ad1b15a6e40" width="800" >
-<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/026f01f9-8269-4698-b9ec-13e3c989d6cf" width="800" >
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/82a5607a-d5c9-4a15-88f3-f94f37958af4" width="700" >
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/813691a7-08f3-4c9c-964f-6ad1b15a6e40" width="700" >
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/026f01f9-8269-4698-b9ec-13e3c989d6cf" width="700" >
 
 
 ## 🚨 Team Member
