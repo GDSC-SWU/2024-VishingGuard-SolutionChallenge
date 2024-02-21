@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,9 @@ plugins {
 }
 
 android {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+
     namespace = "com.example.vishingguard"
     compileSdk = 34
 
@@ -17,6 +22,17 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Gradle.properties 파일에 정의된 API 키 사용
+        buildConfigField(
+            "String", "Google_MAP_API_KEY", properties.getProperty("Google_MAP_API_KEY")
+        )
+        buildConfigField(
+            "String", "clientId", properties.getProperty("clientId")
+        )
+        buildConfigField(
+            "String", "clientSecret", properties.getProperty("clientSecret")
+        )
     }
 
     buildTypes {
@@ -39,6 +55,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -83,4 +100,7 @@ dependencies {
     // Google Map
     implementation ("com.google.android.gms:play-services-location:17.0.0")
     implementation ("com.google.android.gms:play-services-maps:17.0.0")
+
+    // OK
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 }
