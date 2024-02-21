@@ -8,21 +8,21 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 
-# 모델 및 토크나이저 불러오기
+# Load model and tokenizer
 model_name = "chaeyeon1/vp_kobert_model"
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 class PredictInput(BaseModel):
-    text: str  # 입력 텍스트
+    text: str  # Input text
 
 class PredictOutput(BaseModel):
-    is_phishing: bool  # 보이스피싱 여부
+    is_phishing: bool  # Whether it's a phishing or not
 
 @app.post("/predict", response_model=PredictOutput)
 async def predict(payload: PredictInput):
     try:
-        # 텍스트를 토큰화하고 모델에 입력으로 전달
+        # Tokenize the text and pass it to the model as input
         inputs = tokenizer(payload.text, return_tensors='pt', padding=True, truncation=True)
         with torch.no_grad():
             outputs = model(**inputs)
@@ -30,14 +30,14 @@ async def predict(payload: PredictInput):
         logits = outputs.logits
         probabilities = torch.nn.functional.softmax(logits, dim=1).squeeze().tolist()
 
-        # 확률에 따라 보이스피싱 여부 판단
-        is_phishing = probabilities[1] > 0.5  # 보이스피싱 클래스의 확률이 0.5 이상인 경우 True
+        # Determine whether it's phishing or not based on probabilities
+        is_phishing = probabilities[1] > 0.5  # True if the probability of phishing class is greater than 0.5
 
         return {"is_phishing": is_phishing}
 
     except Exception as e:
-        print(f"에러 발생: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"내부 서버 오류: {str(e)}")
+        print(f"Error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
