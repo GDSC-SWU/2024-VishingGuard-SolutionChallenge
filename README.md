@@ -11,7 +11,8 @@ We have recognized the need to protect individuals' valuable assets. Hence, we i
 In addition, voice phishing crimes can occur to everyone, including the socially disadvantaged.   
 To counter the increasingly sophisticated evolution of voice phishing techniques, we aim to provide a voice phishing crime prevention service.
 ## 🚨 Our Goals
-<img src = "https://github.com/GDSC-SWU/2024-FE-SolutionChallenge/assets/87843494/247ce071-3451-4055-b706-d7e3c5d6a773">
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/b92967e0-ca44-4e33-b0db-fd6519cb540d">
+
 
 ### Reduced Inequalities
 🎯 **Digital Underprivileged Groups**   
