@@ -1,9 +1,20 @@
 package com.example.vishingguard
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Handler
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -12,10 +23,12 @@ import com.example.vishingguard.databinding.ActivityMainBinding
 import com.example.vishingguard.pishing.smishing.data.SmsDialog
 import com.example.vishingguard.pishing.smishing.data.SmsRequest
 import com.example.vishingguard.pishing.smishing.data.SmsViewModel
+import com.example.vishingguard.vishing.CallDialog
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val viewModel by viewModels<SmsViewModel>()
+    private val SmsViewModel by viewModels<SmsViewModel>()
+    private lateinit var telephonyManager: TelephonyManager
 
     override fun initView() {
         // Set up the screen
@@ -23,6 +36,17 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         // Request permissions for receiving SMS
         requestPermission()
+
+        // Request permissions
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            1
+        )
+
+        // Register the phone state receiver
+        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        registerReceiver(phoneStateReceiver, IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED))
     }
 
     private fun setNavigation() {
@@ -40,12 +64,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     // Request permission to receive SMS
     private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECEIVE_SMS)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS)
             != PackageManager.PERMISSION_GRANTED
         ) {
             // Request permission if not granted
             ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.RECEIVE_SMS), 0)
+                arrayOf(Manifest.permission.RECEIVE_SMS), 0)
         }
     }
 
@@ -65,7 +89,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             // Send SMS data to ViewModel for processing
             val smsRequest = SmsRequest(
                 smishingScript = smishingScript, phone = phone)
-            viewModel.postSms(smsRequest)
+            SmsViewModel.postSms(smsRequest)
 
             handleReportResponse()
         }
@@ -73,11 +97,75 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun handleReportResponse() {
         // Observe Vishing data
-        viewModel.postSms.observe(this) { response ->
+        SmsViewModel.postSms.observe(this) { response ->
             if (response.data) {
                 val dialog = SmsDialog(this)
                 dialog.show()
             }
         }
+    }
+
+    private val phoneStateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                val state = it.getStringExtra(TelephonyManager.EXTRA_STATE)
+                when (state) {
+                    TelephonyManager.EXTRA_STATE_RINGING -> {
+                        // Show dialog when there's an incoming call
+                        val callDialog = CallDialog(this@MainActivity)
+                        callDialog.show()
+                    }
+                    TelephonyManager.EXTRA_STATE_OFFHOOK -> {
+                        // Start recording when call starts
+                        // Add code to send notification 30 minutes later
+                        Handler().postDelayed({
+                            sendNotification()
+                        }, 1800000)
+                    }
+                    TelephonyManager.EXTRA_STATE_IDLE -> {
+                        // Stop recording when call ends
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(phoneStateReceiver)
+    }
+
+    private fun sendNotification() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channelId = "channel_id"
+        val channelName = "channel_name"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
+            channel.enableVibration(true) // Enable vibration
+        }
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(getString(R.string.title_notification))
+            .setContentText(getString(R.string.content_notification))
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000)) // Set vibration pattern
+
+        notificationManager.notify(112345648, notificationBuilder.build())
+
+        // Check and request notification access permission
+        if (!isNotificationAccessEnabled()) {
+            // If notification access permission is not granted, navigate to settings to request it
+            val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+            startActivity(intent)
+        }
+    }
+    private fun isNotificationAccessEnabled(): Boolean {
+        val contentResolver = applicationContext.contentResolver
+        val listeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
+        val packageName = applicationContext.packageName
+        return listeners != null && listeners.contains(packageName)
     }
 }

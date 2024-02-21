@@ -64,6 +64,12 @@
     <string name="tv_warning_title">Danger!</string>
     <string name="tv_warning_content">This seems like a smishing text</string>
 
+    // Notification
+    <string name="title_notification">Voice Phishing Check</string>
+    <string name="content_notification">"Hang up and verify if it's voice phishing"</string>
+    <string name="title_warning_call">Hold on!</string>
+    <string name="content_warning_call">To prevent voice phishing, \nplease record the call.</string>
+
     <string name="tv_standard_pishing">The analysis above reflects data from the past 7 days.</string>
     <string name="tv_record">Main Phishing Records</string>
     <string name="tv_call">Call</string>
@@ -81,7 +87,7 @@
 
     <string name="tv_title_risky">Risky</string>
     <string name="tv_result_risky">"This week's phishing risk report results are risky :("</string>
-    <string name="tv_content_risky">"More vigilance on voice phishing 🙏🏻</string>
+    <string name="tv_content_risky">"More vigilance on voice phishing 🙏🏻"</string>
 
     <!--my page text-->
     <string name="tv_update_mypage">Update Information</string>
