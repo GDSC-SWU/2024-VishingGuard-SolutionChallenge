@@ -39,6 +39,8 @@ We want to be a service that contributes to a society that becomes a safe settle
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/4b8f4f1e-100e-4040-a11b-65cb7da7a48b">
 
 
+나영이가방금뽑은거
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/ff4b9cbb-c039-4538-b093-2e09b0190e3e">
 
 
 ## 🚨 Team Member
