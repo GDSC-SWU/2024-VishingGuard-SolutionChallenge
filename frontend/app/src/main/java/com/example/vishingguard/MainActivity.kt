@@ -13,6 +13,7 @@ import android.os.Environment
 import android.os.Handler
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -28,12 +29,15 @@ import com.example.vishingguard.stt.RequestConfig
 import com.example.vishingguard.stt.SttData
 import com.example.vishingguard.stt.SttViewModel
 import com.example.vishingguard.vishing.CallDialog
+import com.example.vishingguard.vishing.VoiceRequest
+import com.example.vishingguard.vishing.VoiceViewModel
 import java.io.File
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val SmsViewModel by viewModels<SmsViewModel>()
     private val SttViewModel by viewModels<SttViewModel>()
+    private val VoiceViewModel by viewModels<VoiceViewModel>()
 
     private lateinit var telephonyManager: TelephonyManager
 
@@ -207,6 +211,34 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         SttViewModel.postTranscribe.observe(this) { response ->
             if (response.id != null) {
                 SttData.setTranscribeId(response.id)
+                startPollingTranscribe()
+            }
+        }
+    }
+
+    private fun startPollingTranscribe() {
+        SttViewModel.getTranscribe()
+
+        SttViewModel.getTranscribe.observe(this) { response ->
+            if (response.status == "completed") {
+                response.results?.let { results ->
+                    results.utterances.forEachIndexed { index, utterance ->
+
+                        // FastAPI 연결
+                        val voiceRequest = VoiceRequest(utterance.msg)
+                        VoiceViewModel.postVoice(voiceRequest)
+                        handleResponse()
+                        Log.d("Utterance $index", utterance.msg)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleResponse() {
+        // Observe Vishing data
+        VoiceViewModel.postVoice.observe(this) { response ->
+            if (response.is_phishing) {
             }
         }
     }
