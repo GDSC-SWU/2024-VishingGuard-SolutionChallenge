@@ -14,7 +14,8 @@ To counter the increasingly sophisticated evolution of voice phishing techniques
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/b92967e0-ca44-4e33-b0db-fd6519cb540d" height="200">
 
 ### Reduced Inequalities
-🎯 **Digital Underprivileged Groups**   
+🎯 **Digital Underprivileged Groups**
+
 Individuals with low digital literacy or limited access to information, such as the elderly and low-income populations, are more susceptible to voice phishing crimes.  
    
 🎯 **Immigrants and International Students**   
@@ -34,6 +35,11 @@ We want to be a service that contributes to a society that becomes a safe settle
 ## 🚨 Demo Video
 ## 🚨 How To Use
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/012e9290-35d2-43dc-9f96-dd691e5f0eec">
+<img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/005743e7-dc0c-40f2-991d-e883f936987f">
+
+
+
+
 
 ## 🚨 Team Member
 | Name | [Nayeong Kim](https://github.com/nanna29) | [Youjin Park](https://github.com/youjin09222) | [Chaeyeon Kim](https://github.com/chaeyeoniklmw) | [Yourim Ha](https://github.com/YulimHa) |
