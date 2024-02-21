@@ -1,0 +1,3 @@
+-data processing: voice pishing file(STT API) + crawling file, 국립국어원 모두의 말뭉치 #300개 random select
+-데이터 전처리
+-KoBERT 모델 설계 & 학습 & 정확도 
