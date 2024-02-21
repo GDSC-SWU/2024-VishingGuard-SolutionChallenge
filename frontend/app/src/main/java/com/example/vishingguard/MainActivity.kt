@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Environment
 import android.os.Handler
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -23,18 +24,27 @@ import com.example.vishingguard.databinding.ActivityMainBinding
 import com.example.vishingguard.pishing.smishing.data.SmsDialog
 import com.example.vishingguard.pishing.smishing.data.SmsRequest
 import com.example.vishingguard.pishing.smishing.data.SmsViewModel
+import com.example.vishingguard.stt.RequestConfig
+import com.example.vishingguard.stt.SttData
+import com.example.vishingguard.stt.SttViewModel
 import com.example.vishingguard.vishing.CallDialog
+import java.io.File
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val SmsViewModel by viewModels<SmsViewModel>()
+    private val SttViewModel by viewModels<SttViewModel>()
+
     private lateinit var telephonyManager: TelephonyManager
 
     override fun initView() {
         // Set up the screen
         setNavigation()
 
-        // Request permissions for receiving SMS
+        // Check for phone phishing
+        postStt()
+
+        // Request necessary permissions
         requestPermission()
 
         // Request permissions
@@ -167,5 +177,37 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         val listeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
         val packageName = applicationContext.packageName
         return listeners != null && listeners.contains(packageName)
+    }
+
+    private fun postStt() {
+        SttViewModel.postStt()
+
+        // Observe Vishing data
+        SttViewModel.postStt.observe(this) { response ->
+            if (response.accessToken != null) {
+                SttData.setSttAccessToken(response.accessToken)
+            }
+            postTranscribe()
+        }
+    }
+
+    private fun postTranscribe() {
+        // Set file path and file type
+        val filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/2.mp3"
+        val file = File(filePath)
+
+        val config = RequestConfig(
+            true, 2, false, true,
+            true, false, true, 50, "CALL",
+            false, arrayListOf("Prosecutor", "Police")
+        )
+        SttViewModel.postTranscribe(config, file)
+
+        // Observe Vishing data
+        SttViewModel.postTranscribe.observe(this) { response ->
+            if (response.id != null) {
+                SttData.setTranscribeId(response.id)
+            }
+        }
     }
 }
