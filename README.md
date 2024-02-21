@@ -13,12 +13,6 @@ To counter the increasingly sophisticated evolution of voice phishing techniques
 ## 🚨 Our Goals
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/b92967e0-ca44-4e33-b0db-fd6519cb540d">
 
-
-https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/db401f3b-fb47-46b2-ba29-26eb6299969e
-
-
-
-
 ### Reduced Inequalities
 🎯 **Digital Underprivileged Groups**   
 Individuals with low digital literacy or limited access to information, such as the elderly and low-income populations, are more susceptible to voice phishing crimes.  
