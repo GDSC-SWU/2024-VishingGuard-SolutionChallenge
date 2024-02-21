@@ -1,4 +1,4 @@
-# 2024-VishingGuard-SolutionChallenge
+# 2024 SolutionChallenge - VGuard : VishingGuard 🚨
 <img src = "https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb">
 
 ## 🚨 Service Introduction
