@@ -36,7 +36,8 @@ We want to be a service that contributes to a society that becomes a safe settle
 
 ## 🚨 Demo Video
 
-<a href="https://youtu.be/J58I36UGfZw"><img alt="VGuard_Demo" src="https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb" width="700">
+<a href="https://youtu.be/Kor-Ezbv3uk"><img alt="VGuard_Demo" src="https://github.com/GDSC-SWU/2024-VishingGuard-SolutionChallenge/assets/87843494/408980fe-904c-44e5-a31d-226614c073eb" width="700">
+
 
 ## 🚨 How To Use
 
