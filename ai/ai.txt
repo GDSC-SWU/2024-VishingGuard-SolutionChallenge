@@ -2,5 +2,5 @@ voice pishing file(STT API) + crawling file[yes_vp]-Financial Regulatory Authori
 data preprocessing : data preprocessing, re_preprocessing_data
 model : huggingface hub save "chaeyeon1/vp_kobert_model"
 model_test: confusion_matrix.py, Huperparameter tunning.py
-FastAPI: env,Scripts, main.py,Dockerfile, docker-compose.yaml
+fastAPI: env,Scripts, main.py,Dockerfile, docker-compose.yaml
 cloud platform and hosting services (Google Cloud Platform): IP deploy
